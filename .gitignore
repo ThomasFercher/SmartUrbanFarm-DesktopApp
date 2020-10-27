@@ -1,1 +1,8 @@
 build/
+pubspec.lock
+.packages
+pubspec.lock
+.dart_tool/package_config.json
+linux/flutter/generated_plugin_registrant.cc
+linux/flutter/generated_plugin_registrant.h
+linux/flutter/generated_plugins.cmake
