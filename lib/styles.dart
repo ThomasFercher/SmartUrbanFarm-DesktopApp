@@ -50,7 +50,7 @@ ThemeData themeData = ThemeData(
   ),
 );
 
-TextStyle heading = GoogleFonts.quicksand(color: Colors.white);
+TextStyle heading = GoogleFonts.quicksand(color: Colors.white, fontSize: 20.0);
 
 TextStyle heading2 = GoogleFonts.quicksand();
 

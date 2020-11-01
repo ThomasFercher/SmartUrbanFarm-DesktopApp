@@ -1,13 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:suf_linux/customwidgets/colorFadeIcon.dart';
+import 'package:suf_linux/customwidgets/pageTile.dart';
+import 'package:suf_linux/objects/pageOption.dart';
 import 'package:suf_linux/pages/dashboard.dart';
 import 'package:suf_linux/pages/settings.dart';
 import 'package:suf_linux/providers/dashboardProvider.dart';
 import 'package:suf_linux/styles.dart';
 
-class Sider extends StatelessWidget {
-  List<PageOption> pageOptions = [
+import 'colorFadeText.dart';
+
+class Sider extends StatefulWidget {
+  final List<PageOption> pageOptions = [
     new PageOption(
       widget: Dashboard(),
       icon: Icons.dashboard,
@@ -19,27 +25,46 @@ class Sider extends StatelessWidget {
       title: "Settings",
     )
   ];
+  @override
+  _SiderState createState() => _SiderState();
+}
+
+class _SiderState extends State<Sider> {
+  int selected;
+
+  @override
+  void initState() {
+    super.initState();
+    selected = 0;
+  }
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
       width: 200,
-      height: MediaQuery.of(context).size.height,
+      height: 800,
       color: primaryColor,
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(5),
       child: Column(
         children: [
           Container(
+            margin: EdgeInsets.only(top: 5, bottom: 20),
             child: Text(
               "Smart Urban Farm",
               style: heading,
             ),
           ),
           ListView.builder(
+            itemCount: widget.pageOptions.length,
+            shrinkWrap: true,
             itemBuilder: (context, index) {
               return PageTile(
-                option: pageOptions[index],
+                option: widget.pageOptions[index],
+                onTap: () => setState(() {
+                  selected = index;
+                }),
+                sel: index == selected,
               );
             },
           )
@@ -47,30 +72,4 @@ class Sider extends StatelessWidget {
       ),
     );
   }
-}
-
-class PageTile extends StatelessWidget {
-  final PageOption option;
-
-  const PageTile({Key key, this.option}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return ListTile(
-      leading: Icon(option.icon),
-      title: Text(option.title),
-      onTap: () {
-        Provider.of<DashboardProvider>(context).setSelectedChild(option.widget);
-      },
-    );
-  }
-}
-
-class PageOption {
-  final Widget widget;
-  final IconData icon;
-  final String title;
-
-  PageOption({this.widget, this.icon, this.title});
 }
