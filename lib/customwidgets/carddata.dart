@@ -12,8 +12,6 @@ class CardData extends StatelessWidget {
   final String text;
   final String label;
   final Color iconColor;
-  final String type;
-  final GlobalKey key;
 
   /// This widget displays a given text with a label and icon
   /// All this is displayed in a card
@@ -22,9 +20,7 @@ class CardData extends StatelessWidget {
     @required this.text,
     @required this.label,
     @required this.iconColor,
-    @required this.type,
-    @required this.key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,26 +36,33 @@ class CardData extends StatelessWidget {
           color: Colors.white, //iconColor, //getTheme().cardColor,
         ),
         padding: EdgeInsets.all(8),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Flexible(
-              fit: FlexFit.tight,
+            Padding(
+              padding: const EdgeInsets.only(right: 20.0),
               child: Icon(
                 icon,
-                size: 26,
+                size: 24,
                 color: iconColor,
               ),
             ),
-            Flexible(
-              fit: FlexFit.tight,
+            Text(
+              label,
+              style: GoogleFonts.nunito(
+                color: Colors.black54,
+                fontWeight: FontWeight.w200,
+                fontSize: 18.0,
+              ),
+            ),
+            Expanded(
               child: Text(
                 text,
+                textAlign: TextAlign.end,
                 style: GoogleFonts.nunito(
                   color: Colors.black54,
                   fontWeight: FontWeight.w200,
-                  fontSize: 26.0,
+                  fontSize: 18.0,
                 ),
               ),
             ),

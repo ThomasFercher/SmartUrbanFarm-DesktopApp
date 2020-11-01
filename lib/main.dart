@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:suf_linux/pages/dashboard.dart';
 import 'package:suf_linux/pages/home.dart';
 import 'package:suf_linux/providers/dashboardProvider.dart';
-import 'package:suf_linux/styles.dart';
+import 'package:suf_linux/styles.dart' as s;
 
 void main() => {
       WidgetsFlutterBinding.ensureInitialized(),
@@ -12,7 +12,7 @@ void main() => {
           providers: [
             ChangeNotifierProvider<DashboardProvider>(
               lazy: false,
-              create: (_) => DashboardProvider(selectedChild: Dashboard()),
+              create: (_) => DashboardProvider(selectedChild: s.DashboardRoute),
             ),
           ],
           child: SufLinuxApplication(),
@@ -26,7 +26,7 @@ class SufLinuxApplication extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Suf Linux Application',
-      theme: themeData,
+      theme: s.themeData,
       home: Home(),
     );
   }

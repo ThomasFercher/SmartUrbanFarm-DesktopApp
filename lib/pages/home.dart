@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:suf_linux/customwidgets/sider.dart';
 import 'package:suf_linux/providers/dashboardProvider.dart';
+import 'package:suf_linux/styles.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -17,7 +18,25 @@ class Home extends StatelessWidget {
             Sider(),
             Expanded(
               child: Consumer<DashboardProvider>(builder: (context, d, child) {
-                return d.selectedChild;
+                return Column(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 40,
+                      color: Colors.grey[200],
+                      child: Text(
+                        d.selectedChild.title,
+                        style: heading2,
+                      ),
+                      padding: EdgeInsets.only(left: 10, top: 10),
+                    ),
+                    Container(
+                      color: Colors.grey[200],
+                      child: d.selectedChild.widget,
+                      padding: EdgeInsets.all(10),
+                    ),
+                  ],
+                );
               }),
             )
           ],

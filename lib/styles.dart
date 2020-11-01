@@ -4,6 +4,9 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:suf_linux/objects/pageOption.dart';
+import 'package:suf_linux/pages/dashboard.dart';
+import 'package:suf_linux/pages/settings.dart';
 
 double borderRadius = 15.0;
 double cardElavation = 0.5;
@@ -12,6 +15,18 @@ const Color primaryColor = Color(0xFF26C281);
 const Color secondaryColor = Color(0xFF3f51b5);
 const Color text_gray = Color(0xFF646464);
 const Color accentColor = Colors.white;
+
+PageOption DashboardRoute = PageOption(
+  widget: Dashboard(),
+  icon: Icons.dashboard,
+  title: "Dashboard",
+);
+
+PageOption SettingsRoute = PageOption(
+  widget: Settings(),
+  icon: Icons.settings,
+  title: "Settings",
+);
 
 ThemeData themeData = ThemeData(
   brightness: Brightness.light,
@@ -50,8 +65,10 @@ ThemeData themeData = ThemeData(
   ),
 );
 
-TextStyle heading = GoogleFonts.quicksand(color: Colors.white, fontSize: 20.0);
+TextStyle heading = GoogleFonts.quicksand(
+    color: Colors.white, fontSize: 21.0, fontWeight: FontWeight.w600);
 
-TextStyle heading2 = GoogleFonts.quicksand();
+TextStyle heading2 = GoogleFonts.quicksand(
+    color: Colors.grey, fontSize: 18.0, fontWeight: FontWeight.w400);
 
 TextStyle text = GoogleFonts.quicksand();

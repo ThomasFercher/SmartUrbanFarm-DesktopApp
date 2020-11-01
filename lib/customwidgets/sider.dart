@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:suf_linux/customwidgets/colorFadeIcon.dart';
 import 'package:suf_linux/customwidgets/pageTile.dart';
+import 'package:suf_linux/customwidgets/waterTankLevel.dart';
 import 'package:suf_linux/objects/pageOption.dart';
 import 'package:suf_linux/pages/dashboard.dart';
 import 'package:suf_linux/pages/settings.dart';
@@ -45,11 +46,10 @@ class _SiderState extends State<Sider> {
       width: 200,
       height: 800,
       color: primaryColor,
-      padding: EdgeInsets.all(5),
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.only(top: 5, bottom: 20),
+            margin: EdgeInsets.only(bottom: 20, top: 10),
             child: Text(
               "Smart Urban Farm",
               style: heading,
@@ -67,7 +67,7 @@ class _SiderState extends State<Sider> {
                 sel: index == selected,
               );
             },
-          )
+          ),
         ],
       ),
     );

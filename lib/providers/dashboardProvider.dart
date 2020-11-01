@@ -3,11 +3,14 @@ import 'dart:collection';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:suf_linux/objects/environmentSettings.dart';
+import 'package:suf_linux/objects/pageOption.dart';
+import 'package:suf_linux/pages/dashboard.dart';
+import 'package:suf_linux/pages/settings.dart';
 
 import '../styles.dart';
 
 class DashboardProvider with ChangeNotifier, DiagnosticableTreeMixin {
-  Widget selectedChild;
+  PageOption selectedChild;
   DashboardProvider({@required this.selectedChild});
 
   /*Timer.periodic(Duration(seconds: 60), (timer) {
@@ -15,7 +18,7 @@ class DashboardProvider with ChangeNotifier, DiagnosticableTreeMixin {
       // loadData();
     });*/
 
-  void setSelectedChild(Widget s) {
+  void setSelectedChild(PageOption s) {
     selectedChild = s;
     notifyListeners();
   }

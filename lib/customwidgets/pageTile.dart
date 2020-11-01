@@ -42,7 +42,7 @@ class PageTile extends StatelessWidget {
       onTap: () => {
         onTap(),
         Provider.of<DashboardProvider>(context, listen: false)
-            .setSelectedChild(option.widget),
+            .setSelectedChild(option),
       },
     );
   }

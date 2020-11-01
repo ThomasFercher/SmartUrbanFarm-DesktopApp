@@ -2,7 +2,6 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sgs/styles.dart';
 
 class DayRange extends StatelessWidget {
   @override
@@ -11,7 +10,7 @@ class DayRange extends StatelessWidget {
       height: 100,
       width: MediaQuery.of(context).size.width,
       child: Card(
-        elevation: cardElavation,
+        elevation: 1,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
         child: Container(
           decoration: BoxDecoration(
