@@ -18,6 +18,10 @@ void main() => {
               lazy: false,
               create: (_) => DashboardProvider(selectedChild: s.DashboardRoute),
             ),
+            ChangeNotifierProvider<StorageProvider>(
+              lazy: false,
+              create: (_) => StorageProvider(),
+            ),
           ],
           child: SufLinuxApplication(),
         ),
@@ -32,7 +36,6 @@ class SufLinuxApplication extends StatelessWidget {
       title: 'Suf Linux Application',
       theme: s.themeData,
       home: FutureBuilder(
-        future: loadData(context),
         builder: (context, projectSnap) {
           if (projectSnap.connectionState == ConnectionState.none ||
               projectSnap.hasData == null ||
@@ -51,13 +54,14 @@ class SufLinuxApplication extends StatelessWidget {
             return Home();
           }
         },
+        future: loadData(context),
       ),
     );
   }
 
   Future<void> loadData(context) async {
     Stopwatch stopwatch = new Stopwatch()..start();
-    //await Provider.of<DashboardProvider>(context, listen: false).loadData();
+    await Provider.of<DashboardProvider>(context, listen: false).fetchData();
     await Provider.of<StorageProvider>(context, listen: false).loadFlares();
 
     //add a delay so the animation plays through

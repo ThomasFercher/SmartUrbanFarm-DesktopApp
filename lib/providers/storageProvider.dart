@@ -11,7 +11,7 @@ class StorageProvider extends ChangeNotifier {
   var _assetsToWarmup = [
     AssetFlare(bundle: rootBundle, name: "assets/flares/moon.flr"),
     AssetFlare(bundle: rootBundle, name: "assets/flares/sun.flr"),
-    AssetFlare(bundle: rootBundle, name: "assets/flares/grow.flr")
+    AssetFlare(bundle: rootBundle, name: "assets/flares/plant.flr")
   ];
 
   Future<void> loadFlares() async {

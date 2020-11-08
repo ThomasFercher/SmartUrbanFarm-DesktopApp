@@ -16,34 +16,38 @@ class PageTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return ListTile(
-      title: Row(
-        children: [
-          Container(
-            child: ColorFadeIcon(
-              begin: Colors.white38,
-              end: Colors.white,
-              forward: sel,
-              icon: option.icon,
+
+    return Container(
+      height: 46,
+      child: ListTile(
+        title: Row(
+          children: [
+            Container(
+              child: ColorFadeIcon(
+                begin: Colors.white38,
+                end: Colors.white,
+                forward: sel,
+                icon: option.icon,
+              ),
+              margin: EdgeInsets.only(right: 20),
             ),
-            margin: EdgeInsets.only(right: 20),
-          ),
-          Expanded(
-            child: ColorFadeText(
-              begin: Colors.white38,
-              end: Colors.white,
-              forward: sel,
-              text: option.title,
+            Expanded(
+              child: ColorFadeText(
+                begin: Colors.white38,
+                end: Colors.white,
+                forward: sel,
+                text: option.title,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
+        contentPadding: EdgeInsets.only(left: 10),
+        onTap: () => {
+          onTap(),
+          Provider.of<DashboardProvider>(context, listen: false)
+              .setSelectedChild(option),
+        },
       ),
-      contentPadding: EdgeInsets.only(left: 10),
-      onTap: () => {
-        onTap(),
-        Provider.of<DashboardProvider>(context, listen: false)
-            .setSelectedChild(option),
-      },
     );
   }
 }

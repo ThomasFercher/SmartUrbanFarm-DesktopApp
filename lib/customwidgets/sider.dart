@@ -22,6 +22,21 @@ class Sider extends StatefulWidget {
     ),
     new PageOption(
       widget: Settings(),
+      icon: Icons.photo,
+      title: "Gallery",
+    ),
+    new PageOption(
+      widget: Settings(),
+      icon: Icons.settings_applications,
+      title: "Environment ",
+    ),
+    new PageOption(
+      widget: Settings(),
+      icon: Icons.data_usage,
+      title: "Advanced Data ",
+    ),
+    new PageOption(
+      widget: Settings(),
       icon: Icons.settings,
       title: "Settings",
     )
@@ -41,32 +56,56 @@ class _SiderState extends State<Sider> {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
     // TODO: implement build
     return Container(
       width: 200,
-      height: 800,
+      height: MediaQuery.of(context).size.height,
       color: primaryColor,
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.only(bottom: 20, top: 10),
+            height: 52,
+            padding: EdgeInsets.only(bottom: 20, top: 10),
             child: Text(
               "Smart Urban Farm",
               style: heading,
             ),
           ),
-          ListView.builder(
-            itemCount: widget.pageOptions.length,
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return PageTile(
-                option: widget.pageOptions[index],
-                onTap: () => setState(() {
-                  selected = index;
-                }),
-                sel: index == selected,
-              );
-            },
+          Container(
+            height: height - 52,
+            child: ListView.builder(
+              itemCount: widget.pageOptions.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                if (index == widget.pageOptions.length - 1) {
+                  return Container(
+                    margin: EdgeInsets.only(
+                      top: height - 52 - widget.pageOptions.length * 46 - 10,
+                    ),
+                    child: PageTile(
+                      option: widget.pageOptions[index],
+                      onTap: () => setState(
+                        () {
+                          selected = index;
+                        },
+                      ),
+                      sel: index == selected,
+                    ),
+                  );
+                } else {
+                  return PageTile(
+                    option: widget.pageOptions[index],
+                    onTap: () => setState(
+                      () {
+                        selected = index;
+                      },
+                    ),
+                    sel: index == selected,
+                  );
+                }
+              },
+            ),
           ),
         ],
       ),

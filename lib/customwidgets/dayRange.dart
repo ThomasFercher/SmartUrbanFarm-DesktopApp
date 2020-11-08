@@ -2,15 +2,23 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:suf_linux/styles.dart';
 
 class DayRange extends StatelessWidget {
+  final String suntime;
+
+  const DayRange({Key key, this.suntime}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    var start = suntime.split("-")[0].trim();
+    var end = suntime.split("-")[1].trim();
+
     return SizedBox(
       height: 100,
       width: MediaQuery.of(context).size.width,
       child: Card(
-        elevation: 1,
+        elevation: cardElavation,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
         child: Container(
           decoration: BoxDecoration(
@@ -38,7 +46,7 @@ class DayRange extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 15.0),
                   child: Text(
-                    "06:00",
+                    start,
                     style:
                         GoogleFonts.nunito(color: Colors.white, fontSize: 24),
                   ),
@@ -47,7 +55,7 @@ class DayRange extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(right: 15.0),
                 child: Text(
-                  "18:00",
+                  end,
                   style: GoogleFonts.nunito(color: Colors.white, fontSize: 24),
                 ),
               ),

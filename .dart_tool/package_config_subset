@@ -1,7 +1,7 @@
 suf_linux
 2.7
-file:///home/thomas/Documents/development/projects/suf-linux/suf_linux/
-file:///home/thomas/Documents/development/projects/suf-linux/suf_linux/lib/
+file:///home/thomas/Documents/development/projects/suf-linux/suf/SUF-Linux/
+file:///home/thomas/Documents/development/projects/suf-linux/suf/SUF-Linux/lib/
 async
 2.10
 file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.5.0-nullsafety.1/
@@ -56,8 +56,8 @@ file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.o
 file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flare_dart-2.3.4/lib/
 flare_flutter
 2.2
-file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flare_flutter-1.8.3/
-file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flare_flutter-1.8.3/lib/
+file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flare_flutter-2.0.6/
+file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flare_flutter-2.0.6/lib/
 google_fonts
 2.3
 file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/google_fonts-1.1.1/

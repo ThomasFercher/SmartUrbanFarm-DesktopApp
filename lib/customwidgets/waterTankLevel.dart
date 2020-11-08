@@ -9,69 +9,70 @@ import 'package:flutter/animation.dart';
 
 class WaterTankLevel extends StatelessWidget {
   final double fullness;
-  static double progress;
-  final double height, width;
+
   //controller for animation
-  WaterTankLevel({@required this.fullness, this.height, this.width});
+  WaterTankLevel({@required this.fullness});
 
   @override
   Widget build(BuildContext context) {
-    Size size = new Size(MediaQuery.of(context).size.width, height);
-
     double _yOffset = (200 / 100) * (100 - fullness);
     int yOffset = _yOffset.round();
 
-    return Card(
-      elevation: cardElavation,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(borderRadius),
+    return LayoutBuilder(builder: (context, constraints) {
+      Size size = constraints.biggest;
+      return Card(
+        elevation: cardElavation,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(borderRadius),
+          ),
         ),
-      ),
-      color: Colors.white,
-      child: Container(
-        height: height,
-        child: fullness > 8
-            ? Stack(
-                children: [
-                  new AnimationBody(
-                    size: size,
-                    xOffset: 0,
-                    yOffset: 5 + yOffset,
-                    color: Color(0xFF3f51b5),
-                  ),
-                  new Opacity(
-                    opacity: 0.5,
-                    child: new AnimationBody(
+        color: Colors.white,
+        child: Container(
+          height: size.height,
+          width: size.width - 16,
+          child: fullness > 8
+              ? Stack(
+                  children: [
+                    new AnimationBody(
                       size: size,
-                      xOffset: 80,
-                      yOffset: 10 + yOffset,
+                      xOffset: 0,
+                      yOffset: 5 + yOffset,
                       color: Color(0xFF3f51b5),
                     ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(top: 20),
-                    alignment: Alignment.topCenter,
-                    child: Text(
-                      "$fullness%",
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontWeight: FontWeight.w100,
-                        fontSize: 30.0,
+                    new Opacity(
+                      opacity: 0.5,
+                      child: new AnimationBody(
+                        size: size,
+                        xOffset: 80,
+                        yOffset: 10 + yOffset,
+                        color: Color(0xFF3f51b5),
                       ),
                     ),
+                    Container(
+                      padding: EdgeInsets.only(top: 20),
+                      alignment: Alignment.topCenter,
+                      child: Text(
+                        "$fullness%",
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.w100,
+                          fontSize: 30.0,
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              : Container(
+                  alignment: Alignment.center,
+                  child: new Text(
+                    "Empty",
+                    style: TextStyle(color: Colors.blueAccent),
                   ),
-                ],
-              )
-            : Container(
-                alignment: Alignment.center,
-                child: new Text(
-                  "Empty",
-                  style: TextStyle(color: Colors.blueAccent),
                 ),
-              ),
-      ),
-    );
+        ),
+      );
+    });
   }
 }
 

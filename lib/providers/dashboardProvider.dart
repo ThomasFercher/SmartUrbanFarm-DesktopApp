@@ -1,17 +1,23 @@
 import 'dart:async';
 import 'dart:collection';
+import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:suf_linux/objects/environmentSettings.dart';
 import 'package:suf_linux/objects/pageOption.dart';
 import 'package:suf_linux/pages/dashboard.dart';
 import 'package:suf_linux/pages/settings.dart';
-
+import 'package:http/http.dart';
 import '../styles.dart';
+import 'package:http/http.dart' as http;
 
 class DashboardProvider with ChangeNotifier, DiagnosticableTreeMixin {
+  final baseUrl = "https://smartgrowsystem-sgs.firebaseio.com";
   PageOption selectedChild;
-  DashboardProvider({@required this.selectedChild});
+  DashboardProvider({@required this.selectedChild}) {
+    fetchData();
+  }
 
   /*Timer.periodic(Duration(seconds: 60), (timer) {
       print("aasd");
@@ -23,28 +29,45 @@ class DashboardProvider with ChangeNotifier, DiagnosticableTreeMixin {
     notifyListeners();
   }
 
-  bool alongPressed = false;
-  bool get longPressed => alongPressed;
-  set longPressed(longPressed) => alongPressed = longPressed;
+  Future<void> fetchData() async {
+    humidity = await getValue<double>("$baseUrl/humidity.json");
+    temperature = await getValue<double>("$baseUrl/temperature.json");
+    soilMoisture = await getValue<double>("$baseUrl/soilMoisture.json");
+    suntime = await getValue<String>("$baseUrl/suntime.json");
+    waterTankLevel = await getValue<double>("$baseUrl/waterTankLevel.json");
+    growProgress = await getValue<double>("$baseUrl/growProgress.json");
+
+    notifyListeners();
+    print(waterTankLevel);
+  }
+
+  Future<T> getValue<T>(var url) async {
+    final response = await http.get(url);
+    var body = jsonDecode(response.body);
+
+    if (T == double) {
+      body = double.parse(body);
+    }
+    return body;
+  }
 
   bool setting1 = false;
   bool setting2 = false;
 
   double temperature = 0.0;
-  double humidity = 0.0;
-  double soilMoisture = 0.0;
   double tempSoll = 25;
-  double humiditySoll = 50;
-  double soilMoistureSoll = 50;
-  double waterTankLevel = 40;
-  double waterAnimationProgress;
-  bool waterTankMoving = false;
 
-  void setWaterTankMoving(v) {
-    waterTankMoving = v;
-  }
+  double humidity = 0.0;
+  double humiditySoll = 50;
+
+  double soilMoisture = 0.0;
+  double soilMoistureSoll = 50;
+
+  double waterTankLevel = 0.0;
+  double growProgress = 0.0;
 
   String suntime = "02:30 - 18:00";
+
   SplayTreeMap<DateTime, double> temperatures = new SplayTreeMap();
   SplayTreeMap<DateTime, double> humiditys = new SplayTreeMap();
   // final ref = fb.reference();
@@ -100,11 +123,6 @@ class DashboardProvider with ChangeNotifier, DiagnosticableTreeMixin {
     v = num.parse(v.toStringAsFixed(1));
     soilMoistureSoll = v;
     //  fb.reference().child('soilMoistureSoll').set(soilMoistureSoll);
-    notifyListeners();
-  }
-
-  void setWaterAnimationProgress(double v) {
-    this.waterAnimationProgress = v;
     notifyListeners();
   }
 

@@ -9,7 +9,7 @@ import 'package:suf_linux/pages/dashboard.dart';
 import 'package:suf_linux/pages/settings.dart';
 
 double borderRadius = 15.0;
-double cardElavation = 0.5;
+double cardElavation = 2.0;
 
 const Color primaryColor = Color(0xFF26C281);
 const Color secondaryColor = Color(0xFF3f51b5);
@@ -69,6 +69,6 @@ TextStyle heading = GoogleFonts.quicksand(
     color: Colors.white, fontSize: 21.0, fontWeight: FontWeight.w600);
 
 TextStyle heading2 = GoogleFonts.quicksand(
-    color: Colors.grey, fontSize: 18.0, fontWeight: FontWeight.w400);
+    color: Colors.black54, fontSize: 18.0, fontWeight: FontWeight.w600);
 
 TextStyle text = GoogleFonts.quicksand();

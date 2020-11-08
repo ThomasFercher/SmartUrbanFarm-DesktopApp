@@ -9,6 +9,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    print(MediaQuery.of(context).size.width);
     return Material(
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -21,19 +22,7 @@ class Home extends StatelessWidget {
                 return Column(
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 40,
-                      color: Colors.grey[200],
-                      child: Text(
-                        d.selectedChild.title,
-                        style: heading2,
-                      ),
-                      padding: EdgeInsets.only(left: 10, top: 10),
-                    ),
-                    Container(
-                      color: Colors.grey[200],
                       child: d.selectedChild.widget,
-                      padding: EdgeInsets.all(10),
                     ),
                   ],
                 );
