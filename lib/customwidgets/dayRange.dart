@@ -15,7 +15,7 @@ class DayRange extends StatelessWidget {
     var end = suntime.split("-")[1].trim();
 
     return SizedBox(
-      height: 100,
+      height: 70,
       width: MediaQuery.of(context).size.width,
       child: Card(
         elevation: cardElavation,

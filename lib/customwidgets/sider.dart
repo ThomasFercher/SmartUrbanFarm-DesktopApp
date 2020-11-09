@@ -7,6 +7,7 @@ import 'package:suf_linux/customwidgets/pageTile.dart';
 import 'package:suf_linux/customwidgets/waterTankLevel.dart';
 import 'package:suf_linux/objects/pageOption.dart';
 import 'package:suf_linux/pages/dashboard.dart';
+import 'package:suf_linux/pages/gallery.dart';
 import 'package:suf_linux/pages/settings.dart';
 import 'package:suf_linux/providers/dashboardProvider.dart';
 import 'package:suf_linux/styles.dart';
@@ -21,7 +22,7 @@ class Sider extends StatefulWidget {
       title: "Dashboard",
     ),
     new PageOption(
-      widget: Settings(),
+      widget: Gallery(),
       icon: Icons.photo,
       title: "Gallery",
     ),

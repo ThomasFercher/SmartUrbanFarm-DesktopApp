@@ -63,7 +63,8 @@ class SufLinuxApplication extends StatelessWidget {
     Stopwatch stopwatch = new Stopwatch()..start();
     await Provider.of<DashboardProvider>(context, listen: false).fetchData();
     await Provider.of<StorageProvider>(context, listen: false).loadFlares();
-
+    await Provider.of<StorageProvider>(context, listen: false)
+        .initImages(context);
     //add a delay so the animation plays through
     stopwatch.stop();
     return Future.delayed(

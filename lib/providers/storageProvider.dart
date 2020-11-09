@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flare_flutter/flare_cache.dart';
 import 'package:flare_flutter/provider/asset_flare.dart';
@@ -19,6 +20,36 @@ class StorageProvider extends ChangeNotifier {
     for (final asset in _assetsToWarmup) {
       await cachedActor(asset);
     }
+  }
+
+  Future initImages(context) async {
+    // >> To get paths you need these 2 lines
+    final manifestContent =
+        await DefaultAssetBundle.of(context).loadString('AssetManifest.json');
+
+    final Map<String, dynamic> manifestMap = json.decode(manifestContent);
+    // >> To get paths you need these 2 lines
+
+    final imagePaths = manifestMap.keys
+        .where((String key) => key.contains('images/'))
+        .where((String key) => key.contains('.jpeg'))
+        .toList();
+
+    imagePaths.forEach((element) {
+      var path = element.split("/");
+      var imgName = path[path.length - 1];
+
+      if (!images.any((element) => element.semanticLabel == imgName)) {
+        images.add(
+          new Image.asset(
+            element,
+            semanticLabel: imgName,
+          ),
+        );
+      }
+    });
+    notifyListeners();
+    print(images);
   }
 
   Future<void> loadImages(context) async {

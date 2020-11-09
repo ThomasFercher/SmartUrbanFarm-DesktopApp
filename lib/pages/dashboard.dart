@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:suf_linux/customwidgets/carddata.dart';
 import 'package:suf_linux/customwidgets/dayRange.dart';
 import 'package:suf_linux/customwidgets/growProgress.dart';
+import 'package:suf_linux/customwidgets/sectionTitle.dart';
 import 'package:suf_linux/customwidgets/waterTankLevel.dart';
 import 'package:suf_linux/providers/dashboardProvider.dart';
 import 'package:suf_linux/styles.dart';
@@ -22,7 +23,6 @@ class Dashboard extends StatelessWidget {
 
       var height = MediaQuery.of(context).size.height - 20;
       var width = MediaQuery.of(context).size.width - 220;
-      print(width);
 
       return Container(
         width: MediaQuery.of(context).size.width - 200,
@@ -99,23 +99,5 @@ class Dashboard extends StatelessWidget {
         ),
       );
     });
-  }
-}
-
-class SectionHeading extends StatelessWidget {
-  final String text;
-
-  const SectionHeading({Key key, this.text}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Container(
-      padding: EdgeInsets.only(left: 2),
-      child: Text(
-        text,
-        style: heading2,
-      ),
-    );
   }
 }
