@@ -4,7 +4,9 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:suf_linux/objects/climateControl.dart';
 import 'package:suf_linux/objects/environmentSettings.dart';
+import 'package:suf_linux/objects/liveData.dart';
 import 'package:suf_linux/objects/pageOption.dart';
 import 'package:suf_linux/pages/dashboard.dart';
 import 'package:suf_linux/pages/settings.dart';
@@ -15,6 +17,11 @@ import 'package:http/http.dart' as http;
 class DashboardProvider with ChangeNotifier, DiagnosticableTreeMixin {
   final baseUrl = "https://smartgrowsystem-sgs.firebaseio.com";
   PageOption selectedChild;
+  String token;
+
+  LiveData liveData;
+  ClimateControl activeClimate;
+
   DashboardProvider({@required this.selectedChild}) {
     fetchData();
   }
@@ -29,26 +36,43 @@ class DashboardProvider with ChangeNotifier, DiagnosticableTreeMixin {
     notifyListeners();
   }
 
-  Future<void> fetchData() async {
-    humidity = await getValue<double>("$baseUrl/humidity.json");
-    temperature = await getValue<double>("$baseUrl/temperature.json");
-    soilMoisture = await getValue<double>("$baseUrl/soilMoisture.json");
-    suntime = await getValue<String>("$baseUrl/suntime.json");
-    waterTankLevel = await getValue<double>("$baseUrl/waterTankLevel.json");
-    growProgress = await getValue<double>("$baseUrl/growProgress.json");
+  Future<String> authApp() async {
+    final response = await http.post(
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAeTF-VH5vxA0-ssHg4rMcjIodzBnnPvPw");
+    Map<dynamic, dynamic> user = jsonDecode(response.body);
+    return user['idToken'];
+  }
 
+  Future<void> fetchData() async {
+    token = await authApp();
+    liveData = await getLiveData();
+    activeClimate = await getActiveClimate();
     notifyListeners();
     print(waterTankLevel);
   }
 
   Future<T> getValue<T>(var url) async {
-    final response = await http.get(url);
+    final response = await http.get(url + "/liveData/$url.json");
     var body = jsonDecode(response.body);
 
     if (T == double) {
       body = double.parse(body);
     }
     return body;
+  }
+
+  Future<ClimateControl> getActiveClimate() async {
+    final response = await http.get("$baseUrl/activeClimate.json?auth=$token");
+    Map<dynamic, dynamic> json = jsonDecode(response.body);
+
+    return ClimateControl.fromJson(json);
+  }
+
+  Future<LiveData> getLiveData() async {
+    final response = await http.get("$baseUrl/liveClimate.json?auth=$token");
+    Map<dynamic, dynamic> json = jsonDecode(response.body);
+
+    return LiveData.fromJson(json);
   }
 
   bool setting1 = false;

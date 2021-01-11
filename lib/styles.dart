@@ -7,6 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:suf_linux/objects/pageOption.dart';
 import 'package:suf_linux/pages/dashboard.dart';
 import 'package:suf_linux/pages/settings.dart';
+import 'package:uuid/uuid.dart';
+
+var uuid = Uuid();
 
 double borderRadius = 15.0;
 double cardElavation = 2.0;

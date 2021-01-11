@@ -14,12 +14,12 @@ class Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Consumer<DashboardProvider>(builder: (context, d, c) {
-      var temp = d.temperature;
-      var hum = d.humidity;
-      var soilM = d.soilMoisture;
-      var waterTankLevel = d.waterTankLevel;
-      var growProgress = d.growProgress;
-      var suntime = d.suntime;
+      var temp = d.liveData.temperature;
+      var hum = d.liveData.humidity;
+      var soilM = d.liveData.soilMoisture;
+      var waterTankLevel = d.liveData.waterTankLevel;
+      var growProgress = d.liveData.growProgress;
+      var suntime = d.activeClimate.suntime;
 
       var height = MediaQuery.of(context).size.height - 20;
       var width = MediaQuery.of(context).size.width - 220;
