@@ -8,6 +8,9 @@ import 'package:suf_linux/objects/settings.dart';
 class SettingsProvider extends ChangeNotifier {
   Settings settings;
 
+  SettingsProvider() {
+    loadSettings();
+  }
   // final ref = firebaseDatabase.reference().child("appSettings");
 
   List<AppTheme> themes = [

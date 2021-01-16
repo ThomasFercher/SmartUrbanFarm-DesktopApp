@@ -201,11 +201,12 @@ class DashboardProvider with ChangeNotifier, DiagnosticableTreeMixin {
   }
 */
   Future<SplayTreeMap<DateTime, double>> loadList(String child) async {
-    SplayTreeMap<DateTime, double> list;
+    SplayTreeMap<DateTime, double> list = new SplayTreeMap();
     final response = await http.get("$baseUrl/$child.json?auth=$token");
     Map<dynamic, dynamic> json = jsonDecode(response.body);
-    json.map((key, value) {});
-    list = json;
+    json.forEach((key, value) {
+      list[DateTime.parse(key)] = double.parse(value);
+    });
 
     return list;
   }

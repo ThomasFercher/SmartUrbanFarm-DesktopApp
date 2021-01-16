@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:suf_linux/pages/dashboard.dart';
 import 'package:suf_linux/pages/home.dart';
 import 'package:suf_linux/providers/dashboardProvider.dart';
+import 'package:suf_linux/providers/settingsProvider.dart';
 import 'package:suf_linux/providers/storageProvider.dart';
 import 'package:suf_linux/styles.dart' as s;
 
@@ -21,6 +22,10 @@ void main() => {
             ChangeNotifierProvider<StorageProvider>(
               lazy: false,
               create: (_) => StorageProvider(),
+            ),
+            ChangeNotifierProvider<SettingsProvider>(
+              lazy: false,
+              create: (_) => SettingsProvider(),
             ),
           ],
           child: SufLinuxApplication(),

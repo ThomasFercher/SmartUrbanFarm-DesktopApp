@@ -19,6 +19,7 @@ class DataChart extends StatefulWidget {
   final String title;
   final List<String> filter_options = ["Current", "Day", "Month"];
   final String unit;
+  final IconData icon;
 
   static DateTime today = DateTime.now();
   static DateTime yesterday = new DateTime(today.year, today.month,
@@ -34,6 +35,7 @@ class DataChart extends StatefulWidget {
     this.title,
     this.gradientColors,
     this.unit,
+    this.icon,
   });
 
   @override
@@ -136,21 +138,19 @@ class _DataChartState extends State<DataChart> {
 
     return Consumer<DashboardProvider>(
       builder: (context, d, child) {
-        return Padding(
-          padding: const EdgeInsets.only(left: 10.0, right: 25),
-          child: Container(
-            child: Column(children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: SectionTitle(
-                      title: widget.title + " [${widget.unit}]",
-                      fontSize: 24,
-                      color: theme.headlineColor,
-                    ),
+        return Container(
+          child: Column(children: [
+            Row(
+              children: [
+                Container(
+                  height: 48,
+                  width: 48,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(borderRadius),
+                    color: widget.gradientColors[1],
                   ),
-                  PopupMenu(
-                    color: theme.textColor,
+                  child: PopupMenu(
+                    color: widget.gradientColors[0],
                     options: widget.filter_options
                         .map((filter) => PopupMenuOption(filter, null))
                         .toList(),
@@ -159,10 +159,45 @@ class _DataChartState extends State<DataChart> {
                         filter = v;
                       });
                     },
-                  )
-                ],
-              ),
-              Container(
+                  ),
+                ),
+                Container(
+                  height: 48,
+                  width: 48,
+                  margin: EdgeInsets.only(left: 8),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(borderRadius),
+                    color: widget.gradientColors[1],
+                  ),
+                  child: Icon(
+                    widget.icon,
+                    size: 24,
+                    color: widget.gradientColors[0],
+                  ),
+                ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Container(
+                      height: 48,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(borderRadius),
+                        color: widget.gradientColors[1],
+                      ),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: borderRadius, vertical: 8),
+                      child: SectionTitle(
+                        title: widget.title + " [${widget.unit}]",
+                        fontSize: 24,
+                        color: theme.headlineColor,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Expanded(
+              child: Container(
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.only(bottom: 10),
                 child: LineChart(
@@ -170,8 +205,8 @@ class _DataChartState extends State<DataChart> {
                   swapAnimationDuration: Duration(milliseconds: 200),
                 ),
               ),
-            ]),
-          ),
+            )
+          ]),
         );
       },
     );
