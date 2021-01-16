@@ -1,11 +1,16 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 
 import 'package:suf_linux/objects/appTheme.dart';
 import 'package:suf_linux/objects/settings.dart';
+import 'package:suf_linux/providers/auth.dart';
+import 'package:http/http.dart' as http;
 
 class SettingsProvider extends ChangeNotifier {
+  final baseUrl = "https://smartgrowsystem-sgs.firebaseio.com/appSettings";
+  String token;
   Settings settings;
 
   SettingsProvider() {
@@ -38,6 +43,7 @@ class SettingsProvider extends ChangeNotifier {
   ];
 
   Future<void> loadSettings() async {
+    token = await Auth.getAuthToken();
     /* await ref.once().then((DataSnapshot snapshot) {
       var settingsJson = snapshot.value;
       settings = Settings.fromJson(settingsJson);
@@ -47,23 +53,35 @@ class SettingsProvider extends ChangeNotifier {
           new Settings(theme: 0, automaticTimeLapse: true, notifications: true);
     }
   }
-  /*
+
+  Future<void> setValue(String child, String value) {
+    http.put("$baseUrl/$child.json?auth=$token", body: "$value", headers: {
+      "Content-Tpye": "application/json",
+    }).then(
+      (value) => {
+        print(value.statusCode),
+      },
+    );
+  }
 
   setNotifications(value) {
     settings.notifications = value;
-    ref.child("notifications").set(value);
+    setValue("notifications", value.toString());
+
     notifyListeners();
   }
 
   setAutomaticTimeLapse(value) {
     settings.automaticTimeLapse = value;
-    ref.child("automaticTimeLapse").set(value);
+
+    setValue("automaticTimeLapse", value.toString());
     notifyListeners();
   }
 
   setTheme(index) {
     settings.theme = index;
-    ref.child("theme").set(index);
+    setValue("theme", index.toString());
+
     notifyListeners();
   }
 
@@ -72,7 +90,7 @@ class SettingsProvider extends ChangeNotifier {
       return true;
     else
       return false;
-  }*/
+  }
 
   AppTheme getTheme() {
     return themes[settings.theme];

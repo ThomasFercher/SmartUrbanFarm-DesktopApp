@@ -31,7 +31,7 @@ class Advanced extends StatelessWidget {
                   height: MediaQuery.of(context).size.height - 16,
                   child: DataChart(
                     data: value.temperatures,
-                    gradientColors: [theme.primaryColor, Color(0xFF81C784)],
+                    gradientColors: [theme.primaryColor, Color(0xFFA5D6A7)],
                     unit: "°C",
                     title: "Temperatures",
                     icon: Icons.dashboard,

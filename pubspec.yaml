@@ -32,7 +32,7 @@ dependencies:
   uuid: 2.2.2
   fl_chart: ^0.9.4
   carousel_slider: ^2.3.1
-
+  flutter_svg: ^0.19.2+1
 dev_dependencies:
   flutter_test:
     sdk: flutter

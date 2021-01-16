@@ -11,6 +11,7 @@ import 'package:suf_linux/objects/pageOption.dart';
 import 'package:suf_linux/pages/dashboard.dart';
 import 'package:suf_linux/pages/settings.dart';
 import 'package:http/http.dart';
+import 'package:suf_linux/providers/auth.dart';
 import '../styles.dart';
 import 'package:http/http.dart' as http;
 
@@ -44,7 +45,7 @@ class DashboardProvider with ChangeNotifier, DiagnosticableTreeMixin {
   }
 
   Future<void> fetchData() async {
-    token = await authApp();
+    token = await Auth.getAuthToken();
     liveData = await getLiveData();
     activeClimate = await getActiveClimate();
     temperatures = await loadList("temperatures");

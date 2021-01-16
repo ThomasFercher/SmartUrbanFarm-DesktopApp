@@ -189,7 +189,7 @@ class _DataChartState extends State<DataChart> {
                       child: SectionTitle(
                         title: widget.title + " [${widget.unit}]",
                         fontSize: 24,
-                        color: theme.headlineColor,
+                        color: widget.gradientColors[0],
                       ),
                     ),
                   ),
