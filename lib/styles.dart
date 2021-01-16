@@ -17,6 +17,7 @@ double cardElavation = 2.0;
 const Color primaryColor = Color(0xFF26C281);
 const Color secondaryColor = Color(0xFF3f51b5);
 const Color text_gray = Color(0xFF646464);
+const Color dark_gray = Color(0xFF646464);
 const Color accentColor = Colors.white;
 
 PageOption DashboardRoute = PageOption(

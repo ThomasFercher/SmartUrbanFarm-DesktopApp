@@ -6,6 +6,7 @@ import 'package:suf_linux/customwidgets/colorFadeIcon.dart';
 import 'package:suf_linux/customwidgets/pageTile.dart';
 import 'package:suf_linux/customwidgets/waterTankLevel.dart';
 import 'package:suf_linux/objects/pageOption.dart';
+import 'package:suf_linux/pages/advanced.dart';
 import 'package:suf_linux/pages/dashboard.dart';
 import 'package:suf_linux/pages/gallery.dart';
 import 'package:suf_linux/pages/settings.dart';
@@ -32,7 +33,7 @@ class Sider extends StatefulWidget {
       title: "Environment ",
     ),
     new PageOption(
-      widget: Settings(),
+      widget: Advanced(),
       icon: Icons.data_usage,
       title: "Advanced Data ",
     ),

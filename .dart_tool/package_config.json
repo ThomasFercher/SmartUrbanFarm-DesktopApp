@@ -14,6 +14,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "carousel_slider",
+      "rootUri": "file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/carousel_slider-2.3.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.6"
+    },
+    {
       "name": "characters",
       "rootUri": "file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/characters-1.1.0-nullsafety.5",
       "packageUri": "lib/",
@@ -56,6 +62,12 @@
       "languageVersion": "2.0"
     },
     {
+      "name": "equatable",
+      "rootUri": "file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/equatable-1.2.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
       "name": "fake_async",
       "rootUri": "file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/fake_async-1.2.0-nullsafety.3",
       "packageUri": "lib/",
@@ -72,6 +84,12 @@
       "rootUri": "file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/file-5.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.2"
+    },
+    {
+      "name": "fl_chart",
+      "rootUri": "file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/fl_chart-0.9.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.6"
     },
     {
       "name": "flare_dart",
@@ -144,6 +162,18 @@
       "rootUri": "file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.0-nullsafety.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "path_drawing",
+      "rootUri": "file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_drawing-0.4.1+1",
+      "packageUri": "lib/",
+      "languageVersion": "1.19"
+    },
+    {
+      "name": "path_parsing",
+      "rootUri": "file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_parsing-0.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "1.19"
     },
     {
       "name": "path_provider",
@@ -284,7 +314,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-01-11T21:10:03.180856Z",
+  "generated": "2021-01-16T07:14:12.851310Z",
   "generator": "pub",
   "generatorVersion": "2.12.0-141.0.dev"
 }

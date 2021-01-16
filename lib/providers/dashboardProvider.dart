@@ -47,6 +47,8 @@ class DashboardProvider with ChangeNotifier, DiagnosticableTreeMixin {
     token = await authApp();
     liveData = await getLiveData();
     activeClimate = await getActiveClimate();
+    temperatures = await loadList("temperatures");
+    humiditys = await loadList("humiditys");
     notifyListeners();
     print(waterTankLevel);
   }
@@ -197,18 +199,17 @@ class DashboardProvider with ChangeNotifier, DiagnosticableTreeMixin {
     });
     return suntime;
   }
+*/
+  Future<SplayTreeMap<DateTime, double>> loadList(String child) async {
+    SplayTreeMap<DateTime, double> list;
+    final response = await http.get("$baseUrl/$child.json?auth=$token");
+    Map<dynamic, dynamic> json = jsonDecode(response.body);
+    json.map((key, value) {});
+    list = json;
 
-  Future<SplayTreeMap<DateTime, double>> loadHumiditys() async {
-    SplayTreeMap<DateTime, double> humitdites;
-    await ref
-        .child("humiditys")
-        .limitToLast(10)
-        .once()
-        .then((DataSnapshot data) {
-      humitdites = sortData(data.value);
-    });
-    return humitdites;
+    return list;
   }
+  /*
 
   Future<void> loadData() async {
     temperature = await loadTemperature();
