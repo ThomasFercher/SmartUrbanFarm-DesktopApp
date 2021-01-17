@@ -75,7 +75,11 @@ class _SiderState extends State<Sider> {
             ),
           ),
           Container(
-            height: height - 52,
+            child: Image.asset("assets/images/logobanner.png"),
+            height: 120,
+          ),
+          Container(
+            height: height - 172,
             child: ListView.builder(
               itemCount: widget.pageOptions.length,
               shrinkWrap: true,
@@ -83,7 +87,7 @@ class _SiderState extends State<Sider> {
                 if (index == widget.pageOptions.length - 1) {
                   return Container(
                     margin: EdgeInsets.only(
-                      top: height - 52 - widget.pageOptions.length * 46 - 10,
+                      top: height - 172 - widget.pageOptions.length * 46 - 10,
                     ),
                     child: PageTile(
                       option: widget.pageOptions[index],

@@ -18,15 +18,11 @@ class Home extends StatelessWidget {
           children: [
             Sider(),
             Expanded(
-              child: Consumer<DashboardProvider>(builder: (context, d, child) {
-                return Column(
-                  children: [
-                    Container(
-                      child: d.selectedChild.widget,
-                    ),
-                  ],
-                );
-              }),
+              child: Consumer<DashboardProvider>(
+                builder: (context, d, child) {
+                  return d.selectedChild.widget;
+                },
+              ),
             )
           ],
         ),

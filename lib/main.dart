@@ -1,5 +1,6 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flare_flutter/flare_cache.dart';
+import 'package:flare_flutter/flare_controls.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:suf_linux/pages/dashboard.dart';
@@ -36,8 +37,10 @@ void main() => {
 
 class SufLinuxApplication extends StatelessWidget {
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
+    FlareControls flrctrl = new FlareControls();
     return MaterialApp(
       title: 'Suf Linux Application',
       theme: s.themeData,
@@ -48,11 +51,15 @@ class SufLinuxApplication extends StatelessWidget {
               projectSnap.connectionState == ConnectionState.waiting) {
             // Splashscreen using a Flare2d as a loading Animation
             return Container(
-              color: Colors.white,
+              color: s.primaryColor,
               child: FlareActor(
                 'assets/flares/splashscreen.flr',
                 alignment: Alignment.center,
                 animation: "Loading",
+                controller: flrctrl,
+                callback: (s) {
+                  flrctrl.play("Wind");
+                },
               ),
             );
           } else {
