@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:suf_linux/customwidgets/general/popupMenu.dart';
 import 'package:suf_linux/customwidgets/general/sectionTitle.dart';
-import 'package:suf_linux/customwidgets/sectionTitle.dart';
 import 'package:suf_linux/objects/appTheme.dart';
 import 'package:suf_linux/objects/photo.dart';
 import 'package:suf_linux/objects/popupMenuOption.dart';
@@ -27,7 +26,7 @@ class Gallery extends StatelessWidget {
       return Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        color: Colors.grey[100],
+        color: theme.background,
         child: Container(
           height: MediaQuery.of(context).size.height - 40,
           child: Stack(

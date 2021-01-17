@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:suf_linux/objects/appTheme.dart';
+import 'package:suf_linux/providers/settingsProvider.dart';
 import 'package:suf_linux/styles.dart';
 
 class CardData extends StatelessWidget {
@@ -24,16 +26,17 @@ class CardData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppTheme theme = Provider.of<SettingsProvider>(context).getTheme();
+
     return Card(
       elevation: cardElavation,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(borderRadius),
       ),
+      color: theme.cardColor,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(borderRadius),
-
-          color: Colors.white, //iconColor, //getTheme().cardColor,
         ),
         padding: EdgeInsets.all(8),
         child: Row(
@@ -50,7 +53,7 @@ class CardData extends StatelessWidget {
             Text(
               label,
               style: GoogleFonts.nunito(
-                color: Colors.black54,
+                color: theme.textColor,
                 fontWeight: FontWeight.w200,
                 fontSize: 18.0,
               ),
@@ -60,7 +63,7 @@ class CardData extends StatelessWidget {
                 text,
                 textAlign: TextAlign.end,
                 style: GoogleFonts.nunito(
-                  color: Colors.black54,
+                  color: theme.textColor,
                   fontWeight: FontWeight.w200,
                   fontSize: 18.0,
                 ),

@@ -2,6 +2,9 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:suf_linux/objects/appTheme.dart';
+import 'package:suf_linux/providers/settingsProvider.dart';
 import 'package:suf_linux/styles.dart';
 
 class DayRange extends StatelessWidget {
@@ -11,6 +14,8 @@ class DayRange extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppTheme theme = Provider.of<SettingsProvider>(context).getTheme();
+
     var start = suntime.split("-")[0].trim();
     var end = suntime.split("-")[1].trim();
 
@@ -21,6 +26,7 @@ class DayRange extends StatelessWidget {
         elevation: cardElavation,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius)),
+        color: theme.background,
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(borderRadius),

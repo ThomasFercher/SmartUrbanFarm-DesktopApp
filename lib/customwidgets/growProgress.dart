@@ -3,6 +3,9 @@ import 'package:flare_flutter/flare_controls.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:suf_linux/objects/appTheme.dart';
+import 'package:suf_linux/providers/settingsProvider.dart';
 import 'package:suf_linux/styles.dart';
 
 class GrowProgress extends StatelessWidget {
@@ -14,6 +17,8 @@ class GrowProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppTheme theme = Provider.of<SettingsProvider>(context).getTheme();
+
     return LayoutBuilder(builder: (context, constraints) {
       Size size = constraints.biggest;
       return Card(
@@ -22,6 +27,7 @@ class GrowProgress extends StatelessWidget {
             Radius.circular(borderRadius),
           ),
         ),
+        color: theme.cardColor,
         child: Container(
           height: size.height,
           width: size.width,

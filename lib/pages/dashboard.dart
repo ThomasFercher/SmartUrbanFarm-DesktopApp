@@ -3,15 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:suf_linux/customwidgets/carddata.dart';
 import 'package:suf_linux/customwidgets/dayRange.dart';
+import 'package:suf_linux/customwidgets/general/sectionTitle.dart';
 import 'package:suf_linux/customwidgets/growProgress.dart';
-import 'package:suf_linux/customwidgets/sectionTitle.dart';
 import 'package:suf_linux/customwidgets/waterTankLevel.dart';
+import 'package:suf_linux/objects/appTheme.dart';
 import 'package:suf_linux/providers/dashboardProvider.dart';
+import 'package:suf_linux/providers/settingsProvider.dart';
 import 'package:suf_linux/styles.dart';
 
 class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    AppTheme theme = Provider.of<SettingsProvider>(context).getTheme();
+
     // TODO: implement build
     return Consumer<DashboardProvider>(builder: (context, d, c) {
       var temp = d.liveData.temperature;
@@ -27,12 +31,12 @@ class Dashboard extends StatelessWidget {
       return Container(
         width: MediaQuery.of(context).size.width - 200,
         height: height + 20,
-        color: Colors.grey[100],
+        color: theme.background,
         padding: EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SectionHeading(text: "Details"),
+            SectionTitle(title: "Details"),
             GridView.count(
               shrinkWrap: true,
               crossAxisCount: 3,
@@ -62,7 +66,7 @@ class Dashboard extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(top: 10),
             ),
-            SectionHeading(text: "Suntime"),
+            SectionTitle(title: "Suntime"),
             DayRange(
               suntime: suntime,
             ),
@@ -72,10 +76,10 @@ class Dashboard extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: SectionHeading(text: "Grow Progress"),
+                  child: SectionTitle(title: "Grow Progress"),
                 ),
                 Expanded(
-                  child: SectionHeading(text: "Watertank"),
+                  child: SectionTitle(title: "Watertank"),
                 )
               ],
             ),

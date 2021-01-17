@@ -105,6 +105,7 @@ class Settings extends StatelessWidget {
           ),
           Container(
             height: MediaQuery.of(context).size.height - 360,
+            padding: EdgeInsets.only(top: 8, left: 48),
             child: Row(
               children: [
                 Expanded(
@@ -143,11 +144,14 @@ class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    AppTheme theme = Provider.of<SettingsProvider>(context).getTheme();
+
     return Consumer<SettingsProvider>(builder: (context, settings, child) {
       return Container(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height - 60,
+        height: MediaQuery.of(context).size.height,
         padding: EdgeInsets.symmetric(horizontal: 20),
+        color: theme.background,
         child: ListView(
           children: getSettings(settings, context),
         ),

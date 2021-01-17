@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:suf_linux/objects/appTheme.dart';
+import 'package:suf_linux/providers/settingsProvider.dart';
 import 'package:suf_linux/styles.dart';
 import 'dart:math';
 import 'package:vector_math/vector_math.dart' as Vector;
@@ -15,6 +18,8 @@ class WaterTankLevel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppTheme theme = Provider.of<SettingsProvider>(context).getTheme();
+
     double _yOffset = (200 / 100) * (100 - fullness);
     int yOffset = _yOffset.round();
 
@@ -27,7 +32,7 @@ class WaterTankLevel extends StatelessWidget {
             Radius.circular(borderRadius),
           ),
         ),
-        color: Colors.white,
+        color: theme.cardColor,
         child: Container(
           height: size.height,
           width: size.width - 16,
