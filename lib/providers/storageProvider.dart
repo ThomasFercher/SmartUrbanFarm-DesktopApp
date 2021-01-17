@@ -1,14 +1,19 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:flare_flutter/flare_cache.dart';
 import 'package:flare_flutter/provider/asset_flare.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:io';
+
+import 'package:path_provider/path_provider.dart';
+import 'package:suf_linux/objects/photo.dart';
+import 'package:suf_linux/services.dart/fileservice.dart';
 
 class StorageProvider extends ChangeNotifier {
-  Map<String, String> imgRefs = new Map();
-  List<Image> images = [];
-  Map<String, String> urls = {};
+  List<Photo> photos = [];
+
   var _assetsToWarmup = [
     AssetFlare(bundle: rootBundle, name: "assets/flares/moon.flr"),
     AssetFlare(bundle: rootBundle, name: "assets/flares/sun.flr"),
@@ -22,66 +27,38 @@ class StorageProvider extends ChangeNotifier {
     }
   }
 
-  Future initImages(context) async {
-    // >> To get paths you need these 2 lines
-    final manifestContent =
-        await DefaultAssetBundle.of(context).loadString('AssetManifest.json');
-
-    final Map<String, dynamic> manifestMap = json.decode(manifestContent);
-    // >> To get paths you need these 2 lines
-
-    final imagePaths = manifestMap.keys
-        .where((String key) => key.contains('images/'))
-        .where((String key) => key.contains('.jpeg'))
-        .toList();
-
-    imagePaths.forEach((element) {
-      var path = element.split("/");
-      var imgName = path[path.length - 1];
-
-      if (!images.any((element) => element.semanticLabel == imgName)) {
-        images.add(
-          new Image.asset(
-            element,
-            semanticLabel: imgName,
-          ),
-        );
-      }
-    });
-    notifyListeners();
-    print(images);
-  }
-
   Future<void> loadImages(context) async {
-    // imgRefs = await getImageReferences();
+    FileService service = new FileService();
+    List<File> files = service.getFileList();
 
-    /* await Future.wait(
-      imgRefs.keys.map(
-             (key) async => urls[key] = await imgRefs[key].getDownloadURL(),
-          ),
-    );*/
-
-    urls.forEach((date, url) {
-      if (images.every((element) => element.semanticLabel != date))
-        images.add(
-          new Image.network(
-            url,
-            semanticLabel: date,
-          ),
-        );
-    });
+    photos = files.map((file) {
+      var p = file.path.split("/")[file.path.split("/").length - 1];
+      var date_string = p.replaceAll("photo_", "").replaceAll(".jpeg", "");
+      print(date_string);
+      return Photo(file: file, image: Image.file(file), date: date_string);
+    }).toList();
 
     //need to call sort after all images are in the lis
 
-    images.sort((img1, img2) {
-      return img1.semanticLabel.compareTo(img2.semanticLabel);
+    photos.sort((ph1, ph2) {
+      return ph1.date.compareTo(ph2.date);
     });
 
-    images.forEach((element) {
-      precacheImage(element.image, context);
+    photos.forEach((photo) {
+      precacheImage(photo.image.image, context);
     });
 
-    print("loaded images");
+    print("loaded photos");
     notifyListeners();
+  }
+
+  void deletePhoto(Photo photo) {
+    this.photos.remove(photo);
+    photo.file.deleteSync();
+    notifyListeners();
+  }
+
+  void takePhoto() {
+    print("Take Photo");
   }
 }

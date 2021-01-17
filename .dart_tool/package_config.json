@@ -86,6 +86,12 @@
       "languageVersion": "2.2"
     },
     {
+      "name": "file_picker",
+      "rootUri": "file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/file_picker-2.1.5+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
       "name": "fl_chart",
       "rootUri": "file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/fl_chart-0.9.4",
       "packageUri": "lib/",
@@ -110,6 +116,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_plugin_android_lifecycle",
+      "rootUri": "file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-1.0.11",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
+    },
+    {
       "name": "flutter_svg",
       "rootUri": "file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_svg-0.19.2+1",
       "packageUri": "lib/",
@@ -118,6 +130,12 @@
     {
       "name": "flutter_test",
       "rootUri": "file:///home/thomas/snap/flutter/common/flutter/packages/flutter_test",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_web_plugins",
+      "rootUri": "file:///home/thomas/snap/flutter/common/flutter/packages/flutter_web_plugins",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -144,6 +162,12 @@
       "rootUri": "file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.16.1",
       "packageUri": "lib/",
       "languageVersion": "2.5"
+    },
+    {
+      "name": "js",
+      "rootUri": "file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.3-nullsafety.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "matcher",
@@ -183,7 +207,7 @@
     },
     {
       "name": "path_provider",
-      "rootUri": "file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.6.22",
+      "rootUri": "file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.6.27",
       "packageUri": "lib/",
       "languageVersion": "2.1"
     },
@@ -332,7 +356,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-01-16T08:14:15.413703Z",
+  "generated": "2021-01-17T13:49:10.666415Z",
   "generator": "pub",
   "generatorVersion": "2.12.0-141.0.dev"
 }

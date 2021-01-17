@@ -15,14 +15,15 @@ class DayRange extends StatelessWidget {
     var end = suntime.split("-")[1].trim();
 
     return SizedBox(
-      height: 70,
+      height: 80,
       width: MediaQuery.of(context).size.width,
       child: Card(
         elevation: cardElavation,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(borderRadius)),
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
+            borderRadius: BorderRadius.circular(borderRadius),
             gradient: LinearGradient(
               stops: [0.1, 1.4],
               colors: [Color(0xFFfad0c4), Color(0xFF000C40)],

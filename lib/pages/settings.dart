@@ -175,6 +175,8 @@ class ThemeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
       var w = constraints.maxWidth;
+      var h = constraints.maxHeight - 6 * borderRadius;
+      print(h);
       return GestureDetector(
         onTap: onSelected,
         child: Container(
@@ -191,37 +193,44 @@ class ThemeCard extends StatelessWidget {
               children: [
                 Container(
                   width: w,
-                  child: CustomPaint(
-                    painter: ThemePainter(appTheme),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: w / 5,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: (w / 5 - w / 7) / 2, vertical: 8),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Card(
-                                margin: EdgeInsets.all(0),
-                                color: cardColor,
-                                elevation: 1,
-                                child: Container(
-                                  width: w / 7,
-                                  height: w / 7,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(w / 7),
-                                ),
-                              ),
-                            ],
+                  child: Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: primaryColor,
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(borderRadius),
+                            topLeft: Radius.circular(borderRadius),
                           ),
                         ),
-                        Expanded(
-                          child: Column(
-                            children: [
-                              Row(
+                        width: w / 5,
+                        padding: EdgeInsets.symmetric(
+                            horizontal: (w / 5 - w / 7) / 2, vertical: 8),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Card(
+                              margin: EdgeInsets.all(0),
+                              color: cardColor,
+                              elevation: 1,
+                              child: Container(
+                                width: w / 7,
+                                height: w / 7,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(w / 7),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(borderRadius),
+                              child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
@@ -230,7 +239,7 @@ class ThemeCard extends StatelessWidget {
                                     elevation: 1,
                                     child: Container(
                                       width: w / 5,
-                                      height: w / 5,
+                                      height: h / 5,
                                     ),
                                   ),
                                   Card(
@@ -238,7 +247,7 @@ class ThemeCard extends StatelessWidget {
                                     elevation: 1,
                                     child: Container(
                                       width: w / 5,
-                                      height: w / 5,
+                                      height: h / 5,
                                     ),
                                   ),
                                   Card(
@@ -246,22 +255,26 @@ class ThemeCard extends StatelessWidget {
                                     elevation: 1,
                                     child: Container(
                                       width: w / 5,
-                                      height: w / 5,
+                                      height: h / 5,
                                     ),
                                   )
                                 ],
                               ),
-                              Padding(padding: EdgeInsets.only(bottom: 15)),
-                              Card(
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(borderRadius),
+                              child: Card(
                                 color: cardColor,
                                 elevation: 1,
                                 child: Container(
                                   width: w,
-                                  height: w / 5,
+                                  height: h / 5,
                                 ),
                               ),
-                              Padding(padding: EdgeInsets.only(bottom: 15)),
-                              Row(
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(borderRadius),
+                              child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
@@ -270,7 +283,7 @@ class ThemeCard extends StatelessWidget {
                                     elevation: 1,
                                     child: Container(
                                       width: 2 * w / 5,
-                                      height: 2 * w / 5,
+                                      height: 2 * h / 5,
                                     ),
                                   ),
                                   Card(
@@ -278,16 +291,16 @@ class ThemeCard extends StatelessWidget {
                                     elevation: 1,
                                     child: Container(
                                       width: w / 5,
-                                      height: 2 * w / 5,
+                                      height: 2 * h / 5,
                                     ),
                                   ),
                                 ],
-                              )
-                            ],
-                          ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
                 selected
@@ -297,7 +310,7 @@ class ThemeCard extends StatelessWidget {
                         margin: EdgeInsets.all(5),
                         child: Icon(
                           Icons.check,
-                          color: Colors.white,
+                          color: primaryColor,
                         ),
                       )
                     : Container(),
@@ -331,32 +344,5 @@ class LeadingIcon extends StatelessWidget {
         color: theme.primaryColor,
       ),
     );
-  }
-}
-
-class ThemePainter extends CustomPainter {
-  final AppTheme appTheme;
-  ThemePainter(this.appTheme);
-  //drawing
-  @override
-  void paint(Canvas canvas, Size size) {
-    var paint = Paint();
-    paint.style = PaintingStyle.fill;
-
-    var path = new Path();
-
-    paint.color = appTheme.primaryColor;
-    path.moveTo(0, size.height);
-
-    path.lineTo(size.width / 5, size.height);
-    path.lineTo(size.width / 5, 0);
-
-    path.lineTo(0, 0);
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return true;
   }
 }
