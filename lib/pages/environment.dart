@@ -1,7 +1,11 @@
+import 'package:animations/animations.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:suf_linux/customwidgets/climate/left/activeClimateControlItem.dart';
+import 'package:suf_linux/customwidgets/climate/left/growPhaseSelect.dart';
 import 'package:suf_linux/customwidgets/climate/right/climateControlItem.dart';
 import 'package:suf_linux/customwidgets/general/popupMenu.dart';
 import 'package:suf_linux/customwidgets/general/sectionTitle.dart';
@@ -24,46 +28,280 @@ class Environment extends StatelessWidget {
     // TODO: implement build
     AppTheme theme = Provider.of<SettingsProvider>(context).getTheme();
 
-    return Consumer<DashboardProvider>(builder: (context, data, c) {
-      List<ClimateControl> climates = data.climates;
-      var height = MediaQuery.of(context).size.height;
-      return Container(
-        width: MediaQuery.of(context).size.width,
-        height: height,
-        padding: EdgeInsets.all(8),
-        color: theme.background,
-        child: Row(
-          children: [
-            Expanded(child: Container()),
-            Expanded(
+    return Container(
+      child: Consumer<DashboardProvider>(builder: (context, data, c) {
+        List<ClimateControl> climates = data.climates;
+        ClimateControl activeClimate = data.activeClimate;
+        var temp = activeClimate.getTemperature(activeClimate.growPhase.phase);
+        var hum = activeClimate.getHumidity(activeClimate.growPhase.phase);
+        var sun = activeClimate.getSuntime(activeClimate.growPhase.phase);
+
+        var height = MediaQuery.of(context).size.height;
+        var width = MediaQuery.of(context).size.width / 2;
+        width = width.floorToDouble();
+
+        List<Widget> climctrlitems = climates
+            .map((clim) => ClimateControlItem(
+                  settings: clim,
+                  height: height - 56,
+                ))
+            .toList();
+
+        print("asd");
+        return Container(
+          width: MediaQuery.of(context).size.width,
+          height: height,
+          color: theme.background,
+          child: Row(
+            children: [
+              Expanded(
                 child: Container(
-              child: Column(
-                children: [
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    child: SectionTitle(
-                      title: "Others",
-                    ),
-                    height: 30,
-                  ),
-                  Expanded(
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: climates.length,
-                      itemBuilder: (context, index) {
-                        return ClimateControlItem(
-                          settings: climates[index],
-                          height: height - 16,
-                        );
+                  color: theme.primaryColor,
+                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  child: OpenContainer(
+                      tappable: false,
+                      closedElevation: 0.0,
+                      closedColor: primaryColor,
+                      openBuilder: (_, closeContainer) {
+                        /*    return EditEnvironment(
+                            initialSettings: activeClimate,
+                            create: false,
+                          );*/
                       },
+                      closedBuilder: (_, openContainer) {
+                        return Container(
+                          width: width,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(borderRadius),
+                            ),
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.white.withOpacity(0.0),
+                                Colors.white24,
+                              ],
+                              stops: [0, 0.8],
+                              begin: Alignment.centerRight,
+                              end: Alignment.centerLeft,
+                            ),
+                          ),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: borderRadius),
+                          margin: EdgeInsets.only(bottom: 8),
+                          child: LayoutBuilder(builder: (context, constraints) {
+                            var w = constraints.maxWidth;
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        height: 60,
+                                        alignment: Alignment.centerLeft,
+                                        child: SectionTitle(
+                                          title: activeClimate.name,
+                                          color: Colors.white,
+                                          fontSize: 28,
+                                        ),
+                                      ),
+                                    ),
+                                    PopupMenu(
+                                      color: Colors.white,
+                                      options: [
+                                        PopupMenuOption(
+                                          "Edit",
+                                          Icon(
+                                            Icons.edit,
+                                            color: primaryColor,
+                                          ),
+                                        ),
+                                      ],
+                                      onSelected: (val) {
+                                        switch (val) {
+                                          case 'Edit':
+                                            openContainer();
+                                            break;
+                                          default:
+                                        }
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 12),
+                                      child: SectionTitle(
+                                        title: "Active Growphase",
+                                        color: Colors.white,
+                                        fontSize: 22,
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: const EdgeInsets.only(bottom: 8),
+                                      width: w,
+                                      color: Colors.red,
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          GrowPhaseSelect(
+                                            phase: GROWPHASEVEGETATION,
+                                            disabledWidth: (w) * 0.2,
+                                            color: Colors.deepPurple,
+                                            title: "Vegetation",
+                                            expandedWidth: (w) * 0.6,
+                                            right_phase: GROWPHASEFLOWER,
+                                            icon: MaterialCommunityIcons.sprout,
+                                          ),
+                                          GrowPhaseSelect(
+                                            disabledWidth: (w) * 0.2,
+                                            expandedWidth: (w) * 0.6,
+                                            title: "Early Flower",
+                                            color: Colors.green,
+                                            phase: GROWPHASEFLOWER,
+                                            left_phase: GROWPHASEVEGETATION,
+                                            right_phase: GROWPHASELATEFLOWER,
+                                            icon: MaterialCommunityIcons.sprout,
+                                          ),
+                                          GrowPhaseSelect(
+                                            left_phase: GROWPHASEFLOWER,
+                                            phase: GROWPHASELATEFLOWER,
+                                            title: "Late Flower",
+                                            color: Colors.amber,
+                                            disabledWidth: (w) * 0.2,
+                                            expandedWidth: (w) * 0.6,
+                                            icon: MaterialCommunityIcons.sprout,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      width: w,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          ActiveClimateControlItem(
+                                            height: 60,
+                                            icon: WeatherIcons.wi_thermometer,
+                                            lable: "Temperature",
+                                            value: "$temp°C",
+                                          ),
+                                          ActiveClimateControlItem(
+                                            height: 60,
+                                            icon: WeatherIcons.wi_humidity,
+                                            lable: "Humidity",
+                                            value: "$hum%",
+                                          ),
+                                          ActiveClimateControlItem(
+                                            icon: WeatherIcons.wi_day_sunny,
+                                            height: 60,
+                                            lable: "Suntime",
+                                            value: "$sun",
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 8),
+                                      child: SectionTitle(
+                                        title: "Irrigation",
+                                        color: Colors.white,
+                                        fontSize: 22,
+                                      ),
+                                    ),
+                                    Container(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 4),
+                                      child: Row(
+                                        children: [
+                                          activeClimate.automaticWatering
+                                              ? Chip(
+                                                  label: Container(
+                                                    height: 34,
+                                                    alignment: Alignment.center,
+                                                    child: SectionTitle(
+                                                      fontSize: 14,
+                                                      title: "Automatic",
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                  backgroundColor: primaryColor,
+                                                  avatar: Icon(
+                                                    Icons.auto_awesome,
+                                                    color: Colors.white,
+                                                  ),
+                                                )
+                                              : Chip(
+                                                  label: Container(
+                                                    height: 32,
+                                                    alignment: Alignment.center,
+                                                    child: SectionTitle(
+                                                      fontSize: 14,
+                                                      title: "Regulated",
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                  backgroundColor:
+                                                      theme.secondaryColor,
+                                                  avatar: Icon(
+                                                    Icons.tune,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                          Expanded(
+                                            child: Container(
+                                              alignment: Alignment.centerRight,
+                                              child: Text(
+                                                activeClimate.automaticWatering
+                                                    ? "${activeClimate.soilMoisture}%"
+                                                    : "${activeClimate.waterConsumption}l/d",
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w100,
+                                                  fontSize: 28.0,
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            );
+                          }),
+                        );
+                      }),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  child: CarouselSlider(
+                    items: climctrlitems,
+                    options: CarouselOptions(
+                      viewportFraction: 1,
+                      enlargeCenterPage: true,
+                      height: MediaQuery.of(context).size.height,
+                      enableInfiniteScroll: false,
+                      scrollDirection: Axis.vertical,
                     ),
                   ),
-                ],
+                ),
               ),
-            )),
-          ],
-        ),
-      );
-    });
+            ],
+          ),
+        );
+      }),
+    );
   }
 }

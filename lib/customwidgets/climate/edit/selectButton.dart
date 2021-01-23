@@ -37,12 +37,12 @@ class SelectButton extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color: enabled ? color.shade200 : theme.disabled,
+              color: enabled ? color.shade100 : theme.disabled,
               size: 36,
             ),
             SectionTitle(
               title: title,
-              color: enabled ? color.shade200 : theme.disabled,
+              color: enabled ? color.shade100 : theme.disabled,
               fontSize: 14,
             )
           ],

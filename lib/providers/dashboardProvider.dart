@@ -183,7 +183,7 @@ class DashboardProvider with ChangeNotifier, DiagnosticableTreeMixin {
     activeClimate.growPhase.phase = phase;
 
     http.put("$baseUrl/activeClimate/growPhase/phase.json?auth=$token",
-        body: "$phase",
+        body: "phase:$phase",
         headers: {
           "Content-Tpye": "application/json",
         }).then(

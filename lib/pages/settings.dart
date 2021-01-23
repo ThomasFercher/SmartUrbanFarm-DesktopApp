@@ -103,37 +103,38 @@ class Settings extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            height: MediaQuery.of(context).size.height - 360,
-            padding: EdgeInsets.only(top: 8, left: 48),
-            child: Row(
-              children: [
-                Expanded(
-                  child: ThemeCard(
-                    background: themes[0].background,
-                    cardColor: themes[0].cardColor,
-                    onSelected: () => {pr.setTheme(0)},
-                    selected: pr.getSelected(0),
-                    appTheme: themes[0],
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.only(top: 8, left: 48),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: ThemeCard(
+                      background: themes[0].background,
+                      cardColor: themes[0].cardColor,
+                      onSelected: () => {pr.setTheme(0)},
+                      selected: pr.getSelected(0),
+                      appTheme: themes[0],
+                    ),
                   ),
-                ),
-                /*   ThemeCard(
-                  gradient: themes[1].background,
-                  cardColor: themes[1].cardColor,
-                  onSelected: () => {pr.setTheme(1)},
-                  selected: pr.getSelected(1),
-                  appTheme: themes[1],
-                ),*/
-                Expanded(
-                  child: ThemeCard(
-                    background: themes[1].background,
+                  /*   ThemeCard(
+                    gradient: themes[1].background,
                     cardColor: themes[1].cardColor,
                     onSelected: () => {pr.setTheme(1)},
                     selected: pr.getSelected(1),
                     appTheme: themes[1],
+                  ),*/
+                  Expanded(
+                    child: ThemeCard(
+                      background: themes[1].background,
+                      cardColor: themes[1].cardColor,
+                      onSelected: () => {pr.setTheme(1)},
+                      selected: pr.getSelected(1),
+                      appTheme: themes[1],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ]),

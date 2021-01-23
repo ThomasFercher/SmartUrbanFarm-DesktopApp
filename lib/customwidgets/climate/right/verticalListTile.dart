@@ -34,7 +34,7 @@ class VerticalListTile extends StatelessWidget {
     return Container(
       width: width,
       decoration: BoxDecoration(
-        color: color.shade200,
+        color: color.shade100,
         borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
       ),
       padding: EdgeInsets.only(bottom: borderRadius),

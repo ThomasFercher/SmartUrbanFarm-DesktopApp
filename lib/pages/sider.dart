@@ -1,3 +1,4 @@
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -76,7 +77,10 @@ class _SiderState extends State<Sider> {
             ),
           ),
           Container(
-            child: Image.asset("assets/images/logobanner.png"),
+            child: FlareActor(
+              'assets/flares/logo.flr',
+              alignment: Alignment.center,
+            ),
             height: 120,
           ),
           Container(
