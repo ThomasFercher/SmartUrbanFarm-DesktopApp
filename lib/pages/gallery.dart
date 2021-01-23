@@ -10,6 +10,7 @@ import 'package:suf_linux/objects/popupMenuOption.dart';
 import 'package:suf_linux/providers/settingsProvider.dart';
 import 'package:suf_linux/providers/storageProvider.dart';
 import 'package:suf_linux/styles.dart';
+import 'package:animations/animations.dart';
 
 class Gallery extends StatelessWidget {
   void takePhoto(context) {
@@ -31,17 +32,13 @@ class Gallery extends StatelessWidget {
           height: MediaQuery.of(context).size.height - 40,
           child: Stack(
             children: [
-              CarouselSlider.builder(
-                options: CarouselOptions(
-                  viewportFraction: 0.95,
-                  enlargeCenterPage: true,
-                  height: MediaQuery.of(context).size.height,
-                  enableInfiniteScroll: false,
-                ),
+              GridView.builder(
                 itemCount: photos.length,
                 itemBuilder: (context, index) {
                   return PhotoListItem(photos[index]);
                 },
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3),
               ),
               Align(
                 alignment: Alignment.bottomRight,
@@ -77,6 +74,35 @@ class PhotoListItem extends StatelessWidget {
     Provider.of<StorageProvider>(context, listen: false).deletePhoto(photo);
   }
 
+  onTap(context) {
+    showModal(
+      configuration: FadeScaleTransitionConfiguration(
+        transitionDuration: Duration(milliseconds: 250),
+        barrierDismissible: true,
+        reverseTransitionDuration: Duration(milliseconds: 250),
+      ),
+      context: context,
+      builder: (context) {
+        return Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.center,
+                child: Container(
+                  width: photo.image.width,
+                  height: photo.image.height,
+                  child: Image(image: photo.image.image),
+                ),
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -97,15 +123,18 @@ class PhotoListItem extends StatelessWidget {
               children: [
                 Stack(
                   children: [
-                    Container(
-                      width: photo.image.width,
-                      height: photo.image.height,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(borderRadius),
-                          topRight: Radius.circular(borderRadius),
+                    GestureDetector(
+                      onTap: () => onTap(context),
+                      child: Container(
+                        width: photo.image.width,
+                        height: photo.image.height,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(borderRadius),
+                            topRight: Radius.circular(borderRadius),
+                          ),
+                          child: photo.image,
                         ),
-                        child: photo.image,
                       ),
                     ),
                     Align(

@@ -20,6 +20,10 @@ const Color text_gray = Color(0xFF646464);
 const Color dark_gray = Color(0xFF646464);
 const Color accentColor = Colors.white;
 
+const GROWPHASEVEGETATION = "vegation";
+const GROWPHASEFLOWER = "flower";
+const GROWPHASELATEFLOWER = "lateflower";
+
 PageOption DashboardRoute = PageOption(
   widget: Dashboard(),
   icon: Icons.dashboard,

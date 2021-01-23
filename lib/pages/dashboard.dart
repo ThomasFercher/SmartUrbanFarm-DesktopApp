@@ -23,7 +23,7 @@ class Dashboard extends StatelessWidget {
       var soilM = d.liveData.soilMoisture;
       var waterTankLevel = d.liveData.waterTankLevel;
       var growProgress = d.liveData.growProgress;
-      var suntime = d.activeClimate.suntime;
+      var suntime = "06:00 - 18:00";
 
       var height = MediaQuery.of(context).size.height - 20;
       var width = MediaQuery.of(context).size.width - 220;

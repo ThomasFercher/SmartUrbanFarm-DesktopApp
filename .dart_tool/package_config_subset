@@ -2,6 +2,10 @@ suf_linux
 2.7
 file:///home/thomas/SUF-Linux/
 file:///home/thomas/SUF-Linux/lib/
+animations
+2.2
+file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/animations-1.1.2/
+file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/animations-1.1.2/lib/
 async
 2.12
 file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.5.0-nullsafety.3/
@@ -74,6 +78,10 @@ flare_flutter
 2.2
 file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flare_flutter-2.0.6/
 file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flare_flutter-2.0.6/lib/
+flutter_icons
+2.0
+file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_icons-1.1.0/
+file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_icons-1.1.0/lib/
 flutter_plugin_android_lifecycle
 2.1
 file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-1.0.11/

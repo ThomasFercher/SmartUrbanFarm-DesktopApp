@@ -2,6 +2,12 @@
   "configVersion": 2,
   "packages": [
     {
+      "name": "animations",
+      "rootUri": "file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/animations-1.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.2"
+    },
+    {
       "name": "async",
       "rootUri": "file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.5.0-nullsafety.3",
       "packageUri": "lib/",
@@ -114,6 +120,12 @@
       "rootUri": "file:///home/thomas/snap/flutter/common/flutter/packages/flutter",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_icons",
+      "rootUri": "file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_icons-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
     },
     {
       "name": "flutter_plugin_android_lifecycle",
@@ -356,7 +368,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-01-17T13:49:10.666415Z",
+  "generated": "2021-01-23T13:49:05.258587Z",
   "generator": "pub",
   "generatorVersion": "2.12.0-141.0.dev"
 }

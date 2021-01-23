@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:suf_linux/customwidgets/sider.dart';
+import 'package:suf_linux/pages/sider.dart';
 import 'package:suf_linux/providers/dashboardProvider.dart';
 import 'package:suf_linux/styles.dart';
 

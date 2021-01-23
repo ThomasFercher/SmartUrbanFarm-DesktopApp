@@ -22,15 +22,13 @@ class DashboardProvider with ChangeNotifier, DiagnosticableTreeMixin {
 
   LiveData liveData;
   ClimateControl activeClimate;
+  List<ClimateControl> climates;
+  SplayTreeMap<DateTime, double> temperatures = new SplayTreeMap();
+  SplayTreeMap<DateTime, double> humiditys = new SplayTreeMap();
 
   DashboardProvider({@required this.selectedChild}) {
     fetchData();
   }
-
-  /*Timer.periodic(Duration(seconds: 60), (timer) {
-      print("aasd");
-      // loadData();
-    });*/
 
   void setSelectedChild(PageOption s) {
     selectedChild = s;
@@ -48,10 +46,10 @@ class DashboardProvider with ChangeNotifier, DiagnosticableTreeMixin {
     token = await Auth.getAuthToken();
     liveData = await getLiveData();
     activeClimate = await getActiveClimate();
+    climates = await getClimates();
     temperatures = await loadList("temperatures");
     humiditys = await loadList("humiditys");
     notifyListeners();
-    print(waterTankLevel);
   }
 
   Future<T> getValue<T>(var url) async {
@@ -68,7 +66,18 @@ class DashboardProvider with ChangeNotifier, DiagnosticableTreeMixin {
     final response = await http.get("$baseUrl/activeClimate.json?auth=$token");
     Map<dynamic, dynamic> json = jsonDecode(response.body);
 
-    return ClimateControl.fromJson(json);
+    return ClimateControl.fromJson(json, true);
+  }
+
+  Future<List<ClimateControl>> getClimates() async {
+    List<ClimateControl> climates = [];
+    final response = await http.get("$baseUrl/climates.json?auth=$token");
+    Map<dynamic, dynamic> json = jsonDecode(response.body);
+    json.forEach((key, value) {
+      climates.add(ClimateControl.fromJson(value, false));
+    });
+
+    return climates;
   }
 
   Future<LiveData> getLiveData() async {
@@ -78,46 +87,6 @@ class DashboardProvider with ChangeNotifier, DiagnosticableTreeMixin {
     return LiveData.fromJson(json);
   }
 
-  bool setting1 = false;
-  bool setting2 = false;
-
-  double temperature = 0.0;
-  double tempSoll = 25;
-
-  double humidity = 0.0;
-  double humiditySoll = 50;
-
-  double soilMoisture = 0.0;
-  double soilMoistureSoll = 50;
-
-  double waterTankLevel = 0.0;
-  double growProgress = 0.0;
-
-  String suntime = "02:30 - 18:00";
-
-  SplayTreeMap<DateTime, double> temperatures = new SplayTreeMap();
-  SplayTreeMap<DateTime, double> humiditys = new SplayTreeMap();
-  // final ref = fb.reference();
-
-  List<EnvironmentSettings> settings = [
-    new EnvironmentSettings(
-      name: "Custom",
-      temperature: 50,
-      humidity: 50,
-      soilMoisture: 50,
-      suntime: "02:30 - 18:00",
-      waterConsumption: 1,
-    ),
-    new EnvironmentSettings(
-      name: "Custom",
-      temperature: 50,
-      humidity: 50,
-      soilMoisture: 50,
-      suntime: "02:30 - 18:00",
-      waterConsumption: 1,
-    )
-  ];
-
   SplayTreeMap<DateTime, double> getTemperatures() {
     return temperatures;
   }
@@ -126,81 +95,6 @@ class DashboardProvider with ChangeNotifier, DiagnosticableTreeMixin {
     return humiditys;
   }
 
-  void suntimeChanged(List<dynamic> suntime) {
-    String time = "${suntime[0]} - ${suntime[1]}";
-    this.suntime = time;
-    //   fb.reference().child('suntime').set({'suntime': time}).then((_) {});
-  }
-
-  void tempSollChanged(double v) {
-    v = num.parse(v.toStringAsFixed(1));
-    tempSoll = v;
-    //   fb.reference().child('temperatureSoll').set(tempSoll);
-    notifyListeners();
-  }
-
-  void humiditySollChanged(double v) {
-    v = num.parse(v.toStringAsFixed(1));
-    humiditySoll = v;
-    //   fb.reference().child('humiditySoll').set(humiditySoll);
-    notifyListeners();
-  }
-
-  void soilMoistureSollChanged(double v) {
-    v = num.parse(v.toStringAsFixed(1));
-    soilMoistureSoll = v;
-    //  fb.reference().child('soilMoistureSoll').set(soilMoistureSoll);
-    notifyListeners();
-  }
-
-  /* Future<SplayTreeMap<DateTime, double>> loadTemperatures() async {
-    SplayTreeMap<DateTime, double> temps;
-    await ref
-        .child("temperatures")
-        .limitToLast(10)
-        .once()
-        .then((DataSnapshot data) {
-      temps = sortData(data.value);
-    });
-    return temps;
-  }*/
-
-  /* Future<double> loadTemperature() async {
-    double temp;
-    await ref.child("temperature").once().then((DataSnapshot data) {
-      temp = double.parse(data.value);
-    });
-    return temp;
-  }
-
-  Future<double> loadHumidity() async {
-    double humidity;
-    await ref.child("humidity").once().then((DataSnapshot data) {
-      humidity = double.parse(data.value);
-    });
-    return humidity;
-  }
-
-  Future<double> loadSoilMoisture() async {
-    double soilMoisture;
-    await ref.child("soilMoisture").once().then((DataSnapshot data) {
-      soilMoisture = double.parse(data.value);
-    });
-    return soilMoisture;
-  }
-
-  Future<String> loadSuntime() async {
-    String suntime;
-    await ref
-        .child("suntime")
-        .child("suntime")
-        .once()
-        .then((DataSnapshot data) {
-      suntime = data.value;
-    });
-    return suntime;
-  }
-*/
   Future<SplayTreeMap<DateTime, double>> loadList(String child) async {
     SplayTreeMap<DateTime, double> list = new SplayTreeMap();
     final response = await http.get("$baseUrl/$child.json?auth=$token");
@@ -211,26 +105,92 @@ class DashboardProvider with ChangeNotifier, DiagnosticableTreeMixin {
 
     return list;
   }
-  /*
 
-  Future<void> loadData() async {
-    temperature = await loadTemperature();
-    humidity = await loadHumidity();
-    soilMoisture = await loadSoilMoisture();
-    suntime = await loadSuntime();
-    temperatures = await loadTemperatures();
-    humiditys = await loadHumiditys();
+  void editClimate(ClimateControl initial, ClimateControl newClimate) {
+    bool isActive = false;
+    // If the active Climate is edited update active climate aswell
+    if (initial.getID == activeClimate.getID) {
+      setActiveClimate(newClimate);
+      isActive = true;
+    }
+    // get the local ClimateControl Object by matching the id
+    ClimateControl clim =
+        climates.singleWhere((clim) => initial.getID == clim.getID);
+    // edit in local list
+    climates[climates.indexOf(clim)] = newClimate;
+    // edit in firebase
+    http.put("$baseUrl/climates/${initial.getID}.json?auth=$token",
+        body: "${newClimate.getJson(isActive)}",
+        headers: {
+          "Content-Tpye": "application/json",
+        }).then(
+      (value) => {
+        print(value.statusCode),
+      },
+    );
 
     notifyListeners();
   }
 
-  void pressed() {
-    alongPressed = !alongPressed;
+  void createClimate(ClimateControl newClimate) {
+    // add Climate to local List
+    climates.add(newClimate);
+    // add Climate to Firebase
+    http.post("$baseUrl/climates/${newClimate.getID}.json?auth=$token",
+        body: "${newClimate.getJson(false)}",
+        headers: {
+          "Content-Tpye": "application/json",
+        }).then(
+      (value) => {
+        print(value.statusCode),
+      },
+    );
     notifyListeners();
   }
 
-  void editSettings(EnvironmentSettings initial, EnvironmentSettings e_s) {
-    settings[settings.indexOf(initial)] = e_s;
+  void setActiveClimate(ClimateControl climate) {
+    activeClimate = climate;
+    activeClimate.growPhase.phase = GROWPHASEVEGETATION;
+    http.post("$baseUrl/activeClimate.json?auth=$token",
+        body: "${climate.getJson(true)}",
+        headers: {
+          "Content-Tpye": "application/json",
+        }).then(
+      (value) => {
+        print(value.statusCode),
+      },
+    );
     notifyListeners();
-  }*/
+  }
+
+  void deleteClimate(ClimateControl climate) {
+    // Remove Climate locally
+    climates.remove(climate);
+    // Remove Climate in firebase
+    http
+        .delete(
+          "$baseUrl/climates/${climate.getID}.json?auth=$token",
+        )
+        .then(
+          (value) => {
+            print(value.statusCode),
+          },
+        );
+    notifyListeners();
+  }
+
+  void activeClimateChangePhase(String phase) {
+    activeClimate.growPhase.phase = phase;
+
+    http.put("$baseUrl/activeClimate/growPhase/phase.json?auth=$token",
+        body: "$phase",
+        headers: {
+          "Content-Tpye": "application/json",
+        }).then(
+      (value) => {
+        print(value.statusCode),
+      },
+    );
+    notifyListeners();
+  }
 }
