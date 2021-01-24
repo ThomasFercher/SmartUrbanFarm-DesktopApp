@@ -22,6 +22,7 @@ class ActiveClimateControlItem extends StatelessWidget {
     // TODO: implement build
 
     return ListTile(
+      contentPadding: EdgeInsets.symmetric(horizontal: 4),
       leading: Container(
         height: height - 8,
         width: height - 8,
@@ -43,7 +44,7 @@ class ActiveClimateControlItem extends StatelessWidget {
           style: GoogleFonts.nunito(
             color: Colors.white,
             fontWeight: FontWeight.w600,
-            fontSize: 18,
+            fontSize: 16,
           ),
         ),
       ),
@@ -52,7 +53,7 @@ class ActiveClimateControlItem extends StatelessWidget {
         style: GoogleFonts.nunito(
           color: Colors.white,
           fontWeight: FontWeight.w100,
-          fontSize: 26,
+          fontSize: 22,
         ),
       ),
     );

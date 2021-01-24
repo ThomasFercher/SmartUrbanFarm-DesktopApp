@@ -74,7 +74,8 @@ class DashboardProvider with ChangeNotifier, DiagnosticableTreeMixin {
     final response = await http.get("$baseUrl/climates.json?auth=$token");
     Map<dynamic, dynamic> json = jsonDecode(response.body);
     json.forEach((key, value) {
-      climates.add(ClimateControl.fromJson(value, false));
+      if (key != activeClimate.id)
+        climates.add(ClimateControl.fromJson(value, false));
     });
 
     return climates;

@@ -24,11 +24,13 @@ class SectionTitle extends StatelessWidget {
       child: Text(
         title,
         textAlign: TextAlign.start,
+        maxLines: 2,
+        softWrap: true,
         style: GoogleFonts.nunito(
           textStyle: TextStyle(
             color: color ?? theme.headlineColor,
             fontWeight: FontWeight.w700,
-            fontSize: fontSize,
+            fontSize: fontSize ?? 20,
           ),
         ),
       ),

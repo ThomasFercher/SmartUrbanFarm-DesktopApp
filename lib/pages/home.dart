@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:suf_linux/objects/appTheme.dart';
+import 'package:suf_linux/pages/environment.dart';
 import 'package:suf_linux/pages/sider.dart';
 import 'package:suf_linux/providers/dashboardProvider.dart';
+import 'package:suf_linux/providers/settingsProvider.dart';
 import 'package:suf_linux/styles.dart';
 
 class Home extends StatelessWidget {
@@ -10,21 +13,28 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     print(MediaQuery.of(context).size.width);
+    AppTheme theme = Provider.of<SettingsProvider>(context).getTheme();
     return Material(
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        child: Row(
-          children: [
-            Sider(),
-            Expanded(
-              child: Consumer<DashboardProvider>(
-                builder: (context, d, child) {
-                  return d.selectedChild.widget;
-                },
-              ),
-            )
-          ],
+        child: Consumer<DashboardProvider>(
+          builder: (context, d, child) {
+            return Row(
+              children: [
+                Container(
+                  color: d.selectedChild.title == "Environment"
+                      ? theme.primaryColor
+                      : theme.background,
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: Sider(),
+                ),
+                Expanded(
+                  child: d.selectedChild.widget,
+                )
+              ],
+            );
+          },
         ),
       ),
     );

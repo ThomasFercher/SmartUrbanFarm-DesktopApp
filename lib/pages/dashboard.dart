@@ -36,7 +36,9 @@ class Dashboard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SectionTitle(title: "Details"),
+            SectionTitle(
+              title: "Details",
+            ),
             GridView.count(
               shrinkWrap: true,
               crossAxisCount: 3,

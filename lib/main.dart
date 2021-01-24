@@ -9,6 +9,7 @@ import 'package:suf_linux/providers/dashboardProvider.dart';
 import 'package:suf_linux/providers/settingsProvider.dart';
 import 'package:suf_linux/providers/storageProvider.dart';
 import 'package:suf_linux/services.dart/fileservice.dart';
+import 'package:suf_linux/services.dart/vpd.dart';
 import 'package:suf_linux/styles.dart' as s;
 
 void main() => {
@@ -74,7 +75,10 @@ class SufLinuxApplication extends StatelessWidget {
 
   Future<void> loadData(context) async {
     FileService s = new FileService();
+    // Init VPD Class
+    await VPD().loadJson(context);
     Stopwatch stopwatch = new Stopwatch()..start();
+
     await Provider.of<DashboardProvider>(context, listen: false).fetchData();
     await Provider.of<StorageProvider>(context, listen: false).loadFlares();
     await Provider.of<StorageProvider>(context, listen: false)

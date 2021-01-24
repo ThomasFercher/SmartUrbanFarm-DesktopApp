@@ -68,7 +68,7 @@ class GrowPhaseSelect extends StatelessWidget {
                       child: SectionTitle(
                         title: title,
                         color: isSelected ? color : Colors.grey[300],
-                        fontSize: isSelected ? 18 : 12,
+                        fontSize: isSelected ? 18 : 10,
                       ),
                     ),
                   ],

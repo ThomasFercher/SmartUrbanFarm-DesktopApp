@@ -10,6 +10,8 @@ import 'package:suf_linux/objects/pageOption.dart';
 import 'package:suf_linux/pages/advanced.dart';
 import 'package:suf_linux/pages/environment.dart';
 import 'package:suf_linux/pages/dashboard.dart';
+import 'package:suf_linux/pages/environment.dart';
+import 'package:suf_linux/pages/environment.dart';
 import 'package:suf_linux/pages/gallery.dart';
 import 'package:suf_linux/pages/settings.dart';
 import 'package:suf_linux/providers/dashboardProvider.dart';
@@ -32,7 +34,7 @@ class Sider extends StatefulWidget {
     new PageOption(
       widget: Environment(),
       icon: Icons.settings_applications,
-      title: "Environment ",
+      title: "Environment",
     ),
     new PageOption(
       widget: Advanced(),
@@ -65,7 +67,16 @@ class _SiderState extends State<Sider> {
     return Container(
       width: 200,
       height: MediaQuery.of(context).size.height,
-      color: primaryColor,
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(blurRadius: 4.0),
+          BoxShadow(color: Colors.white10, offset: Offset(0, -16)),
+          BoxShadow(color: Colors.white10, offset: Offset(0, 16)),
+          BoxShadow(color: Colors.white10, offset: Offset(-16, -16)),
+          BoxShadow(color: Colors.white10, offset: Offset(-16, 16)),
+        ],
+        color: primaryColor,
+      ),
       child: Column(
         children: [
           Container(

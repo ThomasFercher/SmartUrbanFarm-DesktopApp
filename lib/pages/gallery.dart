@@ -29,7 +29,7 @@ class Gallery extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         color: theme.background,
         child: Container(
-          height: MediaQuery.of(context).size.height - 40,
+          padding: EdgeInsets.all(8),
           child: Stack(
             children: [
               GridView.builder(
@@ -38,7 +38,10 @@ class Gallery extends StatelessWidget {
                   return PhotoListItem(photos[index]);
                 },
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3),
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8,
+                ),
               ),
               Align(
                 alignment: Alignment.bottomRight,
@@ -110,8 +113,7 @@ class PhotoListItem extends StatelessWidget {
     AppTheme theme = Provider.of<SettingsProvider>(context).getTheme();
 
     return Container(
-      margin: EdgeInsets.all(20),
-      width: MediaQuery.of(context).size.width - 30,
+      width: MediaQuery.of(context).size.width,
       child: Stack(
         children: [
           Card(

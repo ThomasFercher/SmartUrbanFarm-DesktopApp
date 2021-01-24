@@ -14,130 +14,136 @@ class Settings extends StatelessWidget {
     List<AppTheme> themes = pr.themes;
 
     return [
-      Padding(
-        padding: EdgeInsets.only(top: 20),
-      ),
-      SwitchListTile(
-        contentPadding: EdgeInsets.symmetric(horizontal: 0),
-        secondary: LeadingIcon(icon: Icons.camera_alt),
-        value: pr.settings.automaticTimeLapse,
-        inactiveTrackColor: theme.contrast,
-        activeColor: theme.primaryColor,
-        title: Text(
-          "Take daily picture",
-          style: GoogleFonts.nunito(
-            color: theme.headlineColor,
-          ),
-        ),
-        subtitle: new Text(
-          "A timelapse will be created",
-          style: GoogleFonts.nunito(
-            color: theme.headlineColor,
-          ),
-        ),
-        onChanged: (value) => pr.setAutomaticTimeLapse(value),
-      ),
-      SwitchListTile(
-        contentPadding: EdgeInsets.symmetric(horizontal: 0),
-        secondary: LeadingIcon(icon: Icons.notifications),
-        value: pr.settings.notifications,
-        inactiveTrackColor: theme.contrast,
-        activeColor: theme.primaryColor,
-        title: Text(
-          "Notifications",
-          style: GoogleFonts.nunito(
-            color: theme.headlineColor,
-          ),
-        ),
-        subtitle: new Text(
-          "Enable or Disable Notifications",
-          style: GoogleFonts.nunito(
-            color: theme.headlineColor,
-          ),
-        ),
-        onChanged: (value) => pr.setNotifications(value),
-      ),
-      ListTile(
-        contentPadding: EdgeInsets.symmetric(horizontal: 0),
-        leading: LeadingIcon(icon: Icons.info),
-        title: Text(
-          "More Information",
-          style: GoogleFonts.nunito(
-            color: theme.headlineColor,
-          ),
-        ),
-        subtitle: new Text(
-          "Information about licenses and version number",
-          style: GoogleFonts.nunito(
-            color: theme.headlineColor,
-          ),
-        ),
-        onTap: () {
-          showAboutDialog(
-            context: context,
-            applicationIcon: Container(
-              width: 50,
-              height: 50,
-              padding: EdgeInsets.only(bottom: 5, right: 5),
-              child: SvgPicture.asset(
-                "assets/leaf.svg",
-                color: Colors.green,
-              ),
+      Container(
+        margin: EdgeInsets.only(top: 20),
+        height: 60,
+        child: SwitchListTile(
+          contentPadding: EdgeInsets.symmetric(horizontal: 0),
+          secondary: LeadingIcon(icon: Icons.camera_alt),
+          value: pr.settings.automaticTimeLapse,
+          inactiveTrackColor: theme.contrast,
+          activeColor: theme.primaryColor,
+          title: Text(
+            "Take daily picture",
+            style: GoogleFonts.nunito(
+              color: theme.headlineColor,
             ),
-            applicationLegalese: "",
-            applicationVersion: "0.4.4",
-            useRootNavigator: true,
-            applicationName: "SGS",
-          );
-        },
+          ),
+          subtitle: new Text(
+            "A timelapse will be created",
+            style: GoogleFonts.nunito(
+              color: theme.headlineColor,
+            ),
+          ),
+          onChanged: (value) => pr.setAutomaticTimeLapse(value),
+        ),
       ),
       Container(
-        child: Column(children: [
-          ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 0),
-            leading: LeadingIcon(icon: Icons.colorize),
-            title: Text(
-              "Select Color Theme",
-              style: GoogleFonts.nunito(
-                color: theme.headlineColor,
-              ),
+        height: 60,
+        child: SwitchListTile(
+          contentPadding: EdgeInsets.symmetric(horizontal: 0),
+          secondary: LeadingIcon(icon: Icons.notifications),
+          value: pr.settings.notifications,
+          inactiveTrackColor: theme.contrast,
+          activeColor: theme.primaryColor,
+          title: Text(
+            "Notifications",
+            style: GoogleFonts.nunito(
+              color: theme.headlineColor,
             ),
           ),
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.only(top: 8, left: 48),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: ThemeCard(
-                      background: themes[0].background,
-                      cardColor: themes[0].cardColor,
-                      onSelected: () => {pr.setTheme(0)},
-                      selected: pr.getSelected(0),
-                      appTheme: themes[0],
-                    ),
-                  ),
-                  /*   ThemeCard(
-                    gradient: themes[1].background,
-                    cardColor: themes[1].cardColor,
-                    onSelected: () => {pr.setTheme(1)},
-                    selected: pr.getSelected(1),
-                    appTheme: themes[1],
-                  ),*/
-                  Expanded(
-                    child: ThemeCard(
-                      background: themes[1].background,
-                      cardColor: themes[1].cardColor,
-                      onSelected: () => {pr.setTheme(1)},
-                      selected: pr.getSelected(1),
-                      appTheme: themes[1],
-                    ),
-                  ),
-                ],
-              ),
+          subtitle: new Text(
+            "Enable or Disable Notifications",
+            style: GoogleFonts.nunito(
+              color: theme.headlineColor,
             ),
           ),
-        ]),
+          onChanged: (value) => pr.setNotifications(value),
+        ),
+      ),
+      Container(
+        height: 60,
+        child: ListTile(
+          contentPadding: EdgeInsets.symmetric(horizontal: 0),
+          leading: LeadingIcon(icon: Icons.info),
+          title: Text(
+            "More Information",
+            style: GoogleFonts.nunito(
+              color: theme.headlineColor,
+            ),
+          ),
+          subtitle: new Text(
+            "Information about licenses and version number",
+            style: GoogleFonts.nunito(
+              color: theme.headlineColor,
+            ),
+          ),
+          onTap: () {
+            showAboutDialog(
+              context: context,
+              applicationIcon: Container(
+                width: 50,
+                height: 50,
+                padding: EdgeInsets.only(bottom: 5, right: 5),
+                child: SvgPicture.asset(
+                  "assets/leaf.svg",
+                  color: Colors.green,
+                ),
+              ),
+              applicationLegalese: "",
+              applicationVersion: "0.4.4",
+              useRootNavigator: true,
+              applicationName: "SGS",
+            );
+          },
+        ),
+      ),
+      Container(
+        height: 60,
+        child: ListTile(
+          contentPadding: EdgeInsets.symmetric(horizontal: 0),
+          leading: LeadingIcon(icon: Icons.colorize),
+          title: Text(
+            "Select Color Theme",
+            style: GoogleFonts.nunito(
+              color: theme.headlineColor,
+            ),
+          ),
+        ),
+      ),
+      Expanded(
+        child: Container(
+          padding: EdgeInsets.only(top: 8, left: 0, bottom: 8),
+          child: Row(
+            children: [
+              Expanded(
+                child: ThemeCard(
+                  background: themes[0].background,
+                  cardColor: themes[0].cardColor,
+                  onSelected: () => {pr.setTheme(0)},
+                  selected: pr.getSelected(0),
+                  appTheme: themes[0],
+                ),
+              ),
+              /*   ThemeCard(
+                gradient: themes[1].background,
+                cardColor: themes[1].cardColor,
+                onSelected: () => {pr.setTheme(1)},
+                selected: pr.getSelected(1),
+                appTheme: themes[1],
+              ),*/
+              Expanded(
+                child: ThemeCard(
+                  background: themes[1].background,
+                  cardColor: themes[1].cardColor,
+                  onSelected: () => {pr.setTheme(1)},
+                  selected: pr.getSelected(1),
+                  appTheme: themes[1],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     ];
   }
@@ -153,7 +159,7 @@ class Settings extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         padding: EdgeInsets.symmetric(horizontal: 20),
         color: theme.background,
-        child: ListView(
+        child: Column(
           children: getSettings(settings, context),
         ),
       );
@@ -209,8 +215,8 @@ class ThemeCard extends StatelessWidget {
                           ),
                         ),
                         width: w / 5,
-                        padding: EdgeInsets.symmetric(
-                            horizontal: (w / 5 - w / 7) / 2, vertical: 8),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 0, vertical: 8),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           mainAxisSize: MainAxisSize.max,
@@ -234,7 +240,7 @@ class ThemeCard extends StatelessWidget {
                         child: Column(
                           children: [
                             Padding(
-                              padding: EdgeInsets.all(borderRadius),
+                              padding: EdgeInsets.all(borderRadius / 2),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,

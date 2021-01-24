@@ -74,6 +74,12 @@
       "languageVersion": "2.0"
     },
     {
+      "name": "expandable",
+      "rootUri": "file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/expandable-4.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
       "name": "fake_async",
       "rootUri": "file:///home/thomas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/fake_async-1.2.0-nullsafety.3",
       "packageUri": "lib/",
@@ -368,7 +374,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-01-23T16:17:37.055461Z",
+  "generated": "2021-01-24T08:39:46.692091Z",
   "generator": "pub",
   "generatorVersion": "2.12.0-141.0.dev"
 }

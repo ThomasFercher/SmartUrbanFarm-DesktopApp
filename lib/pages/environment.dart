@@ -11,8 +11,10 @@ import 'package:suf_linux/customwidgets/general/popupMenu.dart';
 import 'package:suf_linux/customwidgets/general/sectionTitle.dart';
 import 'package:suf_linux/objects/appTheme.dart';
 import 'package:suf_linux/objects/climateControl.dart';
+import 'package:suf_linux/objects/pageOption.dart';
 import 'package:suf_linux/objects/photo.dart';
 import 'package:suf_linux/objects/popupMenuOption.dart';
+import 'package:suf_linux/pages/editEnvironment.dart';
 import 'package:suf_linux/providers/dashboardProvider.dart';
 import 'package:suf_linux/providers/settingsProvider.dart';
 import 'package:suf_linux/providers/storageProvider.dart';
@@ -47,7 +49,6 @@ class Environment extends StatelessWidget {
                 ))
             .toList();
 
-        print("asd");
         return Container(
           width: MediaQuery.of(context).size.width,
           height: height,
@@ -57,231 +58,219 @@ class Environment extends StatelessWidget {
               Expanded(
                 child: Container(
                   color: theme.primaryColor,
-                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                  child: OpenContainer(
-                      tappable: false,
-                      closedElevation: 0.0,
-                      closedColor: primaryColor,
-                      openBuilder: (_, closeContainer) {
-                        /*    return EditEnvironment(
-                            initialSettings: activeClimate,
-                            create: false,
-                          );*/
-                      },
-                      closedBuilder: (_, openContainer) {
-                        return Container(
-                          width: width,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(borderRadius),
-                            ),
-                            gradient: LinearGradient(
-                              colors: [
-                                Colors.white.withOpacity(0.0),
-                                Colors.white24,
-                              ],
-                              stops: [0, 0.8],
-                              begin: Alignment.centerRight,
-                              end: Alignment.centerLeft,
-                            ),
+                  padding: EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+                  child: Container(
+                    width: width,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(borderRadius),
+                      ),
+                      gradient: LinearGradient(
+                        colors: [
+                          Colors.white.withOpacity(0.0),
+                          Colors.white24,
+                        ],
+                        stops: [0, 0.8],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: borderRadius),
+                    child: LayoutBuilder(builder: (context, constraints) {
+                      var w = constraints.maxWidth;
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  height: 60,
+                                  alignment: Alignment.centerLeft,
+                                  child: SectionTitle(
+                                    title: activeClimate.name,
+                                    color: Colors.white,
+                                    fontSize: 28,
+                                  ),
+                                ),
+                              ),
+                              PopupMenu(
+                                color: Colors.white,
+                                options: [
+                                  PopupMenuOption(
+                                    "Edit",
+                                    Icon(
+                                      Icons.edit,
+                                      color: primaryColor,
+                                    ),
+                                  ),
+                                ],
+                                onSelected: (val) {
+                                  if (val == "Edit") {
+                                    Provider.of<DashboardProvider>(context,
+                                            listen: false)
+                                        .setSelectedChild(
+                                      PageOption(
+                                        title: "Edit Environemnt",
+                                        icon: Icons.ac_unit,
+                                        widget: EditEnvironment(
+                                            initialSettings: activeClimate,
+                                            create: false),
+                                      ),
+                                    );
+                                  }
+                                },
+                              ),
+                            ],
                           ),
-                          padding:
-                              EdgeInsets.symmetric(horizontal: borderRadius),
-                          margin: EdgeInsets.only(bottom: 8),
-                          child: LayoutBuilder(builder: (context, constraints) {
-                            var w = constraints.maxWidth;
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Row(
+                          Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 12),
+                                child: SectionTitle(
+                                  title: "Active Growphase",
+                                  color: Colors.white,
+                                  fontSize: 22,
+                                ),
+                              ),
+                              Container(
+                                width: w,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Expanded(
-                                      child: Container(
-                                        height: 60,
-                                        alignment: Alignment.centerLeft,
-                                        child: SectionTitle(
-                                          title: activeClimate.name,
-                                          color: Colors.white,
-                                          fontSize: 28,
-                                        ),
-                                      ),
+                                    GrowPhaseSelect(
+                                      phase: GROWPHASEVEGETATION,
+                                      disabledWidth: (w) * 0.2,
+                                      color: Colors.deepPurple,
+                                      title: "Vegetation",
+                                      expandedWidth: (w) * 0.6,
+                                      right_phase: GROWPHASEFLOWER,
+                                      icon: MaterialCommunityIcons.sprout,
                                     ),
-                                    PopupMenu(
-                                      color: Colors.white,
-                                      options: [
-                                        PopupMenuOption(
-                                          "Edit",
-                                          Icon(
-                                            Icons.edit,
-                                            color: primaryColor,
-                                          ),
-                                        ),
-                                      ],
-                                      onSelected: (val) {
-                                        switch (val) {
-                                          case 'Edit':
-                                            openContainer();
-                                            break;
-                                          default:
-                                        }
-                                      },
+                                    GrowPhaseSelect(
+                                      disabledWidth: (w) * 0.2,
+                                      expandedWidth: (w) * 0.6,
+                                      title: "Early Flower",
+                                      color: Colors.green,
+                                      phase: GROWPHASEFLOWER,
+                                      left_phase: GROWPHASEVEGETATION,
+                                      right_phase: GROWPHASELATEFLOWER,
+                                      icon: MaterialCommunityIcons.sprout,
+                                    ),
+                                    GrowPhaseSelect(
+                                      left_phase: GROWPHASEFLOWER,
+                                      phase: GROWPHASELATEFLOWER,
+                                      title: "Late Flower",
+                                      color: Colors.amber,
+                                      disabledWidth: (w) * 0.2,
+                                      expandedWidth: (w) * 0.6,
+                                      icon: MaterialCommunityIcons.sprout,
                                     ),
                                   ],
                                 ),
-                                Column(
+                              ),
+                              Container(
+                                width: w,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 12),
-                                      child: SectionTitle(
-                                        title: "Active Growphase",
-                                        color: Colors.white,
-                                        fontSize: 22,
-                                      ),
+                                    ActiveClimateControlItem(
+                                      height: 60,
+                                      icon: WeatherIcons.wi_thermometer,
+                                      lable: "Temperature",
+                                      value: "$temp°C",
                                     ),
-                                    Container(
-                                      padding: const EdgeInsets.only(bottom: 8),
-                                      width: w,
-                                      color: Colors.red,
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          GrowPhaseSelect(
-                                            phase: GROWPHASEVEGETATION,
-                                            disabledWidth: (w) * 0.2,
-                                            color: Colors.deepPurple,
-                                            title: "Vegetation",
-                                            expandedWidth: (w) * 0.6,
-                                            right_phase: GROWPHASEFLOWER,
-                                            icon: MaterialCommunityIcons.sprout,
-                                          ),
-                                          GrowPhaseSelect(
-                                            disabledWidth: (w) * 0.2,
-                                            expandedWidth: (w) * 0.6,
-                                            title: "Early Flower",
-                                            color: Colors.green,
-                                            phase: GROWPHASEFLOWER,
-                                            left_phase: GROWPHASEVEGETATION,
-                                            right_phase: GROWPHASELATEFLOWER,
-                                            icon: MaterialCommunityIcons.sprout,
-                                          ),
-                                          GrowPhaseSelect(
-                                            left_phase: GROWPHASEFLOWER,
-                                            phase: GROWPHASELATEFLOWER,
-                                            title: "Late Flower",
-                                            color: Colors.amber,
-                                            disabledWidth: (w) * 0.2,
-                                            expandedWidth: (w) * 0.6,
-                                            icon: MaterialCommunityIcons.sprout,
-                                          ),
-                                        ],
-                                      ),
+                                    ActiveClimateControlItem(
+                                      height: 60,
+                                      icon: WeatherIcons.wi_humidity,
+                                      lable: "Humidity",
+                                      value: "$hum%",
                                     ),
-                                    Container(
-                                      width: w,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          ActiveClimateControlItem(
-                                            height: 60,
-                                            icon: WeatherIcons.wi_thermometer,
-                                            lable: "Temperature",
-                                            value: "$temp°C",
-                                          ),
-                                          ActiveClimateControlItem(
-                                            height: 60,
-                                            icon: WeatherIcons.wi_humidity,
-                                            lable: "Humidity",
-                                            value: "$hum%",
-                                          ),
-                                          ActiveClimateControlItem(
-                                            icon: WeatherIcons.wi_day_sunny,
-                                            height: 60,
-                                            lable: "Suntime",
-                                            value: "$sun",
-                                          )
-                                        ],
-                                      ),
-                                    ),
+                                    ActiveClimateControlItem(
+                                      icon: WeatherIcons.wi_day_sunny,
+                                      height: 60,
+                                      lable: "Suntime",
+                                      value: "$sun",
+                                    )
                                   ],
                                 ),
-                                Column(
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 8),
+                                child: SectionTitle(
+                                  title: "Irrigation",
+                                  color: Colors.white,
+                                  fontSize: 22,
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.symmetric(horizontal: 4),
+                                child: Row(
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(bottom: 8),
-                                      child: SectionTitle(
-                                        title: "Irrigation",
-                                        color: Colors.white,
-                                        fontSize: 22,
-                                      ),
-                                    ),
-                                    Container(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 4),
-                                      child: Row(
-                                        children: [
-                                          activeClimate.automaticWatering
-                                              ? Chip(
-                                                  label: Container(
-                                                    height: 34,
-                                                    alignment: Alignment.center,
-                                                    child: SectionTitle(
-                                                      fontSize: 14,
-                                                      title: "Automatic",
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                  backgroundColor: primaryColor,
-                                                  avatar: Icon(
-                                                    Icons.auto_awesome,
-                                                    color: Colors.white,
-                                                  ),
-                                                )
-                                              : Chip(
-                                                  label: Container(
-                                                    height: 32,
-                                                    alignment: Alignment.center,
-                                                    child: SectionTitle(
-                                                      fontSize: 14,
-                                                      title: "Regulated",
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                  backgroundColor:
-                                                      theme.secondaryColor,
-                                                  avatar: Icon(
-                                                    Icons.tune,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                          Expanded(
-                                            child: Container(
-                                              alignment: Alignment.centerRight,
-                                              child: Text(
-                                                activeClimate.automaticWatering
-                                                    ? "${activeClimate.soilMoisture}%"
-                                                    : "${activeClimate.waterConsumption}l/d",
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.w100,
-                                                  fontSize: 28.0,
-                                                ),
+                                    activeClimate.automaticWatering
+                                        ? Chip(
+                                            label: Container(
+                                              height: 34,
+                                              alignment: Alignment.center,
+                                              child: SectionTitle(
+                                                fontSize: 14,
+                                                title: "Automatic",
+                                                color: Colors.white,
                                               ),
                                             ),
+                                            backgroundColor: primaryColor,
+                                            avatar: Icon(
+                                              Icons.auto_awesome,
+                                              color: Colors.white,
+                                            ),
                                           )
-                                        ],
+                                        : Chip(
+                                            label: Container(
+                                              height: 32,
+                                              alignment: Alignment.center,
+                                              child: SectionTitle(
+                                                fontSize: 14,
+                                                title: "Regulated",
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            backgroundColor:
+                                                theme.secondaryColor,
+                                            avatar: Icon(
+                                              Icons.tune,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                    Expanded(
+                                      child: Container(
+                                        alignment: Alignment.centerRight,
+                                        child: Text(
+                                          activeClimate.automaticWatering
+                                              ? "${activeClimate.soilMoisture}%"
+                                              : "${activeClimate.waterConsumption}l/d",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w100,
+                                            fontSize: 28.0,
+                                          ),
+                                        ),
                                       ),
-                                    ),
+                                    )
                                   ],
                                 ),
-                              ],
-                            );
-                          }),
-                        );
-                      }),
+                              ),
+                            ],
+                          ),
+                        ],
+                      );
+                    }),
+                  ),
                 ),
               ),
               Expanded(
@@ -290,7 +279,7 @@ class Environment extends StatelessWidget {
                     items: climctrlitems,
                     options: CarouselOptions(
                       viewportFraction: 1,
-                      enlargeCenterPage: true,
+                      enlargeCenterPage: false,
                       height: MediaQuery.of(context).size.height,
                       enableInfiniteScroll: false,
                       scrollDirection: Axis.vertical,

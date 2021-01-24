@@ -8,19 +8,25 @@ import 'package:suf_linux/providers/settingsProvider.dart';
 class IconValue extends StatelessWidget {
   final IconData icon;
   final Color color;
-  final String val;
+  String val;
   final String unit;
   final double fontsize;
 
-  const IconValue(
+  IconValue(
       {Key key, this.icon, this.color, this.val, this.unit, this.fontsize})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     AppTheme theme = Provider.of<SettingsProvider>(context).getTheme();
+    if (val.contains(" - ")) {
+      List<String> values = val.split(" - ");
+
+      val = "${values[0]}\n${values[1]}";
+    }
     return Container(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Icon(
             icon,
@@ -33,8 +39,11 @@ class IconValue extends StatelessWidget {
             style: TextStyle(
               color: color,
               fontWeight: FontWeight.w100,
-              fontSize: fontsize ?? 20,
+              fontSize: fontsize ?? 18,
             ),
+            softWrap: true,
+            textAlign: TextAlign.center,
+            maxLines: 3,
           ),
         ],
       ),
