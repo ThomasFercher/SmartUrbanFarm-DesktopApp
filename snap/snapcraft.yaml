@@ -1,0 +1,21 @@
+name: smarturbanfarm
+version: 1.0.0
+summary: Smart Urban Farm
+description: Smart Urban Farm
+
+confinement: strict
+base: core18
+grade: stable
+
+apps:
+  smarturbanfarm:
+    command: smart_urban_farm
+    extensions: [flutter-master] # Where "master" defines which Flutter channel to use for the build
+    plugs:
+    - network
+
+parts:
+  smarturbanfarm:
+    source: .
+    plugin: flutter
+    flutter-target: lib/main.dart # The main entry-point file of the applicati
