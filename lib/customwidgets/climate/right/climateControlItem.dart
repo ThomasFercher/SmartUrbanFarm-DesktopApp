@@ -66,7 +66,7 @@ class ClimateControlItem extends StatelessWidget {
             ),
             color: theme.cardColor,
             child: Container(
-              height: height,
+              height: MediaQuery.of(context).size.height - 8,
               width: w,
               child: Column(
                 children: [
@@ -127,7 +127,7 @@ class ClimateControlItem extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    height: height - 60,
+                    height: height - 20,
                     padding: EdgeInsets.symmetric(
                       horizontal: borderRadius,
                       vertical: 10,
@@ -137,24 +137,25 @@ class ClimateControlItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
+                          height: 30,
                           alignment: Alignment.centerLeft,
                           child: SectionTitle(
                             title: "Grow Phases",
                             fontSize: 20,
                             color: theme.headlineColor,
                           ),
-                          padding: EdgeInsets.only(bottom: 8),
+                          padding: EdgeInsets.only(bottom: 4),
                         ),
                         Expanded(
                           child: Container(
                             width: w,
                             child:
                                 LayoutBuilder(builder: (context, constraints) {
+                              w = (constraints.maxWidth - 1 * borderRadius) / 3;
                               return GridView.count(
                                 primary: false,
                                 crossAxisCount: 3,
-                                childAspectRatio:
-                                    (w / 3) / (constraints.maxHeight),
+                                childAspectRatio: w / (constraints.maxHeight),
                                 padding: EdgeInsets.all(0),
                                 crossAxisSpacing: borderRadius / 2,
                                 children: [
@@ -189,7 +190,8 @@ class ClimateControlItem extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          padding: const EdgeInsets.only(top: 8.0),
+                          padding: const EdgeInsets.only(top: 4.0),
+                          height: 30,
                           alignment: Alignment.centerLeft,
                           child: SectionTitle(
                             title: "Irrigation",
@@ -197,7 +199,8 @@ class ClimateControlItem extends StatelessWidget {
                             color: theme.headlineColor,
                           ),
                         ),
-                        Padding(
+                        Container(
+                          height: 60,
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: Row(
                             children: [

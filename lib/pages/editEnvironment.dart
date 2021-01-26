@@ -38,7 +38,14 @@ class _EditEnvironmentState extends State<EditEnvironment> {
             .createClimate(settings)
         : Provider.of<DashboardProvider>(context, listen: false)
             .editClimate(this.widget.initialSettings, settings);
-    Navigator.pop(context);
+
+    Provider.of<DashboardProvider>(context, listen: false).setSelectedChild(
+      PageOption(
+        widget: Environment(),
+        icon: Icons.settings_applications,
+        title: "Environment",
+      ),
+    );
   }
 
   @override
@@ -96,7 +103,7 @@ class _EditEnvironmentState extends State<EditEnvironment> {
                                           horizontal: 20, vertical: 10),
                                       child: RaisedButton(
                                         onPressed: () =>
-                                            save(pr.getSettings(), context),
+                                            save(pr.climateSettings, context),
                                         color: theme.primaryColor,
                                         textColor: Colors.white,
                                         child: Text(

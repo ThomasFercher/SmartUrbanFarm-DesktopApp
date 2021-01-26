@@ -23,6 +23,7 @@ class _GrowthPhaseState extends State<GrowthPhase> {
     return Consumer<ClimateControlProvider>(builder: (context, pr, child) {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        height: MediaQuery.of(context).size.height,
         child: Card(
           color: theme.cardColor,
           shape: RoundedRectangleBorder(
@@ -32,29 +33,34 @@ class _GrowthPhaseState extends State<GrowthPhase> {
           ),
           child: Column(
             children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.all(borderRadius),
-                      alignment: Alignment.centerLeft,
-                      child: SectionTitle(
-                        title: "Grow Phases",
-                        color: theme.headlineColor,
-                        fontSize: 24,
+              Container(
+                height: 50,
+                padding: EdgeInsets.only(
+                    top: borderRadius, left: borderRadius, right: 0, bottom: 4),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        child: SectionTitle(
+                          title: "Grow Phases",
+                          color: theme.headlineColor,
+                          fontSize: 24,
+                        ),
                       ),
                     ),
-                  ),
-                  InfoDialog(
-                    title: "Grow Phases",
-                    text:
-                        "Because a plant has different needs in different periods of time, you can specify the Temperature, the Humidity and the Suntime for each the Vegetation, Early Flower and Late Flower Phase",
-                  )
-                ],
+                    InfoDialog(
+                      title: "Grow Phases",
+                      text:
+                          "Because a plant has different needs in different periods of time, you can specify the Temperature, the Humidity and the Suntime for each the Vegetation, Early Flower and Late Flower Phase",
+                    )
+                  ],
+                ),
               ),
               Container(
-                padding: EdgeInsets.all(borderRadius),
-                height: 80,
+                height: 50,
+                padding:
+                    EdgeInsets.only(left: borderRadius, right: borderRadius),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.vertical(
                     top: Radius.circular(borderRadius),
@@ -100,11 +106,9 @@ class _GrowthPhaseState extends State<GrowthPhase> {
                   ],
                 ),
               ),
-              Divider(
-                color: theme.disabled,
-              ),
               Expanded(
                 child: Container(
+                  alignment: Alignment.topCenter,
                   child: AnimatedSwitcher(
                       duration: Duration(milliseconds: 100),
                       child: getGrowthItem(pr.sel_phase)),

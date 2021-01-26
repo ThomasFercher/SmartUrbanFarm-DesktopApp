@@ -70,7 +70,7 @@ class _DaySliderState extends State<DaySlider> {
             children: [
               SectionTitle(
                 title: "Suntime",
-                fontSize: 20,
+                fontSize: 18,
                 color: theme.headlineColor,
               ),
               Text(
@@ -78,7 +78,7 @@ class _DaySliderState extends State<DaySlider> {
                 style: TextStyle(
                   color: theme.headlineColor,
                   fontWeight: FontWeight.w100,
-                  fontSize: 30.0,
+                  fontSize: 20.0,
                 ),
               ),
             ],

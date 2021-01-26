@@ -10,11 +10,13 @@ class SectionTitle extends StatelessWidget {
   final String title;
   final double fontSize;
   final Color color;
+  final int textLines;
 
   SectionTitle({
     this.title,
     this.fontSize,
     this.color,
+    this.textLines,
   });
 
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class SectionTitle extends StatelessWidget {
       child: Text(
         title,
         textAlign: TextAlign.start,
-        maxLines: 2,
+        maxLines: textLines ?? 2,
         softWrap: true,
         style: GoogleFonts.nunito(
           textStyle: TextStyle(

@@ -54,7 +54,7 @@ class Gallery extends StatelessWidget {
                     },
                     backgroundColor: theme.primaryColor,
                     child: Icon(
-                      Icons.photo,
+                      Icons.camera_alt,
                       color: Colors.white,
                     ),
                   ),
@@ -114,6 +114,7 @@ class PhotoListItem extends StatelessWidget {
 
     return Container(
       width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
       child: Stack(
         children: [
           Card(
@@ -123,56 +124,52 @@ class PhotoListItem extends StatelessWidget {
             color: theme.cardColor,
             child: Column(
               children: [
-                Stack(
-                  children: [
-                    GestureDetector(
-                      onTap: () => onTap(context),
-                      child: Container(
-                        width: photo.image.width,
-                        height: photo.image.height,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(borderRadius),
-                            topRight: Radius.circular(borderRadius),
+                Expanded(
+                  child: Stack(
+                    children: [
+                      GestureDetector(
+                        onTap: () => onTap(context),
+                        child: Container(
+                          width: photo.image.width,
+                          height: photo.image.height,
+                          alignment: Alignment.center,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(borderRadius),
+                              topRight: Radius.circular(borderRadius),
+                            ),
+                            child: photo.image,
                           ),
-                          child: photo.image,
                         ),
                       ),
-                    ),
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: PopupMenu(
-                        color: Colors.white,
-                        options: [
-                          PopupMenuOption(
-                            "Delete",
-                            Icon(Icons.delete, color: Colors.redAccent),
-                          )
-                        ],
-                        onSelected: (value) {
-                          switch (value) {
-                            case "Delete":
-                              delete(context);
-                              break;
-                            default:
-                          }
-                        },
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: PopupMenu(
+                          color: Colors.white,
+                          options: [
+                            PopupMenuOption(
+                              "Delete",
+                              Icon(Icons.delete, color: Colors.redAccent),
+                            )
+                          ],
+                          onSelected: (value) {
+                            switch (value) {
+                              case "Delete":
+                                delete(context);
+                                break;
+                              default:
+                            }
+                          },
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 Container(
-                    padding: EdgeInsets.all(10),
-                    alignment: Alignment.topLeft,
-                    child: SectionTitle(title: photo.date)),
-                Container(
-                  padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                  padding: EdgeInsets.all(10),
                   alignment: Alignment.topLeft,
-                  child: Text(
-                    "some text containing data from the time of the photo",
-                    style: TextStyle(color: theme.headlineColor),
-                  ),
-                )
+                  child: SectionTitle(title: photo.date),
+                ),
               ],
             ),
           ),

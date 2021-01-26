@@ -58,8 +58,8 @@ class EditVariable extends StatelessWidget {
         elevation: isChild ? 0 : 1,
         color: theme.cardColor,
         child: Container(
-          padding: const EdgeInsets.only(
-              left: 15.0, right: 15.0, bottom: 10, top: 5),
+          padding:
+              const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 2, top: 2),
           child: Column(
             children: [
               Row(

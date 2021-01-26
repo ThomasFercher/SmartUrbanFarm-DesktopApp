@@ -38,12 +38,12 @@ class SelectButton extends StatelessWidget {
             Icon(
               icon,
               color: enabled ? color.shade100 : theme.disabled,
-              size: 22,
+              size: 20,
             ),
             SectionTitle(
               title: title,
               color: enabled ? color.shade100 : theme.disabled,
-              fontSize: 12,
+              fontSize: 11,
             )
           ],
         ),

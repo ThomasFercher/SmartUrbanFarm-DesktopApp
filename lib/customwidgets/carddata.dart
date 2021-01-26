@@ -46,7 +46,7 @@ class CardData extends StatelessWidget {
               padding: const EdgeInsets.only(right: 4.0),
               child: Icon(
                 icon,
-                size: 24,
+                size: 22,
                 color: iconColor,
               ),
             ),
@@ -55,7 +55,7 @@ class CardData extends StatelessWidget {
               style: GoogleFonts.nunito(
                 color: theme.textColor,
                 fontWeight: FontWeight.w200,
-                fontSize: 15.0,
+                fontSize: 14.0,
               ),
             ),
             Expanded(
@@ -65,7 +65,7 @@ class CardData extends StatelessWidget {
                 style: GoogleFonts.nunito(
                   color: theme.textColor,
                   fontWeight: FontWeight.w200,
-                  fontSize: 17.0,
+                  fontSize: 16.0,
                 ),
               ),
             ),

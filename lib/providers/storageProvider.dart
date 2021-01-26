@@ -32,6 +32,10 @@ class StorageProvider extends ChangeNotifier {
     FileService service = new FileService();
     List<File> files = service.getFileList();
 
+    if (files.isEmpty || files == null) {
+      return;
+    }
+
     photos = files.map((file) {
       var p = file.path.split("/")[file.path.split("/").length - 1];
       var date_string = p.replaceAll("photo_", "").replaceAll(".jpeg", "");
