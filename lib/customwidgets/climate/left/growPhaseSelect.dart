@@ -62,14 +62,14 @@ class GrowPhaseSelect extends StatelessWidget {
                         ? Icon(
                             icon,
                             color: color,
-                            size: 18,
+                            size: 16,
                           )
                         : Container(),
                     Flexible(
                       child: SectionTitle(
                         title: title,
                         color: isSelected ? color : Colors.grey[400],
-                        fontSize: isSelected ? 14 : 8,
+                        fontSize: isSelected ? 13 : 8,
                         textLines: isSelected ? 1 : 2,
                       ),
                     ),

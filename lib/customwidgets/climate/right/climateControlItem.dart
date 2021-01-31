@@ -75,7 +75,7 @@ class ClimateControlItem extends StatelessWidget {
                           child: SectionTitle(
                             title: settings.name,
                             color: theme.primaryColor,
-                            fontSize: 24,
+                            fontSize: 20,
                           ),
                         ),
                       ),

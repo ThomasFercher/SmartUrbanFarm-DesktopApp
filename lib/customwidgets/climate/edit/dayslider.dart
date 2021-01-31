@@ -66,10 +66,11 @@ class _DaySliderState extends State<DaySlider> {
         children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               SectionTitle(
                 title: "Suntime",
-                fontSize: 18,
+                fontSize: 14,
                 color: theme.headlineColor,
               ),
               Text(
@@ -77,74 +78,43 @@ class _DaySliderState extends State<DaySlider> {
                 style: TextStyle(
                   color: theme.headlineColor,
                   fontWeight: FontWeight.w100,
-                  fontSize: 20.0,
+                  fontSize: 18.0,
                 ),
               ),
             ],
           ),
           Container(
-            padding: EdgeInsets.only(top: 10, bottom: 5),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Container(
-                  width: 40,
-                  height: 50,
-                  child: FlareActor(
-                    'assets/flares/sun.flr',
-                    alignment: Alignment.center,
-                    animation: "Moon Rings",
-                    color: Colors.orange,
+            padding: EdgeInsets.only(top: 4),
+            child: SliderTheme(
+              data: SliderThemeData(
+                overlayShape: RoundSliderOverlayShape(overlayRadius: 15),
+                rangeThumbShape: _CustomRangeThumbShape(
+                  values: labels,
+                  valuesTime: _values,
+                ),
+                trackHeight: 2,
+              ),
+              child: RangeSlider(
+                  divisions: 96,
+                  values: _values,
+                  min: 0,
+                  max: 96,
+                  activeColor: widget.color,
+                  inactiveColor: Colors.black12,
+                  onChanged: (values) {
+                    setState(
+                      () {
+                        if (values.end - values.start >= 16) _values = values;
+                        labels = [
+                          getTimeString(_values.start),
+                          getTimeString(_values.end)
+                        ];
+                        suntime = _values.end / 4 - _values.start / 4;
 
-                    //  color: Colors.yellow[500],
-                  ),
-                ),
-                Expanded(
-                  child: SliderTheme(
-                    data: SliderThemeData(
-                      overlayShape: RoundSliderOverlayShape(overlayRadius: 15),
-                      rangeThumbShape: _CustomRangeThumbShape(
-                        values: labels,
-                        valuesTime: _values,
-                      ),
-                      trackHeight: 2,
-                    ),
-                    child: RangeSlider(
-                        divisions: 96,
-                        values: _values,
-                        min: 0,
-                        max: 96,
-                        activeColor: widget.color,
-                        inactiveColor: Colors.black12,
-                        onChanged: (values) {
-                          setState(
-                            () {
-                              if (values.end - values.start >= 16)
-                                _values = values;
-                              labels = [
-                                getTimeString(_values.start),
-                                getTimeString(_values.end)
-                              ];
-                              suntime = _values.end / 4 - _values.start / 4;
-
-                              widget.onValueChanged(
-                                  labels[0] + " - " + labels[1]);
-                            },
-                          );
-                        }),
-                  ),
-                ),
-                Container(
-                  width: 40,
-                  height: 50,
-                  child: FlareActor(
-                    'assets/flares/moon.flr',
-                    alignment: Alignment.center,
-                    animation: "Moon Rings",
-                  ),
-                ),
-              ],
+                        widget.onValueChanged(labels[0] + " - " + labels[1]);
+                      },
+                    );
+                  }),
             ),
           ),
         ],

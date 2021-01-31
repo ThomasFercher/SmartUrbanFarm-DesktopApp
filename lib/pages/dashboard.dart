@@ -32,7 +32,7 @@ class Dashboard extends StatelessWidget {
         width: width,
         height: height + 20,
         color: theme.background,
-        padding: EdgeInsets.all(8),
+        padding: EdgeInsets.all(4),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

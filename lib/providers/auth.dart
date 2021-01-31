@@ -4,10 +4,13 @@ import 'package:http/http.dart' as http;
 class Auth {
   static String token;
 
-  static Future<String> getAuthToken() async {
+  static initAuth() async {
     if (token == null) {
       token = await authApp();
     }
+  }
+
+  static Future<String> getAuthToken() async {
     return token;
   }
 

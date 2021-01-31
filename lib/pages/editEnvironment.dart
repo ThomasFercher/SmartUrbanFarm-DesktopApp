@@ -93,9 +93,10 @@ class _EditEnvironmentState extends State<EditEnvironment> {
                               children: [
                                 Expanded(
                                   child: Container(
-                                    width: width / 2,
                                     padding: EdgeInsets.symmetric(
-                                        horizontal: 20, vertical: 10),
+                                      horizontal: 4,
+                                      vertical: 8,
+                                    ),
                                     child: RaisedButton(
                                       onPressed: () =>
                                           save(pr.climateSettings, context),
@@ -117,9 +118,10 @@ class _EditEnvironmentState extends State<EditEnvironment> {
                                 ),
                                 Expanded(
                                   child: Container(
-                                    width: width / 2,
                                     padding: EdgeInsets.symmetric(
-                                        horizontal: 20, vertical: 10),
+                                      horizontal: 4,
+                                      vertical: 8,
+                                    ),
                                     child: RaisedButton(
                                       onPressed: () =>
                                           Provider.of<DashboardProvider>(

@@ -3,6 +3,7 @@ import 'package:flare_flutter/flare_cache.dart';
 import 'package:flare_flutter/flare_controls.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:suf_linux/objects/pageOption.dart';
 import 'package:suf_linux/pages/dashboard.dart';
 import 'package:suf_linux/pages/home.dart';
 import 'package:suf_linux/providers/auth.dart';
@@ -76,7 +77,7 @@ class SufLinuxApplication extends StatelessWidget {
 
   Future<void> loadData(context) async {
     FileService s = new FileService();
-    await Auth.authApp();
+    await Auth.initAuth();
 
     // Init VPD Class
     await VPD().loadJson(context);
@@ -86,6 +87,7 @@ class SufLinuxApplication extends StatelessWidget {
     await Provider.of<StorageProvider>(context, listen: false).loadFlares();
     await Provider.of<StorageProvider>(context, listen: false)
         .loadImages(context);
+    await Provider.of<SettingsProvider>(context, listen: false).loadSettings();
     //add a delay so the animation plays through
     stopwatch.stop();
     return Future.delayed(

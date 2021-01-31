@@ -72,11 +72,11 @@ class Environment extends StatelessWidget {
                               Expanded(
                                 child: Container(
                                   height: 30,
-                                  alignment: Alignment.centerLeft,
+                                  alignment: Alignment.topCenter,
                                   child: SectionTitle(
                                     title: activeClimate.name,
                                     color: Colors.white,
-                                    fontSize: 22,
+                                    fontSize: 20,
                                   ),
                                 ),
                               ),
@@ -116,7 +116,7 @@ class Environment extends StatelessWidget {
                                 child: SectionTitle(
                                   title: "Active Growphase",
                                   color: Colors.white,
-                                  fontSize: 18,
+                                  fontSize: 16,
                                 ),
                               ),
                               Container(
@@ -185,13 +185,10 @@ class Environment extends StatelessWidget {
                           ),
                           Column(
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 4),
-                                child: SectionTitle(
-                                  title: "Irrigation",
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                ),
+                              SectionTitle(
+                                title: "Irrigation",
+                                color: Colors.white,
+                                fontSize: 16,
                               ),
                               Container(
                                 padding: EdgeInsets.symmetric(horizontal: 4),
@@ -200,10 +197,10 @@ class Environment extends StatelessWidget {
                                     activeClimate.automaticWatering
                                         ? Chip(
                                             label: Container(
-                                              height: 28,
+                                              height: 26,
                                               alignment: Alignment.center,
                                               child: SectionTitle(
-                                                fontSize: 14,
+                                                fontSize: 12,
                                                 title: "Automatic",
                                                 color: Colors.white,
                                               ),
@@ -212,14 +209,15 @@ class Environment extends StatelessWidget {
                                             avatar: Icon(
                                               Icons.auto_awesome,
                                               color: Colors.white,
+                                              size: 16,
                                             ),
                                           )
                                         : Chip(
                                             label: Container(
-                                              height: 28,
+                                              height: 26,
                                               alignment: Alignment.center,
                                               child: SectionTitle(
-                                                fontSize: 14,
+                                                fontSize: 12,
                                                 title: "Regulated",
                                                 color: Colors.white,
                                               ),
@@ -229,6 +227,7 @@ class Environment extends StatelessWidget {
                                             avatar: Icon(
                                               Icons.tune,
                                               color: Colors.white,
+                                              size: 16,
                                             ),
                                           ),
                                     Expanded(
@@ -241,7 +240,7 @@ class Environment extends StatelessWidget {
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.w100,
-                                            fontSize: 22.0,
+                                            fontSize: 18.0,
                                           ),
                                         ),
                                       ),

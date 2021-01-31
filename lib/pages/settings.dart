@@ -15,7 +15,7 @@ class Settings extends StatelessWidget {
 
     return [
       Container(
-        height: 50,
+        height: 40,
         child: SwitchListTile(
           contentPadding: EdgeInsets.symmetric(horizontal: 0),
           secondary: LeadingIcon(icon: Icons.camera_alt),
@@ -26,7 +26,7 @@ class Settings extends StatelessWidget {
             "Take daily picture",
             style: GoogleFonts.nunito(
               color: theme.headlineColor,
-              fontSize: 16,
+              fontSize: 14,
             ),
           ),
           subtitle: new Text(
@@ -40,7 +40,7 @@ class Settings extends StatelessWidget {
         ),
       ),
       Container(
-        height: 50,
+        height: 40,
         child: SwitchListTile(
           contentPadding: EdgeInsets.symmetric(horizontal: 0),
           secondary: LeadingIcon(icon: Icons.notifications),
@@ -51,7 +51,7 @@ class Settings extends StatelessWidget {
             "Notifications",
             style: GoogleFonts.nunito(
               color: theme.headlineColor,
-              fontSize: 16,
+              fontSize: 14,
             ),
           ),
           subtitle: new Text(
@@ -65,15 +65,17 @@ class Settings extends StatelessWidget {
         ),
       ),
       Container(
-        height: 50,
+        height: 40,
         child: ListTile(
           contentPadding: EdgeInsets.symmetric(horizontal: 0),
-          leading: LeadingIcon(icon: Icons.info),
+          leading: LeadingIcon(
+            icon: Icons.info,
+          ),
           title: Text(
             "More Information",
             style: GoogleFonts.nunito(
               color: theme.headlineColor,
-              fontSize: 16,
+              fontSize: 14,
             ),
           ),
           subtitle: new Text(
@@ -104,12 +106,12 @@ class Settings extends StatelessWidget {
         ),
       ),
       Container(
-        height: 50,
+        height: 40,
         child: ListTile(
           contentPadding: EdgeInsets.symmetric(horizontal: 0),
           leading: LeadingIcon(icon: Icons.colorize),
           title: Container(
-            height: 50,
+            height: 40,
             alignment: Alignment.centerLeft,
             child: Text(
               "Select Color Theme",
@@ -159,7 +161,7 @@ class Settings extends StatelessWidget {
       return Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: 4),
         color: theme.background,
         child: Column(
           children: getSettings(settings, context),
@@ -348,12 +350,12 @@ class LeadingIcon extends StatelessWidget {
       width: 40,
       height: 40,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(23),
+        borderRadius: BorderRadius.circular(10),
         color: theme.contrast,
       ),
       child: Icon(
         icon,
-        size: 25,
+        size: 20,
         color: theme.primaryColor,
       ),
     );

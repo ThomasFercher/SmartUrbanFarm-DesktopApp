@@ -43,10 +43,10 @@ class CardData extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(right: 4.0),
+              padding: const EdgeInsets.only(right: 2.0),
               child: Icon(
                 icon,
-                size: 22,
+                size: 18,
                 color: iconColor,
               ),
             ),
@@ -55,7 +55,7 @@ class CardData extends StatelessWidget {
               style: GoogleFonts.nunito(
                 color: theme.textColor,
                 fontWeight: FontWeight.w200,
-                fontSize: 14.0,
+                fontSize: 12.0,
               ),
             ),
             Expanded(
@@ -64,8 +64,8 @@ class CardData extends StatelessWidget {
                 textAlign: TextAlign.end,
                 style: GoogleFonts.nunito(
                   color: theme.textColor,
-                  fontWeight: FontWeight.w200,
-                  fontSize: 16.0,
+                  fontWeight: FontWeight.w100,
+                  fontSize: 14.0,
                 ),
               ),
             ),

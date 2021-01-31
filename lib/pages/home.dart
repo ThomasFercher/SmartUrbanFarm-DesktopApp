@@ -23,7 +23,7 @@ class Home extends StatelessWidget {
             return Row(
               children: [
                 Container(
-                  color: d.selectedChild.title == "Environment"
+                  color: d.selectedChild.widget == Environment()
                       ? theme.primaryColor
                       : theme.background,
                   padding: const EdgeInsets.only(right: 8.0),

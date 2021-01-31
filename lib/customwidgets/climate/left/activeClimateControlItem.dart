@@ -22,7 +22,6 @@ class ActiveClimateControlItem extends StatelessWidget {
     // TODO: implement build
 
     return ListTile(
-      contentPadding: EdgeInsets.symmetric(horizontal: 4),
       leading: Container(
         height: height - 4,
         width: height - 4,

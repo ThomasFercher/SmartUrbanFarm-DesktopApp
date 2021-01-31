@@ -31,14 +31,14 @@ class SelectButton extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         alignment: Alignment.center,
-        padding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+        padding: EdgeInsets.symmetric(horizontal: 2, vertical: 4),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               icon,
               color: enabled ? color.shade100 : theme.disabled,
-              size: 20,
+              size: 18,
             ),
             SectionTitle(
               title: title,

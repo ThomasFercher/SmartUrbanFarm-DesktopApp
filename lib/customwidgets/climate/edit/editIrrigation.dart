@@ -66,6 +66,7 @@ class _EditIrrigationState extends State<EditIrrigation> {
                         children: [
                           Expanded(
                             child: Container(
+                              height: 26,
                               alignment: Alignment.centerLeft,
                               child: SectionTitle(
                                 title: "Irrigation",
@@ -95,16 +96,17 @@ class _EditIrrigationState extends State<EditIrrigation> {
                               color: !pr.climateSettings.automaticWatering
                                   ? Colors.white
                                   : Colors.black26,
-                              size: 18,
+                              size: 16,
                             ),
                             backgroundColor: Colors.black12,
                             isEnabled: true,
                             selected: !pr.climateSettings.automaticWatering,
                             label: Container(
+                              height: 26,
                               alignment: Alignment.center,
                               child: SectionTitle(
                                 title: "Regulated",
-                                fontSize: 14,
+                                fontSize: 12,
                                 color: !pr.climateSettings.automaticWatering
                                     ? Colors.white
                                     : Colors.black26,
@@ -120,8 +122,8 @@ class _EditIrrigationState extends State<EditIrrigation> {
                               Icons.tune,
                               color: pr.climateSettings.automaticWatering
                                   ? Colors.white
-                                  : Colors.black26,
-                              size: 18,
+                                  : Colors.black38,
+                              size: 16,
                             ),
                             backgroundColor: Colors.black12,
                             selected: pr.climateSettings.automaticWatering,
@@ -130,10 +132,10 @@ class _EditIrrigationState extends State<EditIrrigation> {
                               alignment: Alignment.center,
                               child: SectionTitle(
                                 title: "Automatic",
-                                fontSize: 14,
+                                fontSize: 12,
                                 color: pr.climateSettings.automaticWatering
                                     ? Colors.white
-                                    : Colors.black26,
+                                    : Colors.black38,
                               ),
                             ),
                           )

@@ -49,11 +49,9 @@ class EditVariable extends StatelessWidget {
           : const EdgeInsets.symmetric(horizontal: 10, vertical: 2.5),
       color: theme.cardColor,
       child: Container(
-        padding: const EdgeInsets.all(4),
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 4),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -61,7 +59,7 @@ class EditVariable extends StatelessWidget {
                   Container(
                     child: SectionTitle(
                       title: title,
-                      fontSize: 16,
+                      fontSize: 14,
                       color: theme.headlineColor,
                     ),
                   ),
@@ -73,7 +71,7 @@ class EditVariable extends StatelessWidget {
                       style: TextStyle(
                         color: theme.headlineColor,
                         fontWeight: FontWeight.w100,
-                        fontSize: 22.0,
+                        fontSize: 18.0,
                       ),
                     ),
                   ),

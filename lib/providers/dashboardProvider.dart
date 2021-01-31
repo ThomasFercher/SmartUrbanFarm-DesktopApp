@@ -26,14 +26,12 @@ class DashboardProvider with ChangeNotifier, DiagnosticableTreeMixin {
   SplayTreeMap<DateTime, double> temperatures = new SplayTreeMap();
   SplayTreeMap<DateTime, double> humiditys = new SplayTreeMap();
 
-  DashboardProvider({@required this.selectedChild}) {
-    fetchData();
-  }
-
   void setSelectedChild(PageOption s) {
     selectedChild = s;
     notifyListeners();
   }
+
+  DashboardProvider({this.selectedChild});
 
   Future<String> authApp() async {
     final response = await http.post(

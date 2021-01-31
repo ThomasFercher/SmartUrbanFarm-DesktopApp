@@ -67,11 +67,11 @@ class _SiderState extends State<Sider> {
     var height = MediaQuery.of(context).size.height;
 
     return Container(
-      width: 160,
+      width: 136,
       height: height,
       decoration: BoxDecoration(
         boxShadow: [
-          BoxShadow(blurRadius: 4.0),
+          BoxShadow(blurRadius: 3.0),
           BoxShadow(color: Colors.white10, offset: Offset(0, -16)),
           BoxShadow(color: Colors.white10, offset: Offset(0, 16)),
           BoxShadow(color: Colors.white10, offset: Offset(-16, -16)),
@@ -84,8 +84,12 @@ class _SiderState extends State<Sider> {
           Container(
             height: 28,
             child: Text(
-              "Smart Urban Farm",
-              style: heading,
+              'Smart Urban Farm',
+              style: GoogleFonts.nunito(
+                fontSize: 16,
+                color: Colors.white,
+                fontWeight: FontWeight.w200,
+              ),
             ),
           ),
           Container(

@@ -13,9 +13,6 @@ class SettingsProvider extends ChangeNotifier {
   String token;
   Settings settings;
 
-  SettingsProvider() {
-    loadSettings();
-  }
   // final ref = firebaseDatabase.reference().child("appSettings");
 
   List<AppTheme> themes = [
