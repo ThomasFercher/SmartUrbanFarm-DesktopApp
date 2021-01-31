@@ -143,10 +143,10 @@ class _DataChartState extends State<DataChart> {
             Row(
               children: [
                 Container(
-                  height: 48,
-                  width: 48,
+                  height: 36,
+                  width: 36,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(borderRadius),
+                    borderRadius: BorderRadius.circular(8),
                     color: widget.gradientColors[1],
                   ),
                   child: PopupMenu(
@@ -162,16 +162,16 @@ class _DataChartState extends State<DataChart> {
                   ),
                 ),
                 Container(
-                  height: 48,
-                  width: 48,
+                  height: 36,
+                  width: 36,
                   margin: EdgeInsets.only(left: 8),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(borderRadius),
+                    borderRadius: BorderRadius.circular(8),
                     color: widget.gradientColors[1],
                   ),
                   child: Icon(
                     widget.icon,
-                    size: 24,
+                    size: 20,
                     color: widget.gradientColors[0],
                   ),
                 ),

@@ -62,7 +62,6 @@ class _DaySliderState extends State<DaySlider> {
   Widget build(BuildContext context) {
     AppTheme theme = Provider.of<SettingsProvider>(context).getTheme();
     return Container(
-      padding: EdgeInsets.only(top: 10, bottom: 15, left: 20, right: 20),
       child: Column(
         children: <Widget>[
           Row(

@@ -22,7 +22,6 @@ class InfoDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     AppTheme theme = Provider.of<SettingsProvider>(context).getTheme();
     return Container(
-      margin: EdgeInsets.only(right: 24),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(
           Radius.circular(12),

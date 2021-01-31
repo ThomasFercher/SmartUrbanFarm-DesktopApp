@@ -18,7 +18,6 @@ class PageTile extends StatelessWidget {
     // TODO: implement build
 
     return Container(
-      height: 46,
       child: ListTile(
         title: Row(
           children: [
@@ -29,7 +28,7 @@ class PageTile extends StatelessWidget {
                 forward: sel,
                 icon: option.icon,
               ),
-              margin: EdgeInsets.only(right: 20),
+              margin: EdgeInsets.only(right: 8),
             ),
             Expanded(
               child: ColorFadeText(
@@ -41,7 +40,7 @@ class PageTile extends StatelessWidget {
             ),
           ],
         ),
-        contentPadding: EdgeInsets.only(left: 10),
+        contentPadding: EdgeInsets.only(left: 8),
         onTap: () => {
           onTap(),
           Provider.of<DashboardProvider>(context, listen: false)

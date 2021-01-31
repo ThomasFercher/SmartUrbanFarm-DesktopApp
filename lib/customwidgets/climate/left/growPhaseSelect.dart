@@ -54,7 +54,7 @@ class GrowPhaseSelect extends StatelessWidget {
               //  padding: EdgeInsets.all(0),
               labelPadding: EdgeInsets.all(0),
               label: Container(
-                height: 42,
+                height: 34,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -62,13 +62,14 @@ class GrowPhaseSelect extends StatelessWidget {
                         ? Icon(
                             icon,
                             color: color,
+                            size: 18,
                           )
                         : Container(),
                     Flexible(
                       child: SectionTitle(
                         title: title,
                         color: isSelected ? color : Colors.grey[400],
-                        fontSize: isSelected ? 18 : 8,
+                        fontSize: isSelected ? 14 : 8,
                         textLines: isSelected ? 1 : 2,
                       ),
                     ),

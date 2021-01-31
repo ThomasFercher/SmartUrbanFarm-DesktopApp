@@ -45,14 +45,13 @@ class _EditIrrigationState extends State<EditIrrigation> {
     AppTheme theme = Provider.of<SettingsProvider>(context).getTheme();
 
     return Consumer<ClimateControlProvider>(builder: (context, pr, child) {
-      return Container(
-        color: theme.background,
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2.5),
-        child: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(borderRadius),
-            ),
-            color: theme.cardColor,
+      return Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(borderRadius),
+          ),
+          color: theme.cardColor,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
                 Container(
@@ -67,13 +66,11 @@ class _EditIrrigationState extends State<EditIrrigation> {
                         children: [
                           Expanded(
                             child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: borderRadius, vertical: 8),
                               alignment: Alignment.centerLeft,
                               child: SectionTitle(
                                 title: "Irrigation",
                                 color: theme.headlineColor,
-                                fontSize: 22,
+                                fontSize: 18,
                               ),
                             ),
                           ),
@@ -84,67 +81,63 @@ class _EditIrrigationState extends State<EditIrrigation> {
                           )
                         ],
                       ),
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: borderRadius, vertical: 2),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            InputChip(
-                              onSelected: (value) {
-                                pr.changeAutomaticWatering(false);
-                              },
-                              showCheckmark: false,
-                              selectedColor: theme.secondaryColor,
-                              avatar: Icon(
-                                Icons.tune,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          InputChip(
+                            onSelected: (value) {
+                              pr.changeAutomaticWatering(false);
+                            },
+                            showCheckmark: false,
+                            selectedColor: theme.secondaryColor,
+                            avatar: Icon(
+                              Icons.tune,
+                              color: !pr.climateSettings.automaticWatering
+                                  ? Colors.white
+                                  : Colors.black26,
+                              size: 18,
+                            ),
+                            backgroundColor: Colors.black12,
+                            isEnabled: true,
+                            selected: !pr.climateSettings.automaticWatering,
+                            label: Container(
+                              alignment: Alignment.center,
+                              child: SectionTitle(
+                                title: "Regulated",
+                                fontSize: 14,
                                 color: !pr.climateSettings.automaticWatering
                                     ? Colors.white
                                     : Colors.black26,
-                                size: 18,
-                              ),
-                              backgroundColor: Colors.black12,
-                              isEnabled: true,
-                              selected: !pr.climateSettings.automaticWatering,
-                              label: Container(
-                                alignment: Alignment.center,
-                                child: SectionTitle(
-                                  title: "Regulated",
-                                  fontSize: 14,
-                                  color: !pr.climateSettings.automaticWatering
-                                      ? Colors.white
-                                      : Colors.black26,
-                                ),
                               ),
                             ),
-                            InputChip(
-                              showCheckmark: false,
-                              onSelected: (value) {
-                                pr.changeAutomaticWatering(true);
-                              },
-                              avatar: Icon(
-                                Icons.tune,
+                          ),
+                          InputChip(
+                            showCheckmark: false,
+                            onSelected: (value) {
+                              pr.changeAutomaticWatering(true);
+                            },
+                            avatar: Icon(
+                              Icons.tune,
+                              color: pr.climateSettings.automaticWatering
+                                  ? Colors.white
+                                  : Colors.black26,
+                              size: 18,
+                            ),
+                            backgroundColor: Colors.black12,
+                            selected: pr.climateSettings.automaticWatering,
+                            selectedColor: theme.primaryColor,
+                            label: Container(
+                              alignment: Alignment.center,
+                              child: SectionTitle(
+                                title: "Automatic",
+                                fontSize: 14,
                                 color: pr.climateSettings.automaticWatering
                                     ? Colors.white
                                     : Colors.black26,
-                                size: 18,
                               ),
-                              backgroundColor: Colors.black12,
-                              selected: pr.climateSettings.automaticWatering,
-                              selectedColor: theme.primaryColor,
-                              label: Container(
-                                alignment: Alignment.center,
-                                child: SectionTitle(
-                                  title: "Automatic",
-                                  fontSize: 14,
-                                  color: pr.climateSettings.automaticWatering
-                                      ? Colors.white
-                                      : Colors.black26,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
+                            ),
+                          )
+                        ],
                       ),
                       AnimatedSwitcher(
                         duration: Duration(milliseconds: 200),
@@ -177,8 +170,8 @@ class _EditIrrigationState extends State<EditIrrigation> {
                   ),
                 ),
               ],
-            )),
-      );
+            ),
+          ));
     });
   }
 }

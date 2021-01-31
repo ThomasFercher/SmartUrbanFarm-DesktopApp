@@ -74,9 +74,9 @@ ThemeData themeData = ThemeData(
 );
 
 TextStyle heading = GoogleFonts.quicksand(
-    color: Colors.white, fontSize: 21.0, fontWeight: FontWeight.w600);
+    color: Colors.white, fontSize: 18.0, fontWeight: FontWeight.w400);
 
 TextStyle heading2 = GoogleFonts.quicksand(
-    color: Colors.black54, fontSize: 18.0, fontWeight: FontWeight.w600);
+    color: Colors.black54, fontSize: 16.0, fontWeight: FontWeight.w200);
 
 TextStyle text = GoogleFonts.quicksand();

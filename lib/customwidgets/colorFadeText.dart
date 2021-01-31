@@ -48,7 +48,9 @@ class _ColorFadeTextState extends State<ColorFadeText>
 
   @override
   Widget build(BuildContext context) {
-    return Text(widget.text,
-        style: GoogleFonts.quicksand(color: _colorAnim.value));
+    return Text(
+      widget.text,
+      style: GoogleFonts.quicksand(color: _colorAnim.value, fontSize: 16),
+    );
   }
 }

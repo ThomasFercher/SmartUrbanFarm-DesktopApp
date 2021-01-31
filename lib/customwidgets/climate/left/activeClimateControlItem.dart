@@ -24,10 +24,10 @@ class ActiveClimateControlItem extends StatelessWidget {
     return ListTile(
       contentPadding: EdgeInsets.symmetric(horizontal: 4),
       leading: Container(
-        height: height - 12,
-        width: height - 12,
+        height: height - 4,
+        width: height - 4,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular((height - 4) / 4),
           color: Colors.white24,
         ),
         child: Icon(
@@ -44,7 +44,7 @@ class ActiveClimateControlItem extends StatelessWidget {
           style: GoogleFonts.nunito(
             color: Colors.white,
             fontWeight: FontWeight.w600,
-            fontSize: 14,
+            fontSize: 12,
           ),
         ),
       ),
@@ -53,7 +53,7 @@ class ActiveClimateControlItem extends StatelessWidget {
         style: GoogleFonts.nunito(
           color: Colors.white,
           fontWeight: FontWeight.w100,
-          fontSize: 20,
+          fontSize: 14,
         ),
       ),
     );

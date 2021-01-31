@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:suf_linux/pages/dashboard.dart';
 import 'package:suf_linux/pages/home.dart';
+import 'package:suf_linux/providers/auth.dart';
 import 'package:suf_linux/providers/dashboardProvider.dart';
 import 'package:suf_linux/providers/settingsProvider.dart';
 import 'package:suf_linux/providers/storageProvider.dart';
@@ -75,6 +76,8 @@ class SufLinuxApplication extends StatelessWidget {
 
   Future<void> loadData(context) async {
     FileService s = new FileService();
+    await Auth.authApp();
+
     // Init VPD Class
     await VPD().loadJson(context);
     Stopwatch stopwatch = new Stopwatch()..start();

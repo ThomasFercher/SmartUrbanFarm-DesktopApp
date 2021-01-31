@@ -31,7 +31,7 @@ class IconValue extends StatelessWidget {
           Icon(
             icon,
             color: color,
-            size: 24,
+            size: 20,
           ),
           Padding(padding: EdgeInsets.only(bottom: 10)),
           Text(

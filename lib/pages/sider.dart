@@ -39,7 +39,7 @@ class Sider extends StatefulWidget {
     new PageOption(
       widget: Advanced(),
       icon: Icons.data_usage,
-      title: "Advanced Data ",
+      title: "Advanced ",
     ),
     new PageOption(
       widget: Settings(),
@@ -53,20 +53,22 @@ class Sider extends StatefulWidget {
 
 class _SiderState extends State<Sider> {
   int selected;
+  List<PageOption> pageOptions;
 
   @override
   void initState() {
     super.initState();
     selected = 0;
+    pageOptions = widget.pageOptions;
   }
 
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
-    // TODO: implement build
+
     return Container(
-      width: 200,
-      height: MediaQuery.of(context).size.height,
+      width: 160,
+      height: height,
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(blurRadius: 4.0),
@@ -80,8 +82,7 @@ class _SiderState extends State<Sider> {
       child: Column(
         children: [
           Container(
-            height: 52,
-            padding: EdgeInsets.only(bottom: 20, top: 10),
+            height: 28,
             child: Text(
               "Smart Urban Farm",
               style: heading,
@@ -91,46 +92,88 @@ class _SiderState extends State<Sider> {
             child: FlareActor(
               'assets/flares/logo.flr',
               alignment: Alignment.center,
+              fit: BoxFit.fitHeight,
             ),
-            height: 120,
+            height: 80,
           ),
           Container(
-            height: height - 172,
-            child: ListView.builder(
-              itemCount: widget.pageOptions.length,
+            height: height - 116,
+            alignment: Alignment.topCenter,
+            child: ListView(
               shrinkWrap: true,
-              itemBuilder: (context, index) {
-                if (index == widget.pageOptions.length - 1) {
-                  return Container(
-                    margin: EdgeInsets.only(
-                      top: height - 172 - widget.pageOptions.length * 46 - 10,
-                    ),
-                    child: PageTile(
-                      option: widget.pageOptions[index],
-                      onTap: () => setState(
-                        () {
-                          selected = index;
-                        },
-                      ),
-                      sel: index == selected,
-                    ),
-                  );
-                } else {
-                  return PageTile(
-                    option: widget.pageOptions[index],
-                    onTap: () => setState(
-                      () {
-                        selected = index;
-                      },
-                    ),
-                    sel: index == selected,
-                  );
-                }
-              },
+              itemExtent: (height - 116) / widget.pageOptions.length,
+              padding: EdgeInsets.all(0),
+              children: [
+                PageTile(
+                  option: widget.pageOptions[0],
+                  onTap: () => setState(
+                    () {
+                      selected = 0;
+                    },
+                  ),
+                  sel: 0 == selected,
+                ),
+                PageTile(
+                  option: widget.pageOptions[1],
+                  onTap: () => setState(
+                    () {
+                      selected = 1;
+                    },
+                  ),
+                  sel: 1 == selected,
+                ),
+                PageTile(
+                  option: widget.pageOptions[2],
+                  onTap: () => setState(
+                    () {
+                      selected = 2;
+                    },
+                  ),
+                  sel: 2 == selected,
+                ),
+                PageTile(
+                  option: widget.pageOptions[3],
+                  onTap: () => setState(
+                    () {
+                      selected = 3;
+                    },
+                  ),
+                  sel: 3 == selected,
+                ),
+                PageTile(
+                  option: widget.pageOptions[4],
+                  onTap: () => setState(
+                    () {
+                      selected = 4;
+                    },
+                  ),
+                  sel: 4 == selected,
+                ),
+              ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  List<Widget> getOptionTiles(List<PageOption> opt, int selected) {
+    List<Widget> w = [];
+
+    for (var index = 0; index < opt.length; index++) {
+      w.add(
+        PageTile(
+          option: widget.pageOptions[index],
+          onTap: () => setState(
+            () {
+              selected = index;
+            },
+          ),
+          sel: index == selected,
+        ),
+      );
+    }
+
+    return w;
   }
 }

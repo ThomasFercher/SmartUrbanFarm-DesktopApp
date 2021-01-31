@@ -15,8 +15,7 @@ class Settings extends StatelessWidget {
 
     return [
       Container(
-        margin: EdgeInsets.only(top: 20),
-        height: 60,
+        height: 50,
         child: SwitchListTile(
           contentPadding: EdgeInsets.symmetric(horizontal: 0),
           secondary: LeadingIcon(icon: Icons.camera_alt),
@@ -27,19 +26,21 @@ class Settings extends StatelessWidget {
             "Take daily picture",
             style: GoogleFonts.nunito(
               color: theme.headlineColor,
+              fontSize: 16,
             ),
           ),
           subtitle: new Text(
             "A timelapse will be created",
             style: GoogleFonts.nunito(
               color: theme.headlineColor,
+              fontSize: 12,
             ),
           ),
           onChanged: (value) => pr.setAutomaticTimeLapse(value),
         ),
       ),
       Container(
-        height: 60,
+        height: 50,
         child: SwitchListTile(
           contentPadding: EdgeInsets.symmetric(horizontal: 0),
           secondary: LeadingIcon(icon: Icons.notifications),
@@ -50,19 +51,21 @@ class Settings extends StatelessWidget {
             "Notifications",
             style: GoogleFonts.nunito(
               color: theme.headlineColor,
+              fontSize: 16,
             ),
           ),
           subtitle: new Text(
             "Enable or Disable Notifications",
             style: GoogleFonts.nunito(
               color: theme.headlineColor,
+              fontSize: 12,
             ),
           ),
           onChanged: (value) => pr.setNotifications(value),
         ),
       ),
       Container(
-        height: 60,
+        height: 50,
         child: ListTile(
           contentPadding: EdgeInsets.symmetric(horizontal: 0),
           leading: LeadingIcon(icon: Icons.info),
@@ -70,12 +73,14 @@ class Settings extends StatelessWidget {
             "More Information",
             style: GoogleFonts.nunito(
               color: theme.headlineColor,
+              fontSize: 16,
             ),
           ),
           subtitle: new Text(
             "Information about licenses and version number",
             style: GoogleFonts.nunito(
               color: theme.headlineColor,
+              fontSize: 12,
             ),
           ),
           onTap: () {
@@ -99,21 +104,26 @@ class Settings extends StatelessWidget {
         ),
       ),
       Container(
-        height: 60,
+        height: 50,
         child: ListTile(
           contentPadding: EdgeInsets.symmetric(horizontal: 0),
           leading: LeadingIcon(icon: Icons.colorize),
-          title: Text(
-            "Select Color Theme",
-            style: GoogleFonts.nunito(
-              color: theme.headlineColor,
+          title: Container(
+            height: 50,
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Select Color Theme",
+              style: GoogleFonts.nunito(
+                color: theme.headlineColor,
+                fontSize: 16,
+              ),
             ),
           ),
         ),
       ),
       Expanded(
         child: Container(
-          padding: EdgeInsets.only(top: 8, left: 0, bottom: 8),
+          padding: EdgeInsets.only(top: 4, left: 0, bottom: 4),
           child: Row(
             children: [
               Expanded(
@@ -125,13 +135,6 @@ class Settings extends StatelessWidget {
                   appTheme: themes[0],
                 ),
               ),
-              /*   ThemeCard(
-                gradient: themes[1].background,
-                cardColor: themes[1].cardColor,
-                onSelected: () => {pr.setTheme(1)},
-                selected: pr.getSelected(1),
-                appTheme: themes[1],
-              ),*/
               Expanded(
                 child: ThemeCard(
                   background: themes[1].background,
@@ -150,7 +153,6 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     AppTheme theme = Provider.of<SettingsProvider>(context).getTheme();
 
     return Consumer<SettingsProvider>(builder: (context, settings, child) {

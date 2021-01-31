@@ -48,6 +48,10 @@ class _ColorFadeTextState extends State<ColorFadeIcon>
 
   @override
   Widget build(BuildContext context) {
-    return Icon(widget.icon, color: _colorAnim.value);
+    return Icon(
+      widget.icon,
+      color: _colorAnim.value,
+      size: 18,
+    );
   }
 }

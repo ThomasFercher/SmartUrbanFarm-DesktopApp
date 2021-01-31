@@ -47,22 +47,14 @@ class EditVariable extends StatelessWidget {
       padding: isChild
           ? const EdgeInsets.all(0)
           : const EdgeInsets.symmetric(horizontal: 10, vertical: 2.5),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(borderRadius),
-        //(color: theme.background,
-      ),
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(borderRadius),
-        ),
-        elevation: isChild ? 0 : 1,
-        color: theme.cardColor,
-        child: Container(
-          padding:
-              const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 2, top: 2),
-          child: Column(
-            children: [
-              Row(
+      color: theme.cardColor,
+      child: Container(
+        padding: const EdgeInsets.all(4),
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 4),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
@@ -74,7 +66,7 @@ class EditVariable extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    height: 48,
+                    height: 30,
                     alignment: Alignment.bottomRight,
                     child: Text(
                       "$value$unit",
@@ -87,23 +79,23 @@ class EditVariable extends StatelessWidget {
                   ),
                 ],
               ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                child: CupertinoSlider(
-                  value: value,
-                  onChanged: (val) {
-                    val = double.parse((val).toStringAsFixed(2));
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: CupertinoSlider(
+                value: value,
+                onChanged: (val) {
+                  val = double.parse((val).toStringAsFixed(2));
 
-                    onValueChanged(val);
-                  },
-                  activeColor: color,
-                  max: max,
-                  min: min,
-                  divisions: divisions ?? ((max - min) * 2).round(),
-                ),
+                  onValueChanged(val);
+                },
+                activeColor: color,
+                max: max,
+                min: min,
+                divisions: divisions ?? ((max - min) * 2).round(),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

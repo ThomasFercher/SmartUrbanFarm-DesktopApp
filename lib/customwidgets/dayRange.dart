@@ -20,7 +20,7 @@ class DayRange extends StatelessWidget {
     var end = suntime.split("-")[1].trim();
 
     return SizedBox(
-      height: 80,
+      height: 60,
       width: MediaQuery.of(context).size.width,
       child: Card(
         elevation: cardElavation,
@@ -40,8 +40,8 @@ class DayRange extends StatelessWidget {
             children: [
               Container(
                 margin: EdgeInsets.only(left: 10),
-                width: 50,
-                height: 50,
+                width: 40,
+                height: 40,
                 child: FlareActor(
                   'assets/flares/sun.flr',
                   alignment: Alignment.center,
@@ -55,7 +55,7 @@ class DayRange extends StatelessWidget {
                   child: Text(
                     start,
                     style:
-                        GoogleFonts.nunito(color: Colors.white, fontSize: 24),
+                        GoogleFonts.nunito(color: Colors.white, fontSize: 20),
                   ),
                 ),
               ),
@@ -63,13 +63,13 @@ class DayRange extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 15.0),
                 child: Text(
                   end,
-                  style: GoogleFonts.nunito(color: Colors.white, fontSize: 24),
+                  style: GoogleFonts.nunito(color: Colors.white, fontSize: 20),
                 ),
               ),
               Container(
                 margin: EdgeInsets.only(right: 15),
-                width: 50,
-                height: 50,
+                width: 40,
+                height: 40,
                 child: FlareActor(
                   'assets/flares/moon.flr',
                   alignment: Alignment.center,

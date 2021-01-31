@@ -32,7 +32,7 @@ class StorageProvider extends ChangeNotifier {
     FileService service = new FileService();
     List<File> files = service.getFileList();
 
-    if (files.isEmpty || files == null) {
+    if (files == null || files.isEmpty) {
       return;
     }
 

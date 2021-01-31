@@ -22,62 +22,62 @@ class Input extends StatelessWidget {
   Widget build(BuildContext context) {
     AppTheme theme = Provider.of<SettingsProvider>(context).getTheme();
 
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      child: Card(
-        color: theme.cardColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(borderRadius),
-          ),
+    return Card(
+      color: theme.cardColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(borderRadius),
         ),
-        child: Container(
-          padding: EdgeInsets.all(borderRadius),
-          child: Column(
-            children: [
-              Container(
-                alignment: Alignment.centerLeft,
-                child: SectionTitle(
-                    title: "Name", fontSize: 22, color: theme.headlineColor),
+      ),
+      child: Container(
+        padding: EdgeInsets.only(top: 8, left: 8, right: 16, bottom: 16),
+        child: Column(
+          children: [
+            Container(
+              alignment: Alignment.centerLeft,
+              child: SectionTitle(
+                title: "Name",
+                fontSize: 18,
+                color: theme.headlineColor,
               ),
-              SizedBox(
-                height: 48,
-                child: TextFormField(
-                  cursorColor: theme.primaryColor,
-                  initialValue: initialValue,
-                  decoration: InputDecoration(
-                    border: UnderlineInputBorder(
-                      borderSide:
-                          BorderSide(color: theme.primaryColor, width: 1.5),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide:
-                          BorderSide(color: theme.primaryColor, width: 1.5),
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black12, width: 1.5),
-                    ),
+            ),
+            SizedBox(
+              height: 36,
+              child: TextFormField(
+                cursorColor: theme.primaryColor,
+                initialValue: initialValue,
+                decoration: InputDecoration(
+                  border: UnderlineInputBorder(
+                    borderSide:
+                        BorderSide(color: theme.primaryColor, width: 1.5),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide:
+                        BorderSide(color: theme.primaryColor, width: 1.5),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black12, width: 1.5),
+                  ),
 
-                    //fillColor: Colors.green
-                  ),
-                  onChanged: (value) => valChanged(value),
-                  validator: (val) {
-                    if (val.length == 0) {
-                      return "Name cannot be empty!";
-                    } else {
-                      return null;
-                    }
-                  },
-                  style: GoogleFonts.nunito(
-                    color: theme.textColor,
-                    fontSize: 20,
-                    height: 1,
-                    fontWeight: FontWeight.w400,
-                  ),
+                  //fillColor: Colors.green
+                ),
+                onChanged: (value) => valChanged(value),
+                validator: (val) {
+                  if (val.length == 0) {
+                    return "Name cannot be empty!";
+                  } else {
+                    return null;
+                  }
+                },
+                style: GoogleFonts.nunito(
+                  color: theme.textColor,
+                  fontSize: 16,
+                  height: 1,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

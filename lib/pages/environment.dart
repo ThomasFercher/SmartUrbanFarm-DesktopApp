@@ -61,37 +61,22 @@ class Environment extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 4, horizontal: 4),
                   child: Container(
                     width: width,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(borderRadius),
-                      ),
-                      gradient: LinearGradient(
-                        colors: [
-                          Colors.white.withOpacity(0.0),
-                          Colors.white24,
-                        ],
-                        stops: [0, 0.8],
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                      ),
-                    ),
-                    padding: EdgeInsets.symmetric(horizontal: borderRadius),
                     child: LayoutBuilder(builder: (context, constraints) {
                       var w = constraints.maxWidth;
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
                             children: [
                               Expanded(
                                 child: Container(
-                                  height: 60,
+                                  height: 30,
                                   alignment: Alignment.centerLeft,
                                   child: SectionTitle(
                                     title: activeClimate.name,
                                     color: Colors.white,
-                                    fontSize: 28,
+                                    fontSize: 22,
                                   ),
                                 ),
                               ),
@@ -127,14 +112,15 @@ class Environment extends StatelessWidget {
                           Column(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(bottom: 12),
+                                padding: const EdgeInsets.only(bottom: 4),
                                 child: SectionTitle(
                                   title: "Active Growphase",
                                   color: Colors.white,
-                                  fontSize: 22,
+                                  fontSize: 18,
                                 ),
                               ),
                               Container(
+                                height: 40,
                                 width: w,
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -173,24 +159,22 @@ class Environment extends StatelessWidget {
                               Container(
                                 width: w,
                                 child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     ActiveClimateControlItem(
-                                      height: 60,
+                                      height: 36,
                                       icon: WeatherIcons.wi_thermometer,
                                       lable: "Temperature",
                                       value: "$temp°C",
                                     ),
                                     ActiveClimateControlItem(
-                                      height: 60,
+                                      height: 36,
                                       icon: WeatherIcons.wi_humidity,
                                       lable: "Humidity",
                                       value: "$hum%",
                                     ),
                                     ActiveClimateControlItem(
                                       icon: WeatherIcons.wi_day_sunny,
-                                      height: 60,
+                                      height: 36,
                                       lable: "Suntime",
                                       value: "$sun",
                                     )
@@ -202,11 +186,11 @@ class Environment extends StatelessWidget {
                           Column(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(bottom: 8),
+                                padding: const EdgeInsets.only(bottom: 4),
                                 child: SectionTitle(
                                   title: "Irrigation",
                                   color: Colors.white,
-                                  fontSize: 22,
+                                  fontSize: 18,
                                 ),
                               ),
                               Container(
@@ -216,7 +200,7 @@ class Environment extends StatelessWidget {
                                     activeClimate.automaticWatering
                                         ? Chip(
                                             label: Container(
-                                              height: 34,
+                                              height: 28,
                                               alignment: Alignment.center,
                                               child: SectionTitle(
                                                 fontSize: 14,
@@ -232,7 +216,7 @@ class Environment extends StatelessWidget {
                                           )
                                         : Chip(
                                             label: Container(
-                                              height: 32,
+                                              height: 28,
                                               alignment: Alignment.center,
                                               child: SectionTitle(
                                                 fontSize: 14,
@@ -257,7 +241,7 @@ class Environment extends StatelessWidget {
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.w100,
-                                            fontSize: 28.0,
+                                            fontSize: 22.0,
                                           ),
                                         ),
                                       ),

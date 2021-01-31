@@ -26,54 +26,58 @@ class Dashboard extends StatelessWidget {
       var suntime = "06:00 - 18:00";
 
       var height = MediaQuery.of(context).size.height - 20;
-      var width = MediaQuery.of(context).size.width - 220;
+      var width = MediaQuery.of(context).size.width - 160;
 
       return Container(
-        width: MediaQuery.of(context).size.width - 200,
+        width: width,
         height: height + 20,
         color: theme.background,
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SectionTitle(
               title: "Details",
             ),
-            GridView.count(
-              shrinkWrap: true,
-              crossAxisCount: 3,
-              childAspectRatio: 3,
-              crossAxisSpacing: 10,
-              children: [
-                CardData(
-                  icon: Icons.ac_unit,
-                  text: '$temp°C',
-                  label: 'Temperature',
-                  iconColor: primaryColor,
-                ),
-                CardData(
-                  icon: Icons.ac_unit,
-                  text: '$hum%',
-                  label: 'Humidity',
-                  iconColor: primaryColor,
-                ),
-                CardData(
-                  icon: Icons.ac_unit,
-                  text: '$soilM%',
-                  label: 'Soil Moisture',
-                  iconColor: primaryColor,
-                )
-              ],
+            Container(
+              height: 64,
+              child: GridView.count(
+                shrinkWrap: true,
+                crossAxisCount: 3,
+                crossAxisSpacing: 2,
+                childAspectRatio: (width / 3) / 64,
+                padding: EdgeInsets.all(0),
+                children: [
+                  CardData(
+                    icon: Icons.ac_unit,
+                    text: '$temp°C',
+                    label: 'Temperature',
+                    iconColor: primaryColor,
+                  ),
+                  CardData(
+                    icon: Icons.ac_unit,
+                    text: '$hum%',
+                    label: 'Humidity',
+                    iconColor: primaryColor,
+                  ),
+                  CardData(
+                    icon: Icons.ac_unit,
+                    text: '$soilM%',
+                    label: 'Soil Moisture',
+                    iconColor: primaryColor,
+                  )
+                ],
+              ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 10),
+              padding: EdgeInsets.only(top: 4),
             ),
             SectionTitle(title: "Suntime"),
             DayRange(
               suntime: suntime,
             ),
             Padding(
-              padding: EdgeInsets.only(top: 10),
+              padding: EdgeInsets.only(top: 4),
             ),
             Row(
               children: [

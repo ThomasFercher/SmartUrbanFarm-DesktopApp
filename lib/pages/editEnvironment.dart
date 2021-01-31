@@ -80,81 +80,75 @@ class _EditEnvironmentState extends State<EditEnvironment> {
                         pr: pr,
                       ),
                       Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 10,
-                          ),
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(borderRadius),
-                              ),
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(borderRadius),
                             ),
-                            color: theme.cardColor,
-                            child: Padding(
-                              padding: EdgeInsets.all(8),
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      width: width / 2,
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 10),
-                                      child: RaisedButton(
-                                        onPressed: () =>
-                                            save(pr.climateSettings, context),
-                                        color: theme.primaryColor,
-                                        textColor: Colors.white,
-                                        child: Text(
-                                          widget.create ? "Create" : "Save",
-                                          style: GoogleFonts.nunito(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(15),
-                                          ),
+                          ),
+                          color: theme.cardColor,
+                          child: Padding(
+                            padding: EdgeInsets.all(8),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    width: width / 2,
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 10),
+                                    child: RaisedButton(
+                                      onPressed: () =>
+                                          save(pr.climateSettings, context),
+                                      color: theme.primaryColor,
+                                      textColor: Colors.white,
+                                      child: Text(
+                                        widget.create ? "Create" : "Save",
+                                        style: GoogleFonts.nunito(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(15),
                                         ),
                                       ),
                                     ),
                                   ),
-                                  Expanded(
-                                    child: Container(
-                                      width: width / 2,
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 10),
-                                      child: RaisedButton(
-                                        onPressed: () =>
-                                            Provider.of<DashboardProvider>(
-                                                    context,
-                                                    listen: false)
-                                                .setSelectedChild(
-                                          PageOption(
-                                            widget: Environment(),
-                                            icon: Icons.settings_applications,
-                                            title: "Environment",
-                                          ),
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    width: width / 2,
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 10),
+                                    child: RaisedButton(
+                                      onPressed: () =>
+                                          Provider.of<DashboardProvider>(
+                                                  context,
+                                                  listen: false)
+                                              .setSelectedChild(
+                                        PageOption(
+                                          widget: Environment(),
+                                          icon: Icons.settings_applications,
+                                          title: "Environment",
                                         ),
-                                        color: Colors.redAccent,
-                                        textColor: Colors.white,
-                                        child: Text(
-                                          "Cancel",
-                                          style: GoogleFonts.nunito(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(15),
-                                          ),
+                                      ),
+                                      color: Colors.redAccent,
+                                      textColor: Colors.white,
+                                      child: Text(
+                                        "Cancel",
+                                        style: GoogleFonts.nunito(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(15),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                         ),

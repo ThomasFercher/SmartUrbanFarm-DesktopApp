@@ -43,14 +43,14 @@ class GrowProgress extends StatelessWidget {
                 },
               ),
               Container(
-                padding: EdgeInsets.only(top: 20),
+                padding: EdgeInsets.only(top: 4),
                 alignment: Alignment.topCenter,
                 child: Text(
                   "$progress%",
                   style: TextStyle(
                     color: Colors.grey,
                     fontWeight: FontWeight.w100,
-                    fontSize: 30.0,
+                    fontSize: 26.0,
                   ),
                 ),
               ),
