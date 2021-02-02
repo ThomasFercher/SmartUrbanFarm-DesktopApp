@@ -186,7 +186,7 @@ class ClimateControlItem extends StatelessWidget {
                             settings.automaticWatering
                                 ? Chip(
                                     label: Container(
-                                      height: 28,
+                                      height: 26,
                                       alignment: Alignment.center,
                                       child: SectionTitle(
                                         fontSize: 14,
@@ -199,13 +199,14 @@ class ClimateControlItem extends StatelessWidget {
                                       Icons.tune,
                                       color: Colors.white,
                                     ),
+                                    labelPadding: EdgeInsets.only(left: 2),
                                   )
                                 : Chip(
                                     label: Container(
-                                      height: 28,
+                                      height: 26,
                                       alignment: Alignment.center,
                                       child: SectionTitle(
-                                        fontSize: 14,
+                                        fontSize: 13,
                                         title: "Regulated",
                                         color: Colors.white,
                                       ),
@@ -214,6 +215,7 @@ class ClimateControlItem extends StatelessWidget {
                                     avatar: Icon(
                                       Icons.tune,
                                       color: Colors.white,
+                                      size: 16,
                                     ),
                                   ),
                             Expanded(
@@ -226,7 +228,7 @@ class ClimateControlItem extends StatelessWidget {
                                   style: TextStyle(
                                     color: theme.textColor,
                                     fontWeight: FontWeight.w100,
-                                    fontSize: 22.0,
+                                    fontSize: 20.0,
                                   ),
                                 ),
                               ),

@@ -179,16 +179,16 @@ class _DataChartState extends State<DataChart> {
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: Container(
-                      height: 48,
+                      height: 36,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(borderRadius),
+                        borderRadius: BorderRadius.circular(9),
                         color: widget.gradientColors[1],
                       ),
                       padding: EdgeInsets.symmetric(
-                          horizontal: borderRadius, vertical: 8),
+                          horizontal: borderRadius, vertical: 4),
                       child: SectionTitle(
                         title: widget.title + " [${widget.unit}]",
-                        fontSize: 24,
+                        fontSize: 20,
                         color: widget.gradientColors[0],
                       ),
                     ),

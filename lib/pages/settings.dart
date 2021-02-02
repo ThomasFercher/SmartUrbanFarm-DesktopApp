@@ -189,7 +189,7 @@ class ThemeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      var w = constraints.maxWidth;
+      var w = constraints.maxWidth - 20;
       var h = constraints.maxHeight - 6 * borderRadius;
       print(h);
       return GestureDetector(
@@ -347,11 +347,11 @@ class LeadingIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     AppTheme theme = Provider.of<SettingsProvider>(context).getTheme();
     return Container(
-      width: 40,
-      height: 40,
+      width: 36,
+      height: 36,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: theme.contrast,
+        borderRadius: BorderRadius.circular(9),
+        color: theme.contrast.withOpacity(0.5),
       ),
       child: Icon(
         icon,

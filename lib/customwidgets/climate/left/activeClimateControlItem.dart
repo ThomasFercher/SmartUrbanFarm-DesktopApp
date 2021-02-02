@@ -55,6 +55,7 @@ class ActiveClimateControlItem extends StatelessWidget {
           fontSize: 14,
         ),
       ),
+      contentPadding: EdgeInsets.symmetric(horizontal: 2),
     );
   }
 }

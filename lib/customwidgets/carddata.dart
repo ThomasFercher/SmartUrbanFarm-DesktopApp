@@ -38,7 +38,7 @@ class CardData extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(borderRadius),
         ),
-        padding: EdgeInsets.all(8),
+        padding: EdgeInsets.all(4),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
@@ -55,7 +55,7 @@ class CardData extends StatelessWidget {
               style: GoogleFonts.nunito(
                 color: theme.textColor,
                 fontWeight: FontWeight.w200,
-                fontSize: 12.0,
+                fontSize: 11.0,
               ),
             ),
             Expanded(

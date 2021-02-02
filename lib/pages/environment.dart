@@ -72,7 +72,7 @@ class Environment extends StatelessWidget {
                               Expanded(
                                 child: Container(
                                   height: 30,
-                                  alignment: Alignment.topCenter,
+                                  alignment: Alignment.centerLeft,
                                   child: SectionTitle(
                                     title: activeClimate.name,
                                     color: Colors.white,

@@ -71,7 +71,7 @@ class _GrowthPhaseState extends State<GrowthPhase> {
                           },
                         ),
                       ),
-                      Padding(padding: EdgeInsets.only(left: 10)),
+                      Padding(padding: EdgeInsets.only(left: 2)),
                       Expanded(
                         child: SelectButton(
                           color: Colors.green,
@@ -83,7 +83,7 @@ class _GrowthPhaseState extends State<GrowthPhase> {
                           },
                         ),
                       ),
-                      Padding(padding: EdgeInsets.only(left: 10)),
+                      Padding(padding: EdgeInsets.only(left: 2)),
                       Expanded(
                         child: SelectButton(
                           color: Colors.amber,

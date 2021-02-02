@@ -66,7 +66,7 @@ class _EditIrrigationState extends State<EditIrrigation> {
                         children: [
                           Expanded(
                             child: Container(
-                              height: 26,
+                              height: 24,
                               alignment: Alignment.centerLeft,
                               child: SectionTitle(
                                 title: "Irrigation",
@@ -96,17 +96,18 @@ class _EditIrrigationState extends State<EditIrrigation> {
                               color: !pr.climateSettings.automaticWatering
                                   ? Colors.white
                                   : Colors.black26,
-                              size: 16,
+                              size: 14,
                             ),
                             backgroundColor: Colors.black12,
                             isEnabled: true,
+                            labelPadding: EdgeInsets.only(left: 2),
                             selected: !pr.climateSettings.automaticWatering,
                             label: Container(
-                              height: 26,
+                              height: 24,
                               alignment: Alignment.center,
                               child: SectionTitle(
                                 title: "Regulated",
-                                fontSize: 12,
+                                fontSize: 11,
                                 color: !pr.climateSettings.automaticWatering
                                     ? Colors.white
                                     : Colors.black26,
@@ -123,16 +124,17 @@ class _EditIrrigationState extends State<EditIrrigation> {
                               color: pr.climateSettings.automaticWatering
                                   ? Colors.white
                                   : Colors.black38,
-                              size: 16,
+                              size: 14,
                             ),
                             backgroundColor: Colors.black12,
                             selected: pr.climateSettings.automaticWatering,
                             selectedColor: theme.primaryColor,
+                            labelPadding: EdgeInsets.only(left: 2),
                             label: Container(
                               alignment: Alignment.center,
                               child: SectionTitle(
                                 title: "Automatic",
-                                fontSize: 12,
+                                fontSize: 11,
                                 color: pr.climateSettings.automaticWatering
                                     ? Colors.white
                                     : Colors.black38,
