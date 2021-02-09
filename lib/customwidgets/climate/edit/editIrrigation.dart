@@ -84,6 +84,7 @@ class _EditIrrigationState extends State<EditIrrigation> {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           InputChip(
                             onSelected: (value) {
@@ -96,18 +97,17 @@ class _EditIrrigationState extends State<EditIrrigation> {
                               color: !pr.climateSettings.automaticWatering
                                   ? Colors.white
                                   : Colors.black26,
-                              size: 14,
+                              size: 13,
                             ),
+                            padding: EdgeInsets.all(0),
                             backgroundColor: Colors.black12,
                             isEnabled: true,
-                            labelPadding: EdgeInsets.only(left: 2),
+                            labelPadding: EdgeInsets.only(right: 4),
                             selected: !pr.climateSettings.automaticWatering,
                             label: Container(
-                              height: 24,
-                              alignment: Alignment.center,
                               child: SectionTitle(
                                 title: "Regulated",
-                                fontSize: 11,
+                                fontSize: 10,
                                 color: !pr.climateSettings.automaticWatering
                                     ? Colors.white
                                     : Colors.black26,
@@ -124,17 +124,18 @@ class _EditIrrigationState extends State<EditIrrigation> {
                               color: pr.climateSettings.automaticWatering
                                   ? Colors.white
                                   : Colors.black38,
-                              size: 14,
+                              size: 13,
                             ),
                             backgroundColor: Colors.black12,
                             selected: pr.climateSettings.automaticWatering,
                             selectedColor: theme.primaryColor,
-                            labelPadding: EdgeInsets.only(left: 2),
+                            labelPadding: EdgeInsets.only(right: 4),
+                            padding: EdgeInsets.all(0),
                             label: Container(
-                              alignment: Alignment.center,
+                              alignment: Alignment.centerLeft,
                               child: SectionTitle(
                                 title: "Automatic",
-                                fontSize: 11,
+                                fontSize: 10,
                                 color: pr.climateSettings.automaticWatering
                                     ? Colors.white
                                     : Colors.black38,

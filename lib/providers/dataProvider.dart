@@ -15,7 +15,7 @@ import 'package:suf_linux/providers/auth.dart';
 import '../styles.dart';
 import 'package:http/http.dart' as http;
 
-class DashboardProvider with ChangeNotifier, DiagnosticableTreeMixin {
+class DataProvider with ChangeNotifier, DiagnosticableTreeMixin {
   final baseUrl = "https://smartgrowsystem-sgs.firebaseio.com";
   PageOption selectedChild;
   String token;
@@ -31,14 +31,7 @@ class DashboardProvider with ChangeNotifier, DiagnosticableTreeMixin {
     notifyListeners();
   }
 
-  DashboardProvider({this.selectedChild});
-
-  Future<String> authApp() async {
-    final response = await http.post(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAeTF-VH5vxA0-ssHg4rMcjIodzBnnPvPw");
-    Map<dynamic, dynamic> user = jsonDecode(response.body);
-    return user['idToken'];
-  }
+  DataProvider({this.selectedChild});
 
   Future<void> fetchData() async {
     token = await Auth.getAuthToken();
@@ -50,14 +43,12 @@ class DashboardProvider with ChangeNotifier, DiagnosticableTreeMixin {
     notifyListeners();
   }
 
-  Future<T> getValue<T>(var url) async {
-    final response = await http.get(url + "/liveData/$url.json");
-    var body = jsonDecode(response.body);
-
-    if (T == double) {
-      body = double.parse(body);
-    }
-    return body;
+  /// This Function makes a GET Call to the specified [url]
+  /// and returns the Body of the Response as a Map<dynamic,dynamic>
+  Future<Map<dynamic, dynamic>> getValue(var url) async {
+    final response = await http.get("$url.json?auth=$token");
+    Map<dynamic, dynamic> json = jsonDecode(response.body);
+    return json;
   }
 
   Future<ClimateControl> getActiveClimate() async {

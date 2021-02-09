@@ -106,6 +106,7 @@ class Settings extends StatelessWidget {
         ),
       ),
       Container(
+        margin: EdgeInsets.only(top: 5, bottom: 2),
         height: 40,
         child: ListTile(
           contentPadding: EdgeInsets.symmetric(horizontal: 0),
@@ -189,8 +190,8 @@ class ThemeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      var w = constraints.maxWidth - 20;
-      var h = constraints.maxHeight - 6 * borderRadius;
+      var w = constraints.maxWidth;
+      var h = constraints.maxHeight - 18;
       print(h);
       return GestureDetector(
         onTap: onSelected,
@@ -220,13 +221,13 @@ class ThemeCard extends StatelessWidget {
                         ),
                         width: w / 5,
                         padding:
-                            EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+                            EdgeInsets.symmetric(horizontal: 4, vertical: 2),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Card(
-                              margin: EdgeInsets.all(0),
+                              margin: EdgeInsets.all(4),
                               color: cardColor,
                               elevation: 1,
                               child: Container(
@@ -244,7 +245,8 @@ class ThemeCard extends StatelessWidget {
                         child: Column(
                           children: [
                             Padding(
-                              padding: EdgeInsets.all(borderRadius / 2),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 0, vertical: 2),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -277,7 +279,8 @@ class ThemeCard extends StatelessWidget {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.all(borderRadius),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 0, vertical: 2),
                               child: Card(
                                 color: cardColor,
                                 elevation: 1,
@@ -288,7 +291,8 @@ class ThemeCard extends StatelessWidget {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.all(borderRadius),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 0, vertical: 2),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
