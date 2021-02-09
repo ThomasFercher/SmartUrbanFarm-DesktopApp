@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:suf_linux/customwidgets/carddata.dart';
-import 'package:suf_linux/customwidgets/dayRange.dart';
+import 'package:suf_linux/customwidgets/dashboard/carddata.dart';
+import 'package:suf_linux/customwidgets/dashboard/dayRange.dart';
 import 'package:suf_linux/customwidgets/general/sectionTitle.dart';
-import 'package:suf_linux/customwidgets/growProgress.dart';
-import 'package:suf_linux/customwidgets/waterTankLevel.dart';
+import 'package:suf_linux/customwidgets/dashboard/growProgress.dart';
+import 'package:suf_linux/customwidgets/dashboard/waterTankLevel.dart';
 import 'package:suf_linux/objects/appTheme.dart';
-import 'package:suf_linux/providers/dashboardProvider.dart';
+import 'package:suf_linux/providers/dataProvider.dart';
 import 'package:suf_linux/providers/settingsProvider.dart';
 import 'package:suf_linux/styles.dart';
 
@@ -17,7 +17,7 @@ class Dashboard extends StatelessWidget {
     AppTheme theme = Provider.of<SettingsProvider>(context).getTheme();
 
     // TODO: implement build
-    return Consumer<DashboardProvider>(builder: (context, d, c) {
+    return Consumer<DataProvider>(builder: (context, d, c) {
       var temp = d.liveData.temperature;
       var hum = d.liveData.humidity;
       var soilM = d.liveData.soilMoisture;

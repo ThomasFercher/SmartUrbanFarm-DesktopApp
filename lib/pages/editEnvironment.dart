@@ -9,7 +9,7 @@ import 'package:suf_linux/objects/appTheme.dart';
 import 'package:suf_linux/objects/climateControl.dart';
 import 'package:suf_linux/objects/pageOption.dart';
 import 'package:suf_linux/providers/climateControlProvider.dart';
-import 'package:suf_linux/providers/dashboardProvider.dart';
+import 'package:suf_linux/providers/dataProvider.dart';
 import 'package:suf_linux/providers/settingsProvider.dart';
 import 'package:suf_linux/styles.dart';
 
@@ -34,12 +34,12 @@ class _EditEnvironmentState extends State<EditEnvironment> {
   save(ClimateControl settings, context) {
     print(settings);
     widget.create
-        ? Provider.of<DashboardProvider>(context, listen: false)
+        ? Provider.of<DataProvider>(context, listen: false)
             .createClimate(settings)
-        : Provider.of<DashboardProvider>(context, listen: false)
+        : Provider.of<DataProvider>(context, listen: false)
             .editClimate(this.widget.initialSettings, settings);
 
-    Provider.of<DashboardProvider>(context, listen: false).setSelectedChild(
+    Provider.of<DataProvider>(context, listen: false).setSelectedChild(
       PageOption(
         widget: Environment(),
         icon: Icons.settings_applications,
@@ -124,8 +124,7 @@ class _EditEnvironmentState extends State<EditEnvironment> {
                                     ),
                                     child: RaisedButton(
                                       onPressed: () =>
-                                          Provider.of<DashboardProvider>(
-                                                  context,
+                                          Provider.of<DataProvider>(context,
                                                   listen: false)
                                               .setSelectedChild(
                                         PageOption(

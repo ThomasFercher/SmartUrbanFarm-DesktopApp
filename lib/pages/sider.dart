@@ -3,9 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:suf_linux/customwidgets/colorFadeIcon.dart';
-import 'package:suf_linux/customwidgets/pageTile.dart';
-import 'package:suf_linux/customwidgets/waterTankLevel.dart';
+import 'package:suf_linux/customwidgets/sider/colorFadeIcon.dart';
+import 'package:suf_linux/customwidgets/sider/pageTile.dart';
+import 'package:suf_linux/customwidgets/dashboard/waterTankLevel.dart';
 import 'package:suf_linux/objects/pageOption.dart';
 import 'package:suf_linux/pages/advanced.dart';
 import 'package:suf_linux/pages/environment.dart';
@@ -14,10 +14,10 @@ import 'package:suf_linux/pages/environment.dart';
 import 'package:suf_linux/pages/environment.dart';
 import 'package:suf_linux/pages/gallery.dart';
 import 'package:suf_linux/pages/settings.dart';
-import 'package:suf_linux/providers/dashboardProvider.dart';
+import 'package:suf_linux/providers/dataProvider.dart';
 import 'package:suf_linux/styles.dart';
 
-import '../customwidgets/colorFadeText.dart';
+import '../customwidgets/sider/colorFadeText.dart';
 
 class Sider extends StatefulWidget {
   final List<PageOption> pageOptions = [

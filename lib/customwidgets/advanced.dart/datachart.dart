@@ -7,7 +7,7 @@ import 'package:suf_linux/customwidgets/general/sectionTitle.dart';
 import 'package:suf_linux/objects/appTheme.dart';
 import 'package:suf_linux/objects/popupMenuOption.dart';
 import 'package:suf_linux/pages/dashboard.dart';
-import 'package:suf_linux/providers/dashboardProvider.dart';
+import 'package:suf_linux/providers/dataProvider.dart';
 import 'package:suf_linux/providers/settingsProvider.dart';
 
 import '../../styles.dart';
@@ -136,15 +136,16 @@ class _DataChartState extends State<DataChart> {
     maxY = getMaxY(spots) + 1;
     AppTheme theme = Provider.of<SettingsProvider>(context).getTheme();
 
-    return Consumer<DashboardProvider>(
+    return Consumer<DataProvider>(
       builder: (context, d, child) {
         return Container(
+          padding: EdgeInsets.only(right: 20),
           child: Column(children: [
             Row(
               children: [
                 Container(
-                  height: 36,
-                  width: 36,
+                  height: 42,
+                  width: 42,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: widget.gradientColors[1],
@@ -162,8 +163,8 @@ class _DataChartState extends State<DataChart> {
                   ),
                 ),
                 Container(
-                  height: 36,
-                  width: 36,
+                  height: 42,
+                  width: 42,
                   margin: EdgeInsets.only(left: 8),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
@@ -179,7 +180,7 @@ class _DataChartState extends State<DataChart> {
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: Container(
-                      height: 36,
+                      height: 38,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(9),
                         color: widget.gradientColors[1],

@@ -11,7 +11,7 @@ import 'package:suf_linux/objects/climateControl.dart';
 import 'package:suf_linux/objects/pageOption.dart';
 import 'package:suf_linux/objects/popupMenuOption.dart';
 import 'package:suf_linux/pages/editEnvironment.dart';
-import 'package:suf_linux/providers/dashboardProvider.dart';
+import 'package:suf_linux/providers/dataProvider.dart';
 import 'package:suf_linux/providers/settingsProvider.dart';
 
 import '../../../styles.dart';
@@ -62,6 +62,7 @@ class ClimateControlItem extends StatelessWidget {
           return Container(
             height: constraints.maxHeight,
             width: w,
+            color: theme.background.withOpacity(1),
             child: Column(
               children: [
                 Container(
@@ -85,13 +86,11 @@ class ClimateControlItem extends StatelessWidget {
                         onSelected: (val) {
                           switch (val) {
                             case 'Set Active':
-                              Provider.of<DashboardProvider>(context,
-                                      listen: false)
+                              Provider.of<DataProvider>(context, listen: false)
                                   .setActiveClimate(settings);
                               break;
                             case 'Edit':
-                              Provider.of<DashboardProvider>(context,
-                                      listen: false)
+                              Provider.of<DataProvider>(context, listen: false)
                                   .setSelectedChild(
                                 PageOption(
                                   title: "Edit Environemnt",
@@ -102,8 +101,7 @@ class ClimateControlItem extends StatelessWidget {
                               );
                               break;
                             case 'Delete':
-                              Provider.of<DashboardProvider>(context,
-                                      listen: false)
+                              Provider.of<DataProvider>(context, listen: false)
                                   .deleteClimate(settings);
                               break;
                             default:
@@ -189,24 +187,24 @@ class ClimateControlItem extends StatelessWidget {
                                       height: 26,
                                       alignment: Alignment.center,
                                       child: SectionTitle(
-                                        fontSize: 14,
+                                        fontSize: 12,
                                         title: "Automatic",
                                         color: Colors.white,
                                       ),
                                     ),
                                     backgroundColor: primaryColor,
                                     avatar: Icon(
-                                      Icons.tune,
+                                      Icons.auto_awesome,
                                       color: Colors.white,
+                                      size: 16,
                                     ),
-                                    labelPadding: EdgeInsets.only(left: 2),
                                   )
                                 : Chip(
                                     label: Container(
                                       height: 26,
                                       alignment: Alignment.center,
                                       child: SectionTitle(
-                                        fontSize: 13,
+                                        fontSize: 12,
                                         title: "Regulated",
                                         color: Colors.white,
                                       ),

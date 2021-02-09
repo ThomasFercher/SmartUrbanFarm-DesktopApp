@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:suf_linux/objects/appTheme.dart';
 import 'package:suf_linux/pages/environment.dart';
 import 'package:suf_linux/pages/sider.dart';
-import 'package:suf_linux/providers/dashboardProvider.dart';
+import 'package:suf_linux/providers/dataProvider.dart';
 import 'package:suf_linux/providers/settingsProvider.dart';
 import 'package:suf_linux/styles.dart';
 
@@ -18,7 +18,7 @@ class Home extends StatelessWidget {
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        child: Consumer<DashboardProvider>(
+        child: Consumer<DataProvider>(
           builder: (context, d, child) {
             return Row(
               children: [

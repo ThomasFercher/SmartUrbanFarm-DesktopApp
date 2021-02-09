@@ -7,7 +7,7 @@ import 'package:suf_linux/objects/pageOption.dart';
 import 'package:suf_linux/pages/dashboard.dart';
 import 'package:suf_linux/pages/home.dart';
 import 'package:suf_linux/providers/auth.dart';
-import 'package:suf_linux/providers/dashboardProvider.dart';
+import 'package:suf_linux/providers/dataProvider.dart';
 import 'package:suf_linux/providers/settingsProvider.dart';
 import 'package:suf_linux/providers/storageProvider.dart';
 import 'package:suf_linux/services.dart/fileservice.dart';
@@ -20,9 +20,9 @@ void main() => {
       runApp(
         MultiProvider(
           providers: [
-            ChangeNotifierProvider<DashboardProvider>(
+            ChangeNotifierProvider<DataProvider>(
               lazy: false,
-              create: (_) => DashboardProvider(selectedChild: s.DashboardRoute),
+              create: (_) => DataProvider(selectedChild: s.DashboardRoute),
             ),
             ChangeNotifierProvider<StorageProvider>(
               lazy: false,
@@ -83,7 +83,7 @@ class SufLinuxApplication extends StatelessWidget {
     await VPD().loadJson(context);
     Stopwatch stopwatch = new Stopwatch()..start();
 
-    await Provider.of<DashboardProvider>(context, listen: false).fetchData();
+    await Provider.of<DataProvider>(context, listen: false).fetchData();
     await Provider.of<StorageProvider>(context, listen: false).loadFlares();
     await Provider.of<StorageProvider>(context, listen: false)
         .loadImages(context);

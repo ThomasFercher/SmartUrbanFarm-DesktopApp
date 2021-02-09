@@ -5,7 +5,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:suf_linux/customwidgets/advanced.dart/datachart.dart';
 import 'package:suf_linux/objects/appTheme.dart';
-import 'package:suf_linux/providers/dashboardProvider.dart';
+import 'package:suf_linux/providers/dataProvider.dart';
 import 'package:suf_linux/providers/settingsProvider.dart';
 
 class Advanced extends StatelessWidget {
@@ -17,10 +17,10 @@ class Advanced extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       color: theme.background,
-      child: Consumer<DashboardProvider>(
+      child: Consumer<DataProvider>(
         builder: (context, value, child) {
           return Container(
-            padding: EdgeInsets.only(top: 8, right: 2),
+            padding: EdgeInsets.symmetric(horizontal: 8),
             child: CarouselSlider(
               items: [
                 Container(
@@ -59,6 +59,7 @@ class Advanced extends StatelessWidget {
                 enlargeCenterPage: true,
                 height: MediaQuery.of(context).size.height,
                 enableInfiniteScroll: false,
+                scrollDirection: Axis.vertical,
               ),
             ),
           );

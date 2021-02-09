@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:suf_linux/customwidgets/general/sectionTitle.dart';
 import 'package:suf_linux/objects/appTheme.dart';
-import 'package:suf_linux/providers/dashboardProvider.dart';
+import 'package:suf_linux/providers/dataProvider.dart';
 import 'package:suf_linux/providers/settingsProvider.dart';
 
 import '../../../styles.dart';
@@ -32,7 +32,7 @@ class GrowPhaseSelect extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppTheme theme = Provider.of<SettingsProvider>(context).getTheme();
-    return Consumer<DashboardProvider>(builder: (context, data, child) {
+    return Consumer<DataProvider>(builder: (context, data, child) {
       bool isSelected = data.activeClimate.growPhase.phase == phase;
 
       return GestureDetector(
