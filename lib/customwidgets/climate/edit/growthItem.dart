@@ -60,7 +60,7 @@ class GrowthItem extends StatelessWidget {
               Expanded(
                 child: EditVariable(
                   value: pr.climateSettings.getHumidity(phase),
-                  title: "Humidty",
+                  title: "Humidity",
                   unit: "%",
                   icon: WeatherIcons.wi_humidity,
                   minVal: minHum,

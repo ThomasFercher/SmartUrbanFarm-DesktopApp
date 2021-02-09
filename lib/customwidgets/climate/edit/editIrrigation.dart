@@ -83,8 +83,7 @@ class _EditIrrigationState extends State<EditIrrigation> {
                         ],
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           InputChip(
                             onSelected: (value) {
@@ -102,7 +101,7 @@ class _EditIrrigationState extends State<EditIrrigation> {
                             padding: EdgeInsets.all(0),
                             backgroundColor: Colors.black12,
                             isEnabled: true,
-                            labelPadding: EdgeInsets.only(right: 4),
+                            labelPadding: EdgeInsets.only(right: 8),
                             selected: !pr.climateSettings.automaticWatering,
                             label: Container(
                               child: SectionTitle(
@@ -129,7 +128,7 @@ class _EditIrrigationState extends State<EditIrrigation> {
                             backgroundColor: Colors.black12,
                             selected: pr.climateSettings.automaticWatering,
                             selectedColor: theme.primaryColor,
-                            labelPadding: EdgeInsets.only(right: 4),
+                            labelPadding: EdgeInsets.only(right: 8),
                             padding: EdgeInsets.all(0),
                             label: Container(
                               alignment: Alignment.centerLeft,
@@ -148,7 +147,7 @@ class _EditIrrigationState extends State<EditIrrigation> {
                         duration: Duration(milliseconds: 200),
                         child: pr.climateSettings.automaticWatering
                             ? EditVariable(
-                                title: "Mininum Soil Moisture",
+                                title: "Mininum Soil moisture",
                                 color: theme.primaryColor,
                                 value: pr.climateSettings.soilMoisture,
                                 isChild: true,

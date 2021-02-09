@@ -59,7 +59,7 @@ class EditVariable extends StatelessWidget {
                   Container(
                     child: SectionTitle(
                       title: title,
-                      fontSize: 14,
+                      fontSize: 13,
                       color: theme.headlineColor,
                     ),
                   ),
@@ -71,7 +71,7 @@ class EditVariable extends StatelessWidget {
                       style: TextStyle(
                         color: theme.headlineColor,
                         fontWeight: FontWeight.w100,
-                        fontSize: 18.0,
+                        fontSize: 17.0,
                       ),
                     ),
                   ),

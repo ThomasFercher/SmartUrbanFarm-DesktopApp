@@ -136,7 +136,7 @@ class _EditEnvironmentState extends State<EditEnvironment> {
                                       color: Colors.redAccent,
                                       textColor: Colors.white,
                                       child: Text(
-                                        "Cancel",
+                                        "Cancle",
                                         style: GoogleFonts.nunito(
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600),

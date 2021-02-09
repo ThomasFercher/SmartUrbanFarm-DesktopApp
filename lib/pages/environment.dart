@@ -262,46 +262,31 @@ class Environment extends StatelessWidget {
                     Align(
                       alignment: Alignment.topCenter,
                       child: Container(
-                        height: 54,
-                        width: 42,
+                        height: 36,
+                        width: 36,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.vertical(
-                            bottom: Radius.circular(16),
+                            bottom: Radius.circular(12),
                           ),
                         ),
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 16,
-                              padding: EdgeInsets.only(top: 4),
-                              child: SectionTitle(
-                                title: "Add",
-                                fontSize: 10,
-                                color: theme.primaryColor,
+                        child: IconButton(
+                          icon: Icon(Icons.add,size: 20,),
+                          onPressed: () {
+                            Provider.of<DataProvider>(context,
+                                    listen: false)
+                                .setSelectedChild(
+                              PageOption(
+                                title: "Create Environemnt",
+                                icon: Icons.ac_unit,
+                                widget: EditEnvironment(
+                                  initialSettings: activeClimate,
+                                  create: true,
+                                ),
                               ),
-                            ),
-                            Expanded(
-                              child: IconButton(
-                                icon: Icon(Icons.add),
-                                onPressed: () {
-                                  Provider.of<DataProvider>(context,
-                                          listen: false)
-                                      .setSelectedChild(
-                                    PageOption(
-                                      title: "Create Environemnt",
-                                      icon: Icons.ac_unit,
-                                      widget: EditEnvironment(
-                                        initialSettings: activeClimate,
-                                        create: true,
-                                      ),
-                                    ),
-                                  );
-                                },
-                                color: theme.primaryColor,
-                              ),
-                            ),
-                          ],
+                            );
+                          },
+                          color: theme.primaryColor,
                         ),
                       ),
                     )
