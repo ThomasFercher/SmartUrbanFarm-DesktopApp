@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:suf_linux/objects/appTheme.dart';
 import 'package:suf_linux/objects/settings.dart';
-import 'package:suf_linux/providers/auth.dart';
+import 'package:suf_linux/services.dart/auth.dart';
 import 'package:http/http.dart' as http;
 
 class SettingsProvider extends ChangeNotifier {
