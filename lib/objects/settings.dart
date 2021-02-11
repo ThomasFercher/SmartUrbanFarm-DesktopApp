@@ -14,4 +14,6 @@ class Settings {
     this.automaticTimeLapse = json["automaticTimeLapse"];
     this.notifications = json["notifications"];
   }
+
+  
 }

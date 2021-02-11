@@ -6,7 +6,6 @@ import 'growPhase.dart';
 class ClimateControl {
   String id;
   String name;
-
   double soilMoisture;
   bool isActive;
   double waterConsumption;

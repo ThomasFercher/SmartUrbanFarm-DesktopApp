@@ -21,29 +21,29 @@ class StorageProvider extends ChangeNotifier {
     AssetFlare(bundle: rootBundle, name: "assets/flares/logo.flr")
   ];
 
+
+  /// This Functions caches all the predifined Flares [_assetsToWarmup]
   Future<void> loadFlares() async {
-    //chaches the flares so they can be instantly used without loading
     for (final asset in _assetsToWarmup) {
       await cachedActor(asset);
     }
-  }
+  } 
 
+  /// This Functions loads all Photos which exist locally on the 
+  /// machine in the Photos folder. The Photos also get sorted after 
+  /// Date und get precached so they dont load in the App. 
   Future<void> loadImages(context) async {
-    FileService service = new FileService();
-    List<File> files = service.getFileList();
+    List<File> files = FileService.getFileList();
 
     if (files == null || files.isEmpty) {
       return;
     }
 
     photos = files.map((file) {
-      var p = file.path.split("/")[file.path.split("/").length - 1];
-      var date_string = p.replaceAll("photo_", "").replaceAll(".jpeg", "");
-      print(date_string);
+      var fileName = file.path.split("/")[file.path.split("/").length - 1];
+      var date_string = fileName.replaceAll("photo_", "").replaceAll(".jpeg", "");
       return Photo(file: file, image: Image.file(file), date: date_string);
     }).toList();
-
-    //need to call sort after all images are in the lis
 
     photos.sort((ph1, ph2) {
       return ph1.date.compareTo(ph2.date);
@@ -53,13 +53,14 @@ class StorageProvider extends ChangeNotifier {
       precacheImage(photo.image.image, context);
     });
 
-    print("loaded photos");
     notifyListeners();
   }
 
+  /// This Functions deletes the given [photo] locally from the List.
+  /// Aswell as deleting it from the Filesystem.
   void deletePhoto(Photo photo) {
     this.photos.remove(photo);
-    photo.file.deleteSync();
+    FileService.deleteFile(photo.file);
     notifyListeners();
   }
 

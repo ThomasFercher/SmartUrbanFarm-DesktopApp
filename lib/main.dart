@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:suf_linux/objects/pageOption.dart';
 import 'package:suf_linux/pages/dashboard.dart';
 import 'package:suf_linux/pages/home.dart';
-import 'package:suf_linux/providers/auth.dart';
+import 'package:suf_linux/services.dart/auth.dart';
 import 'package:suf_linux/providers/dataProvider.dart';
 import 'package:suf_linux/providers/settingsProvider.dart';
 import 'package:suf_linux/providers/storageProvider.dart';
@@ -76,22 +76,18 @@ class SufLinuxApplication extends StatelessWidget {
   }
 
   Future<void> loadData(context) async {
-    FileService s = new FileService();
+    // Get Auth Token
     await Auth.initAuth();
-
     // Init VPD Class
-    await VPD().loadJson(context);
-    Stopwatch stopwatch = new Stopwatch()..start();
-
+    await VPD.loadJson(context);
+    
+    // Load Everything else
     await Provider.of<DataProvider>(context, listen: false).fetchData();
     await Provider.of<StorageProvider>(context, listen: false).loadFlares();
     await Provider.of<StorageProvider>(context, listen: false)
         .loadImages(context);
     await Provider.of<SettingsProvider>(context, listen: false).loadSettings();
-    //add a delay so the animation plays through
-    stopwatch.stop();
-    return Future.delayed(
-      Duration(milliseconds: 3000 - stopwatch.elapsedMilliseconds),
-    );
+    
+    
   }
 }

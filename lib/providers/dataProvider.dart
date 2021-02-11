@@ -5,13 +5,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:suf_linux/objects/climateControl.dart';
-import 'package:suf_linux/objects/environmentSettings.dart';
 import 'package:suf_linux/objects/liveData.dart';
 import 'package:suf_linux/objects/pageOption.dart';
 import 'package:suf_linux/pages/dashboard.dart';
 import 'package:suf_linux/pages/settings.dart';
 import 'package:http/http.dart';
-import 'package:suf_linux/providers/auth.dart';
+import 'package:suf_linux/services.dart/auth.dart';
 import '../styles.dart';
 import 'package:http/http.dart' as http;
 
@@ -25,6 +24,7 @@ class DataProvider with ChangeNotifier, DiagnosticableTreeMixin {
   List<ClimateControl> climates;
   SplayTreeMap<DateTime, double> temperatures = new SplayTreeMap();
   SplayTreeMap<DateTime, double> humiditys = new SplayTreeMap();
+  SplayTreeMap<DateTime, double> soilMoistures = new SplayTreeMap();
 
   void setSelectedChild(PageOption s) {
     selectedChild = s;
@@ -40,16 +40,10 @@ class DataProvider with ChangeNotifier, DiagnosticableTreeMixin {
     climates = await getClimates();
     temperatures = await loadList("temperatures");
     humiditys = await loadList("humiditys");
+    soilMoistures = await loadList("humiditys");
     notifyListeners();
   }
 
-  /// This Function makes a GET Call to the specified [url]
-  /// and returns the Body of the Response as a Map<dynamic,dynamic>
-  Future<Map<dynamic, dynamic>> getValue(var url) async {
-    final response = await http.get("$url.json?auth=$token");
-    Map<dynamic, dynamic> json = jsonDecode(response.body);
-    return json;
-  }
 
   Future<ClimateControl> getActiveClimate() async {
     final response = await http.get("$baseUrl/activeClimate.json?auth=$token");

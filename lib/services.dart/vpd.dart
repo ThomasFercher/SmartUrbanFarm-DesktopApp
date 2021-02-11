@@ -72,7 +72,7 @@ class VPD {
     );
   }
 
-  Future<void> loadJson(context) async {
+  static Future<void> loadJson(context) async {
     String data =
         await DefaultAssetBundle.of(context).loadString("assets/json/vpd.json");
     Map<dynamic, dynamic> jsonData = json.decode(data);

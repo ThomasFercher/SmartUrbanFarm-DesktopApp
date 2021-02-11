@@ -1,27 +1,27 @@
 import 'dart:io';
 
 class FileService {
-  String dirPath = "/home/suf/Pictures";
+  static final String dirPath = "/home/suf/Pictures";
 
-  List<File> getFileList() {
-    if (FileSystemEntity.isDirectorySync(dirPath)) {
-      Directory dir = new Directory(dirPath);
-      List<FileSystemEntity> entities = dir.listSync(recursive: false);
-
-      List<File> files = [];
-      files = entities.map((ent) {
-        if (FileSystemEntity.isFileSync(ent.path)) {
-          if (ent.path.contains(/*".jpeg"*/ "")) {
-            return File(ent.path);
-          }
-        }
-      }).toList();
-
-      return files;
+  static List<File> getFileList() {
+    if (!FileSystemEntity.isDirectorySync(dirPath)) {
+      return [];
     }
+    Directory dir = new Directory(dirPath);
+    List<FileSystemEntity> entities = dir.listSync(recursive: false);
+    List<File> files = [];
+    files = entities.map((ent) {
+      if (FileSystemEntity.isFileSync(ent.path)) {
+        if (ent.path.contains(".jpeg")) {
+          return File(ent.path);
+        }
+      }
+    }).toList();
+
+    return files;
   }
 
-  void deleteFile(File file) {
+  static void deleteFile(File file) {
     file.deleteSync();
   }
 }
