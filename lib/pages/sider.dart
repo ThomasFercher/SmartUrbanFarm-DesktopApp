@@ -21,27 +21,27 @@ import '../customwidgets/sider/colorFadeText.dart';
 
 class Sider extends StatefulWidget {
   final List<PageOption> pageOptions = [
-    new PageOption(
+    PageOption(
       widget: Dashboard(),
       icon: Icons.dashboard,
       title: "Dashboard",
     ),
-    new PageOption(
+    PageOption(
       widget: Gallery(),
       icon: Icons.photo,
       title: "Gallery",
     ),
-    new PageOption(
+    PageOption(
       widget: Environment(),
       icon: Icons.settings_applications,
       title: "Environment",
     ),
-    new PageOption(
+    PageOption(
       widget: Advanced(),
       icon: Icons.data_usage,
       title: "Advanced ",
     ),
-    new PageOption(
+    PageOption(
       widget: Settings(),
       icon: Icons.settings,
       title: "Settings",

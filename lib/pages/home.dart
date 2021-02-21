@@ -11,8 +11,6 @@ import 'package:suf_linux/styles.dart';
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    print(MediaQuery.of(context).size.width);
     AppTheme theme = Provider.of<SettingsProvider>(context).getTheme();
     return Material(
       child: Container(
