@@ -53,9 +53,13 @@ class SettingsProvider extends ChangeNotifier {
       },
     ).then(
       (value) {
+        print(value.statusCode);
         switch (value.statusCode) {
           case 200:
+            
             Map<dynamic, dynamic> json = jsonDecode(value.body);
+
+            print(json);
             settings = new Settings.fromJson(json);
             print("Successfull Loaded Settings");
             return;
@@ -68,6 +72,7 @@ class SettingsProvider extends ChangeNotifier {
             print("Error while trying to load Settings");
             return;
           default:
+            settings = Settings(automaticTimeLapse: true,notifications: true,theme: 0);
             return;
         }
       },

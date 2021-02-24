@@ -143,7 +143,7 @@ class DataProvider with ChangeNotifier, DiagnosticableTreeMixin {
           case 200:
             Map<dynamic, dynamic> json = jsonDecode(response.body);
             json.forEach((key, value) {
-              list[DateTime.parse(key)] = double.parse(value);
+              list[DateTime.parse(key)] =value *1.0;
             });
             print("$child loaded");
             return list;

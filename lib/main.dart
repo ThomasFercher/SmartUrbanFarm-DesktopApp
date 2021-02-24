@@ -19,6 +19,7 @@ import 'package:suf_linux/styles.dart' as s;
 void main() => {
       WidgetsFlutterBinding.ensureInitialized(),
       FlareCache.doesPrune = false,
+      
       runApp(
         MultiProvider(
           providers: [
@@ -48,20 +49,15 @@ class SufLinuxApplication extends StatefulWidget {
 }
 
 class _SufLinuxApplicationState extends State<SufLinuxApplication> {
-  Artboard _splashscreen;
-  RiveAnimationController _controller;
+  RiveAnimationController grow;
+  RiveAnimationController wind;
 
-  @override
+  Artboard splashscreen;
   void initState() {
-    _controller = new SimpleAnimation("growing")
-      ..isActiveChanged.addListener(() {
-        _controller = new SimpleAnimation("wind");
-      });
     super.initState();
-  }
 
-  @override
-  Widget build(BuildContext context) {
+    // Load the animation file from the bundle, note that you could also
+    // download this. The RiveFile just expects a list of bytes.
     rootBundle.load('assets/flares/splashscreen.riv').then(
       (data) async {
         final file = RiveFile();
@@ -69,35 +65,39 @@ class _SufLinuxApplicationState extends State<SufLinuxApplication> {
         // Load the RiveFile from the binary data.
         if (file.import(data)) {
           final artboard = file.mainArtboard;
-
-          artboard.addController(_controller = _controller);
-          setState(() => _splashscreen = artboard);
+          grow = SimpleAnimation('Growing');
+          wind = SimpleAnimation('Wind');
+          artboard.addController(grow);
+          artboard.addController(wind);
+          //  artboard.addController(wind);
+          setState(() => splashscreen = artboard);
         }
       },
     );
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Suf Linux Application',
       theme: s.themeData,
+      debugShowCheckedModeBanner: false,
       home: FutureBuilder(
         builder: (context, projectSnap) {
           if (projectSnap.connectionState == ConnectionState.none ||
               projectSnap.hasData == null ||
               projectSnap.connectionState == ConnectionState.waiting) {
             // Splashscreen using a Flare2d as a loading Animation
-            return /*Container(
-              color: s.primaryColor,
-              child: FlareActor(
-                'assets/flares/splashscreen.flr',
-                alignment: Alignment.center,
-                animation: "Loading",
-                controller: flrctrl,
-                callback: (s) {
-                  flrctrl.play("Wind");
-                },
+            return Container(
+              color: Colors.transparent,
+              child: Center(
+                child: splashscreen == null
+                    ? const SizedBox()
+                    : Rive(
+                        artboard: splashscreen,
+                      ),
               ),
-            )*/
-                Rive(artboard: _splashscreen);
+            );
           } else {
             // Once loaded the main page will be displayed
             return Home();

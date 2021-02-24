@@ -83,30 +83,25 @@ class _SiderState extends State<Sider> {
       child: Column(
         children: [
           Container(
-            height: 28,
-            child: Text(
-              'Smart Urban Farm',
-              style: GoogleFonts.nunito(
-                fontSize: 16,
+            
+            height: 120,
+            child: Padding(
+              padding: const EdgeInsets.only(top:8.0,left: 4,right: 4),
+              child: Image.asset(
+                'assets/images/logo.png',
+                alignment: Alignment.center,
+                fit: BoxFit.contain,
+
                 color: Colors.white,
-                fontWeight: FontWeight.w200,
               ),
             ),
           ),
           Container(
-            child: SvgPicture.asset(
-              'assets/images/logo.svg',
-              alignment: Alignment.center,
-              fit: BoxFit.fitHeight,
-            ),
-            height: 80,
-          ),
-          Container(
-            height: height - 116,
+            height: height - 120,
             alignment: Alignment.topCenter,
             child: ListView(
               shrinkWrap: true,
-              itemExtent: (height - 116) / widget.pageOptions.length,
+              itemExtent: (height - 120) / widget.pageOptions.length,
               padding: EdgeInsets.all(0),
               children: [
                 PageTile(

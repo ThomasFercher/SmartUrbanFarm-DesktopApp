@@ -1,9 +1,10 @@
 import 'dart:io';
 
 class FileService {
-  static final String dirPath = "/home/suf/Pictures";
+  static final String dirPath = "/home/pi/Pictures";
 
   static List<File> getFileList() {
+    
     if (!FileSystemEntity.isDirectorySync(dirPath)) {
       return [];
     }
@@ -12,9 +13,9 @@ class FileService {
     List<File> files = [];
     files = entities.map((ent) {
       if (FileSystemEntity.isFileSync(ent.path)) {
-        if (ent.path.contains(".jpeg")) {
+      
           return File(ent.path);
-        }
+        
       }
     }).toList();
 
