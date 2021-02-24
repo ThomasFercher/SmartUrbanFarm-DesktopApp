@@ -9,14 +9,16 @@ import 'package:suf_linux/services.dart/auth.dart';
 import 'package:http/http.dart' as http;
 
 class SettingsProvider extends ChangeNotifier {
-  final baseUrl = "https://smartgrowsystem-sgs.firebaseio.com/appSettings";
+  final baseUrl =
+      "https://smartgrowsystem-sgs.firebaseio.com/appSettingsDesktop";
   String token;
   Settings settings;
 
-  // final ref = firebaseDatabase.reference().child("appSettings");
+  bool getSelected(index) => settings.theme == index;
+  AppTheme getTheme() => themes[settings.theme];
 
-  List<AppTheme> themes = [
-    new AppTheme(
+  final List<AppTheme> themes = [
+    AppTheme(
       name: "light",
       cardColor: Colors.white,
       background: Colors.white,
@@ -28,7 +30,7 @@ class SettingsProvider extends ChangeNotifier {
       contrast: Colors.grey[100],
       disabled: Colors.black12,
     ),
-    new AppTheme(
+    AppTheme(
       name: "dark",
       cardColor: Colors.grey[850],
       background: Colors.grey[900],
@@ -41,24 +43,63 @@ class SettingsProvider extends ChangeNotifier {
     )
   ];
 
+  /// Loads the AppSettings from the Firebase. If there is
+  /// a error a local Object will be initialized.
   Future<void> loadSettings() async {
-    token = await Auth.getAuthToken();
-    /* await ref.once().then((DataSnapshot snapshot) {
-      var settingsJson = snapshot.value;
-      settings = Settings.fromJson(settingsJson);
-    });*/
-    if (settings == null) {
-      settings =
-          new Settings(theme: 0, automaticTimeLapse: true, notifications: true);
-    }
+    await http.get(
+      "$baseUrl.json?auth=$token",
+      headers: {
+        "Content-Tpye": "application/json",
+      },
+    ).then(
+      (value) {
+        switch (value.statusCode) {
+          case 200:
+            Map<dynamic, dynamic> json = jsonDecode(value.body);
+            settings = new Settings.fromJson(json);
+            print("Successfull Loaded Settings");
+            return;
+          case 400:
+            settings = new Settings(
+              theme: 0,
+              automaticTimeLapse: true,
+              notifications: true,
+            );
+            print("Error while trying to load Settings");
+            return;
+          default:
+            return;
+        }
+      },
+    );
   }
 
-  Future<void> setValue(String child, String value) {
-    http.put("$baseUrl/$child.json?auth=$token", body: "$value", headers: {
-      "Content-Tpye": "application/json",
-    }).then(
-      (value) => {
-        print(value.statusCode),
+  /// This is a PUT Function to update a variable in the
+  /// firebase Settings object. The [child] specifies the
+  /// location where the [value] will be put. The response
+  /// will be printed out.
+  Future<void> setValue(String child, String value) async {
+    await http.put(
+      "$baseUrl/$child.json?auth=$token",
+      body: "$value",
+      headers: {
+        "Content-Tpye": "application/json",
+      },
+    ).then(
+      (value) {
+        switch (value.statusCode) {
+          case 200:
+            print("Successfull Update of Settings/$child");
+            return;
+          case 400:
+            print("Error while trying to update Settings/$child");
+            return;
+          case 412:
+            print("Error while trying to update Settings/$child");
+            return;
+          default:
+            return;
+        }
       },
     );
   }
@@ -66,13 +107,11 @@ class SettingsProvider extends ChangeNotifier {
   setNotifications(value) {
     settings.notifications = value;
     setValue("notifications", value.toString());
-
     notifyListeners();
   }
 
   setAutomaticTimeLapse(value) {
     settings.automaticTimeLapse = value;
-
     setValue("automaticTimeLapse", value.toString());
     notifyListeners();
   }
@@ -80,18 +119,6 @@ class SettingsProvider extends ChangeNotifier {
   setTheme(index) {
     settings.theme = index;
     setValue("theme", index.toString());
-
     notifyListeners();
-  }
-
-  bool getSelected(index) {
-    if (settings.theme == index)
-      return true;
-    else
-      return false;
-  }
-
-  AppTheme getTheme() {
-    return themes[settings.theme];
   }
 }

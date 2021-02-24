@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:suf_linux/objects/climateControl.dart';
+import 'package:suf_linux/objects/growPhase.dart';
 import 'package:suf_linux/objects/liveData.dart';
 import 'package:suf_linux/objects/pageOption.dart';
 import 'package:suf_linux/pages/dashboard.dart';
@@ -17,8 +18,6 @@ import 'package:http/http.dart' as http;
 class DataProvider with ChangeNotifier, DiagnosticableTreeMixin {
   final baseUrl = "https://smartgrowsystem-sgs.firebaseio.com";
   PageOption selectedChild;
-  String token;
-
   LiveData liveData;
   ClimateControl activeClimate;
   List<ClimateControl> climates;
@@ -26,15 +25,9 @@ class DataProvider with ChangeNotifier, DiagnosticableTreeMixin {
   SplayTreeMap<DateTime, double> humiditys = new SplayTreeMap();
   SplayTreeMap<DateTime, double> soilMoistures = new SplayTreeMap();
 
-  void setSelectedChild(PageOption s) {
-    selectedChild = s;
-    notifyListeners();
-  }
-
   DataProvider({this.selectedChild});
 
   Future<void> fetchData() async {
-    token = await Auth.getAuthToken();
     liveData = await getLiveData();
     activeClimate = await getActiveClimate();
     climates = await getClimates();
@@ -44,89 +37,183 @@ class DataProvider with ChangeNotifier, DiagnosticableTreeMixin {
     notifyListeners();
   }
 
-
   Future<ClimateControl> getActiveClimate() async {
-    final response = await http.get("$baseUrl/activeClimate.json?auth=$token");
-    Map<dynamic, dynamic> json = jsonDecode(response.body);
+    ClimateControl activeClimate = new ClimateControl(
+      name: "",
+      soilMoisture: 0.0,
+      waterConsumption: 0.0,
+      automaticWatering: false,
+      growPhase: GrowPhase(),
+    );
 
-    return ClimateControl.fromJson(json, true);
+    return await http.get(
+      "$baseUrl/activeClimate.json?auth=${Auth.token}",
+      headers: {
+        "Content-Tpye": "application/json",
+      },
+    ).then(
+      (response) {
+        switch (response.statusCode) {
+          case 200:
+            Map<dynamic, dynamic> json = jsonDecode(response.body);
+            activeClimate = ClimateControl.fromJson(json, true);
+            print("Active Climate was loaded: ${activeClimate.getName}");
+            return activeClimate;
+          case 400:
+            print("Active Climate couldnt be loaded");
+            return activeClimate;
+          default:
+            return activeClimate;
+        }
+      },
+    );
   }
 
   Future<List<ClimateControl>> getClimates() async {
     List<ClimateControl> climates = [];
-    final response = await http.get("$baseUrl/climates.json?auth=$token");
-    Map<dynamic, dynamic> json = jsonDecode(response.body);
-    json.forEach((key, value) {
-      if (key != activeClimate.id)
-        climates.add(ClimateControl.fromJson(value, false));
-    });
-
-    return climates;
+    return await http.get(
+      "$baseUrl/climates.json?auth=${Auth.token}",
+      headers: {
+        "Content-Tpye": "application/json",
+      },
+    ).then(
+      (response) {
+        switch (response.statusCode) {
+          case 200:
+            Map<dynamic, dynamic> json = jsonDecode(response.body);
+            json.forEach((key, value) {
+              if (key != activeClimate.id)
+                climates.add(ClimateControl.fromJson(value, false));
+            });
+            print("Climates loaded. Total: ${climates.length}");
+            return climates;
+          case 400:
+            print("Climates couldnt be loaded");
+            return climates;
+          default:
+            return climates;
+        }
+      },
+    );
   }
 
   Future<LiveData> getLiveData() async {
-    final response = await http.get("$baseUrl/liveClimate.json?auth=$token");
-    Map<dynamic, dynamic> json = jsonDecode(response.body);
-
-    return LiveData.fromJson(json);
+    LiveData liveData = new LiveData(
+      temperature: 0.0,
+      humidity: 0.0,
+      soilMoisture: 0.0,
+      growProgress: 0.0,
+      waterTankLevel: 0.0,
+    );
+    return await http.get(
+      "$baseUrl/liveClimate.json?auth=${Auth.token}",
+      headers: {
+        "Content-Tpye": "application/json",
+      },
+    ).then(
+      (response) {
+        switch (response.statusCode) {
+          case 200:
+            Map<dynamic, dynamic> json = jsonDecode(response.body);
+            liveData = LiveData.fromJson(json);
+            print("Live Data was loaded");
+            return liveData;
+          case 400:
+            print("Live Data couldnt be loaded");
+            return liveData;
+          default:
+            return liveData;
+        }
+      },
+    );
   }
 
-  SplayTreeMap<DateTime, double> getTemperatures() {
-    return temperatures;
-  }
-
-  SplayTreeMap<DateTime, double> getHumiditys() {
-    return humiditys;
-  }
-
+  /// This Method loads the given [child] List from
+  /// the Firebase
   Future<SplayTreeMap<DateTime, double>> loadList(String child) async {
     SplayTreeMap<DateTime, double> list = new SplayTreeMap();
-    final response = await http.get("$baseUrl/$child.json?auth=$token");
-    Map<dynamic, dynamic> json = jsonDecode(response.body);
-    json.forEach((key, value) {
-      list[DateTime.parse(key)] = double.parse(value);
-    });
+    return await http.get(
+      "$baseUrl/$child.json?auth=${Auth.token}",
+      headers: {
+        "Content-Tpye": "application/json",
+      },
+    ).then(
+      (response) {
+        switch (response.statusCode) {
+          case 200:
+            Map<dynamic, dynamic> json = jsonDecode(response.body);
+            json.forEach((key, value) {
+              list[DateTime.parse(key)] = double.parse(value);
+            });
+            print("$child loaded");
+            return list;
+          case 400:
+            print("$child couldnt be loaded");
+            return list;
+          default:
+            return list;
+        }
+      },
+    );
+  }
 
-    return list;
+  void setSelectedChild(PageOption s) {
+    selectedChild = s;
+    notifyListeners();
   }
 
   void editClimate(ClimateControl initial, ClimateControl newClimate) {
     bool isActive = false;
-    // If the active Climate is edited update active climate aswell
-    if (initial.getID == activeClimate.getID) {
+    if (initial.id == activeClimate.id) {
       setActiveClimate(newClimate);
       isActive = true;
     }
-    // get the local ClimateControl Object by matching the id
     ClimateControl clim =
         climates.singleWhere((clim) => initial.getID == clim.getID);
-    // edit in local list
     climates[climates.indexOf(clim)] = newClimate;
-    // edit in firebase
-    http.put("$baseUrl/climates/${initial.getID}.json?auth=$token",
-        body: "${newClimate.getJson(isActive)}",
-        headers: {
-          "Content-Tpye": "application/json",
-        }).then(
-      (value) => {
-        print(value.statusCode),
+    http.put(
+      "$baseUrl/climates/${initial.getID}.json?auth=${Auth.token}",
+      body: "${newClimate.getJson(isActive)}",
+      headers: {
+        "Content-Tpye": "application/json",
+      },
+    ).then(
+      (response) {
+        switch (response.statusCode) {
+          case 200:
+            print("${newClimate.name} ${initial.id} was updated");
+            return;
+          case 412:
+            print("${initial.name} ${initial.id} couldnt be updated");
+            return;
+          default:
+            return;
+        }
       },
     );
-
     notifyListeners();
   }
 
   void createClimate(ClimateControl newClimate) {
-    // add Climate to local List
     climates.add(newClimate);
-    // add Climate to Firebase
-    http.post("$baseUrl/climates/${newClimate.getID}.json?auth=$token",
-        body: "${newClimate.getJson(false)}",
-        headers: {
-          "Content-Tpye": "application/json",
-        }).then(
-      (value) => {
-        print(value.statusCode),
+    http.post(
+      "$baseUrl/climates/${newClimate.getID}.json?auth=${Auth.token}",
+      body: "${newClimate.getJson(false)}",
+      headers: {
+        "Content-Tpye": "application/json",
+      },
+    ).then(
+      (response) {
+        switch (response.statusCode) {
+          case 200:
+            print("${newClimate.name} ${newClimate.id} was created");
+            return;
+          case 412:
+            print("${newClimate.name} ${newClimate.id} couldnt be created");
+            return;
+          default:
+            return;
+        }
       },
     );
     notifyListeners();
@@ -135,44 +222,70 @@ class DataProvider with ChangeNotifier, DiagnosticableTreeMixin {
   void setActiveClimate(ClimateControl climate) {
     activeClimate = climate;
     activeClimate.growPhase.phase = GROWPHASEVEGETATION;
-    http.post("$baseUrl/activeClimate.json?auth=$token",
-        body: "${climate.getJson(true)}",
-        headers: {
-          "Content-Tpye": "application/json",
-        }).then(
-      (value) => {
-        print(value.statusCode),
+    http.post(
+      "$baseUrl/activeClimate.json?auth=${Auth.token}",
+      body: "${climate.getJson(true)}",
+      headers: {
+        "Content-Tpye": "application/json",
+      },
+    ).then(
+      (response) {
+        switch (response.statusCode) {
+          case 200:
+            print("${climate.name} ${climate.id} is active now");
+            return;
+          case 412:
+            print("${climate.name} ${climate.id} couldnt be set active");
+            return;
+          default:
+            return;
+        }
       },
     );
     notifyListeners();
   }
 
   void deleteClimate(ClimateControl climate) {
-    // Remove Climate locally
     climates.remove(climate);
-    // Remove Climate in firebase
     http
-        .delete(
-          "$baseUrl/climates/${climate.getID}.json?auth=$token",
-        )
+        .delete("$baseUrl/climates/${climate.getID}.json?auth=${Auth.token}")
         .then(
-          (value) => {
-            print(value.statusCode),
-          },
-        );
+      (response) {
+        switch (response.statusCode) {
+          case 200:
+            print("${climate.name} ${climate.id} was deleted");
+            return;
+          case 412:
+            print("${climate.name} ${climate.id} couldnt be deleted");
+            return;
+          default:
+            return;
+        }
+      },
+    );
     notifyListeners();
   }
 
-  void activeClimateChangePhase(String phase) {
+  void changePhase(String phase) {
     activeClimate.growPhase.phase = phase;
-
-    http.put("$baseUrl/activeClimate/growPhase/phase.json?auth=$token",
-        body: "phase:$phase",
-        headers: {
-          "Content-Tpye": "application/json",
-        }).then(
-      (value) => {
-        print(value.statusCode),
+    http.put(
+      "$baseUrl/activeClimate/growPhase/phase.json?auth=${Auth.token}",
+      body: "phase:$phase",
+      headers: {
+        "Content-Tpye": "application/json",
+      },
+    ).then(
+      (response) {
+        switch (response.statusCode) {
+          case 200:
+            print("$phase is active now");
+            return;
+          case 412:
+            print("$phase couldnt be activated");
+            return;
+          default:
+            return;
+        }
       },
     );
     notifyListeners();

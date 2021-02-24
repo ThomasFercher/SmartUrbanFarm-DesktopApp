@@ -38,7 +38,7 @@ class GrowPhaseSelect extends StatelessWidget {
       return GestureDetector(
         onTap: () {
           if (!isSelected) {
-            data.activeClimateChangePhase(phase);
+            data.changePhase(phase);
           }
         },
         child: AnimatedContainer(
