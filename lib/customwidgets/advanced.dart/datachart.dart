@@ -151,7 +151,7 @@ class _DataChartState extends State<DataChart> {
                     color: widget.gradientColors[1],
                   ),
                   child: PopupMenu(
-                    color: widget.gradientColors[0],
+                    color: Colors.white,
                     options: widget.filter_options
                         .map((filter) => PopupMenuOption(filter, null))
                         .toList(),
@@ -173,7 +173,7 @@ class _DataChartState extends State<DataChart> {
                   child: Icon(
                     widget.icon,
                     size: 20,
-                    color: widget.gradientColors[0],
+                    color: Colors.white,
                   ),
                 ),
                 Expanded(
@@ -190,7 +190,7 @@ class _DataChartState extends State<DataChart> {
                       child: SectionTitle(
                         title: widget.title + " [${widget.unit}]",
                         fontSize: 20,
-                        color: widget.gradientColors[0],
+                        color: Colors.white,
                       ),
                     ),
                   ),
@@ -248,10 +248,10 @@ class _DataChartState extends State<DataChart> {
         show: true,
         bottomTitles: SideTitles(
           showTitles: true,
-          reservedSize: 20,
+          reservedSize: 16,
           interval: 5,
           textStyle: const TextStyle(
-              color: dark_gray, fontWeight: FontWeight.bold, fontSize: 14),
+              color: dark_gray, fontWeight: FontWeight.bold, fontSize: 10,),
           getTitles: (value) {
             if (value < dates.length) {
               var v = dates[value.toInt()];
@@ -287,13 +287,13 @@ class _DataChartState extends State<DataChart> {
           textStyle: const TextStyle(
             color: dark_gray,
             fontWeight: FontWeight.bold,
-            fontSize: 14,
+            fontSize: 10,
           ),
           interval: 3,
           getTitles: (value) {
             return "${value.toInt()}";
           },
-          reservedSize: 20,
+          reservedSize: 16,
           margin: 5,
         ),
       ),

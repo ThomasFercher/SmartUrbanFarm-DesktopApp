@@ -1,6 +1,7 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:suf_linux/customwidgets/sider/colorFadeIcon.dart';
@@ -72,10 +73,10 @@ class _SiderState extends State<Sider> {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(blurRadius: 3.0),
-          BoxShadow(color: Colors.white10, offset: Offset(0, -16)),
-          BoxShadow(color: Colors.white10, offset: Offset(0, 16)),
-          BoxShadow(color: Colors.white10, offset: Offset(-16, -16)),
-          BoxShadow(color: Colors.white10, offset: Offset(-16, 16)),
+          BoxShadow(color: Colors.white10, offset: Offset(0, -8)),
+          BoxShadow(color: Colors.white10, offset: Offset(0, 8)),
+          BoxShadow(color: Colors.white10, offset: Offset(-8, -8)),
+          BoxShadow(color: Colors.white10, offset: Offset(-8, 8)),
         ],
         color: primaryColor,
       ),
@@ -93,8 +94,8 @@ class _SiderState extends State<Sider> {
             ),
           ),
           Container(
-            child: FlareActor(
-              'assets/flares/logo.flr',
+            child: SvgPicture.asset(
+              'assets/images/logo.svg',
               alignment: Alignment.center,
               fit: BoxFit.fitHeight,
             ),

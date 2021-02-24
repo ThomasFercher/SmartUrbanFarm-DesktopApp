@@ -18,6 +18,7 @@ class FileService {
       }
     }).toList();
 
+    print(files);
     return files;
   }
 

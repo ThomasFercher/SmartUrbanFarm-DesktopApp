@@ -37,7 +37,7 @@ class _EditIrrigationState extends State<EditIrrigation> {
         tapBodyToExpand: false,
         expandIcon: Icons.radio_button_off,
         collapseIcon: Icons.radio_button_checked,
-        iconColor: theme.textColor);
+        iconColor: theme.textColor,);
   }
 
   @override

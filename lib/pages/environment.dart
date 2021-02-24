@@ -206,13 +206,13 @@ class Environment extends StatelessWidget {
                                                   child: SectionTitle(
                                                     fontSize: 12,
                                                     title: "Automatic",
-                                                    color: Colors.white,
+                                                    color: theme.primaryColor,
                                                   ),
                                                 ),
-                                                backgroundColor: primaryColor,
+                                                backgroundColor: Colors.white,
                                                 avatar: Icon(
                                                   Icons.auto_awesome,
-                                                  color: Colors.white,
+                                                  color: theme.primaryColor,
                                                   size: 16,
                                                 ),
                                               )

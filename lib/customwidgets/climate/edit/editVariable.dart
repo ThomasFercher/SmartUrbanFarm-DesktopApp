@@ -71,7 +71,7 @@ class EditVariable extends StatelessWidget {
                       style: TextStyle(
                         color: theme.headlineColor,
                         fontWeight: FontWeight.w100,
-                        fontSize: 17.0,
+                        fontSize: 15.0,
                       ),
                     ),
                   ),

@@ -33,6 +33,7 @@ class DayRange extends StatelessWidget {
             gradient: LinearGradient(
               stops: [0.1, 1.4],
               colors: [Color(0xFFfad0c4), Color(0xFF000C40)],
+              
             ),
           ),
           child: Row(

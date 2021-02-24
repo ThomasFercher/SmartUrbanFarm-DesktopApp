@@ -62,7 +62,7 @@ class WaterTankLevel extends StatelessWidget {
                         style: TextStyle(
                           color: Colors.grey,
                           fontWeight: FontWeight.w100,
-                          fontSize: 26.0,
+                          fontSize: 20.0,
                         ),
                       ),
                     ),
