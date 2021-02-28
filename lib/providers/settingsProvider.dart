@@ -15,7 +15,13 @@ class SettingsProvider extends ChangeNotifier {
   Settings settings;
 
   bool getSelected(index) => settings.theme == index;
-  AppTheme getTheme() => themes[settings.theme ?? 0];
+  AppTheme getTheme() {
+    if (settings == null) {
+      settings =
+          Settings(automaticTimeLapse: true, notifications: true, theme: 0);
+    }
+    return themes[settings.theme];
+  }
 
   final List<AppTheme> themes = [
     AppTheme(
