@@ -19,7 +19,6 @@ import 'package:suf_linux/styles.dart' as s;
 void main() => {
       WidgetsFlutterBinding.ensureInitialized(),
       FlareCache.doesPrune = false,
-      
       runApp(
         MultiProvider(
           providers: [

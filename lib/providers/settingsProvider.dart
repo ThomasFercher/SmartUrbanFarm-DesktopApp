@@ -15,7 +15,7 @@ class SettingsProvider extends ChangeNotifier {
   Settings settings;
 
   bool getSelected(index) => settings.theme == index;
-  AppTheme getTheme() => themes[settings.theme];
+  AppTheme getTheme() => themes[settings.theme ?? 0];
 
   final List<AppTheme> themes = [
     AppTheme(
@@ -56,7 +56,6 @@ class SettingsProvider extends ChangeNotifier {
         print(value.statusCode);
         switch (value.statusCode) {
           case 200:
-            
             Map<dynamic, dynamic> json = jsonDecode(value.body);
 
             print(json);
@@ -72,7 +71,8 @@ class SettingsProvider extends ChangeNotifier {
             print("Error while trying to load Settings");
             return;
           default:
-            settings = Settings(automaticTimeLapse: true,notifications: true,theme: 0);
+            settings = Settings(
+                automaticTimeLapse: true, notifications: true, theme: 0);
             return;
         }
       },
