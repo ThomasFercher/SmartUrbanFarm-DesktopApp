@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:suf_linux/objects/appTheme.dart';
@@ -92,10 +91,7 @@ class Settings extends StatelessWidget {
                 width: 50,
                 height: 50,
                 padding: EdgeInsets.only(bottom: 5, right: 5),
-                child: SvgPicture.asset(
-                  "assets/leaf.svg",
-                  color: Colors.green,
-                ),
+                child: Container(),
               ),
               applicationLegalese: "",
               applicationVersion: "0.4.4",

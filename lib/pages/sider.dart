@@ -1,7 +1,6 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:suf_linux/customwidgets/sider/colorFadeIcon.dart';
@@ -83,15 +82,13 @@ class _SiderState extends State<Sider> {
       child: Column(
         children: [
           Container(
-            
             height: 120,
             child: Padding(
-              padding: const EdgeInsets.only(top:8.0,left: 4,right: 4),
+              padding: const EdgeInsets.only(top: 8.0, left: 4, right: 4),
               child: Image.asset(
                 'assets/images/logo.png',
                 alignment: Alignment.center,
                 fit: BoxFit.contain,
-
                 color: Colors.white,
               ),
             ),

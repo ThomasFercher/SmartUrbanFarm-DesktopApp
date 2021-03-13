@@ -36,7 +36,6 @@ dependencies:
   file_picker: ^2.0.8
   flutter_icons: ^1.1.0
   expandable: ^4.1.4
-  flutter_svg: ^0.19.0
   rive: ^0.6.8
 
 dev_dependencies:

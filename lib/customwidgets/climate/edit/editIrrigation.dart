@@ -29,15 +29,16 @@ class _EditIrrigationState extends State<EditIrrigation> {
 
   ExpandableThemeData getExpandTheme(AppTheme theme) {
     return ExpandableThemeData(
-        headerAlignment: ExpandablePanelHeaderAlignment.center,
-        tapBodyToCollapse: false,
-        tapHeaderToExpand: false,
-        inkWellBorderRadius: BorderRadius.all(Radius.circular(0)),
-        useInkWell: false,
-        tapBodyToExpand: false,
-        expandIcon: Icons.radio_button_off,
-        collapseIcon: Icons.radio_button_checked,
-        iconColor: theme.textColor,);
+      headerAlignment: ExpandablePanelHeaderAlignment.center,
+      tapBodyToCollapse: false,
+      tapHeaderToExpand: false,
+      inkWellBorderRadius: BorderRadius.all(Radius.circular(0)),
+      useInkWell: false,
+      tapBodyToExpand: false,
+      expandIcon: Icons.radio_button_off,
+      collapseIcon: Icons.radio_button_checked,
+      iconColor: theme.textColor,
+    );
   }
 
   @override
@@ -83,7 +84,7 @@ class _EditIrrigationState extends State<EditIrrigation> {
                         ],
                       ),
                       Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           InputChip(
                             onSelected: (value) {
@@ -165,7 +166,7 @@ class _EditIrrigationState extends State<EditIrrigation> {
                                 icon: WeatherIcons.wi_earthquake,
                                 max: 100,
                                 min: 0,
-                                unit: "ml/d",
+                                unit: "l/d",
                                 onValueChanged: (v) =>
                                     pr.changeWaterConsumption(v),
                               ),
