@@ -143,7 +143,7 @@ class DataProvider with ChangeNotifier, DiagnosticableTreeMixin {
           case 200:
             Map<dynamic, dynamic> json = jsonDecode(response.body);
             json.forEach((key, value) {
-              list[DateTime.parse(key)] =value *1.0;
+              list[DateTime.parse(key)] = value * 1.0;
             });
             print("$child loaded");
             return list;
@@ -282,6 +282,29 @@ class DataProvider with ChangeNotifier, DiagnosticableTreeMixin {
             return;
           case 412:
             print("$phase couldnt be activated");
+            return;
+          default:
+            return;
+        }
+      },
+    );
+    notifyListeners();
+  }
+
+  void setPhoto(bool photo) {
+    http
+        .put(
+      "$baseUrl/photo.json?auth=${Auth.token}",
+      body: photo,
+    )
+        .then(
+      (response) {
+        switch (response.statusCode) {
+          case 200:
+            print("Photo is set");
+            return;
+          case 412:
+            print("Phase couldnt be set");
             return;
           default:
             return;

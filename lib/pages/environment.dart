@@ -21,10 +21,6 @@ import 'package:suf_linux/providers/storageProvider.dart';
 import 'package:suf_linux/styles.dart';
 
 class Environment extends StatelessWidget {
-  void takePhoto(context) {
-    Provider.of<StorageProvider>(context, listen: false).takePhoto();
-  }
-
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -271,10 +267,12 @@ class Environment extends StatelessWidget {
                           ),
                         ),
                         child: IconButton(
-                          icon: Icon(Icons.add,size: 20,),
+                          icon: Icon(
+                            Icons.add,
+                            size: 20,
+                          ),
                           onPressed: () {
-                            Provider.of<DataProvider>(context,
-                                    listen: false)
+                            Provider.of<DataProvider>(context, listen: false)
                                 .setSelectedChild(
                               PageOption(
                                 title: "Create Environemnt",

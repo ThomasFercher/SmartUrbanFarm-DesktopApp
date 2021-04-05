@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -8,8 +9,11 @@ import 'package:flutter/services.dart';
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:suf_linux/objects/photo.dart';
 import 'package:suf_linux/services.dart/fileservice.dart';
+
+import 'dataProvider.dart';
 
 class StorageProvider extends ChangeNotifier {
   List<Photo> photos = [];
@@ -21,19 +25,18 @@ class StorageProvider extends ChangeNotifier {
     AssetFlare(bundle: rootBundle, name: "assets/flares/logo.flr")
   ];
 
-
   /// This Functions caches all the predifined Flares [_assetsToWarmup]
   Future<void> loadFlares() async {
     for (final asset in _assetsToWarmup) {
       await cachedActor(asset);
     }
-  } 
+  }
 
-  /// This Functions loads all Photos which exist locally on the 
-  /// machine in the Photos folder. The Photos also get sorted after 
-  /// Date und get precached so they dont load in the App. 
+  /// This Functions loads all Photos which exist locally on the
+  /// machine in the Photos folder. The Photos also get sorted after
+  /// Date und get precached so they dont load in the App.
   Future<void> loadImages(context) async {
-    List<File> files = FileService.getFileList();
+    List<File> files = await FileService.getFileList();
 
     if (files == null || files.isEmpty) {
       return;
@@ -41,7 +44,8 @@ class StorageProvider extends ChangeNotifier {
 
     photos = files.map((file) {
       var fileName = file.path.split("/")[file.path.split("/").length - 1];
-      var date_string = fileName.replaceAll("photo_", "").replaceAll(".jpeg", "");
+      var date_string =
+          fileName.replaceAll("photo_", "").replaceAll(".jpeg", "");
       return Photo(file: file, image: Image.file(file), date: date_string);
     }).toList();
 
@@ -64,7 +68,10 @@ class StorageProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void takePhoto() {
-    print("Take Photo");
+  void takePhoto(context) async {
+    Provider.of<DataProvider>(context, listen: false).setPhoto(true);
+    Timer(Duration(seconds: 10), () {
+      loadImages(context);
+    });
   }
 }

@@ -14,7 +14,7 @@ import 'package:animations/animations.dart';
 
 class Gallery extends StatelessWidget {
   void takePhoto(context) {
-    Provider.of<StorageProvider>(context, listen: false).takePhoto();
+    Provider.of<StorageProvider>(context, listen: false).takePhoto(context);
   }
 
   @override
@@ -168,7 +168,8 @@ class PhotoListItem extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.all(10),
                   alignment: Alignment.topLeft,
-                  child: SectionTitle(title: photo.date),
+                  child: SectionTitle(
+                      title: photo.date.split("\\")[1].replaceAll(".jpg", "")),
                 ),
               ],
             ),
