@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:suf_linux/customwidgets/dashboard/carddata.dart';
 import 'package:suf_linux/customwidgets/dashboard/dayRange.dart';
@@ -49,19 +50,19 @@ class Dashboard extends StatelessWidget {
                 padding: EdgeInsets.all(0),
                 children: [
                   CardData(
-                    icon: Icons.ac_unit,
+                    icon: WeatherIcons.wi_barometer,
                     text: '$temp°C',
                     label: 'Temperature',
                     iconColor: primaryColor,
                   ),
                   CardData(
-                    icon: Icons.ac_unit,
+                    icon: WeatherIcons.wi_humidity,
                     text: '$hum%',
                     label: 'Humidity',
                     iconColor: primaryColor,
                   ),
                   CardData(
-                    icon: Icons.ac_unit,
+                    icon: WeatherIcons.wi_barometer,
                     text: '$soilM%',
                     label: 'Soil Moisture',
                     iconColor: primaryColor,
